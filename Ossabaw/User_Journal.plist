@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Sample</key>
+	<dict>
+		<key>Entries</key>
+		<array>
+			<dict>
+				<key>Information</key>
+				<string>These are awesome places!</string>
+				<key>Date</key>
+				<string>{3, 10, 1992}</string>
+				<key>Images</key>
+				<array>
+					<string>clubhouse.png</string>
+					<string>southbeach.png</string>
+				</array>
+			</dict>
+			<dict>
+				<key>Information</key>
+				<string>These are awesome places!</string>
+				<key>Date</key>
+				<string>{4, 10, 1992}</string>
+				<key>Images</key>
+				<array>
+					<string>middlebeach.png</string>
+					<string>boardinghouse.png</string>
+				</array>
+			</dict>
+		</array>
+	</dict>
+	<key>Slave Tabbies</key>
+	<dict>
+		<key>Entries</key>
+		<array>
+			<string></string>
+		</array>
+	</dict>
+	<key>Boarding Houses</key>
+	<dict/>
+	<key>Club Houses</key>
+	<dict/>
+	<key>South Beach</key>
+	<dict/>
+	<key>Middle Beach</key>
+	<dict/>
+	<key>Alligators</key>
+	<dict/>
+	<key>Middle Place</key>
+	<dict/>
+	<key>Main Road</key>
+	<dict/>
+	<key>Tabbies and Houses</key>
+	<dict/>
+</dict>
+</plist>

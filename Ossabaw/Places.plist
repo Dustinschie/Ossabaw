@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Names</key>
+	<array>
+		<string>Slave Tabbies</string>
+		<string>Boarding Houses</string>
+		<string>Club Houses</string>
+		<string>South Beach</string>
+		<string>Middle Beach</string>
+		<string>Alligators</string>
+		<string>Middle Place</string>
+		<string>Main Road</string>
+		<string>Tabbies and Houses</string>
+	</array>
+	<key>places</key>
+	<array>
+		<dict>
+			<key>Name</key>
+			<string>Slave Tabbies</string>
+			<key>Information</key>
+			<string>The three surviving tabby slave quarters of North End Plantation’s antebellum period are considered one of the best preserved examples of slave settlement architecture in the southeast.</string>
+			<key>Images</key>
+			<array>
+				<string>slavetabbies.png</string>
+			</array>
+			<key>Icon</key>
+			<string>slavetabbies_icon.png</string>
+			<key>Location</key>
+			<string>{31.839120, -81.092040}</string>
+		</dict>
+		<dict>
+			<key>Images</key>
+			<array>
+				<string>boardinghouse.png</string>
+			</array>
+			<key>Name</key>
+			<string>Boarding Houses</string>
+			<key>Information</key>
+			<string>The Award winning Boarding House is now available for smaller groups, inviduals and people staying longer on the island for study, research of culture programs.</string>
+			<key>Icon</key>
+			<string>boardinghouse_icon.png</string>
+			<key>Location</key>
+			<string>{31.837551, -81.091422}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Club Houses</string>
+			<key>Information</key>
+			<string>The restored Clubhouse is considered to be one of the oldest and best surviving examples of pre-fabricated architecture on the Georgia coast.</string>
+			<key>Icon</key>
+			<string>clubhouse_icon.png</string>
+			<key>Images</key>
+			<array>
+				<string>clubhouse.png</string>
+			</array>
+			<key>Location</key>
+			<string>{31.836855, -81.089317}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>South Beach</string>
+			<key>Information</key>
+			<string>At high tide the South End Beach is completely submerged by the sea.</string>
+			<key>Images</key>
+			<array>
+				<string>southbeach.png</string>
+			</array>
+			<key>Icon</key>
+			<string>southbeach_icon.png</string>
+			<key>Location</key>
+			<string>{31.743185, -81.114693}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Middle Beach</string>
+			<key>Information</key>
+			<string>Once growing behind the dunes, these palms are testimony to the dynamic nature of Bradley Beach.</string>
+			<key>Images</key>
+			<array>
+				<string>middlebeach.png</string>
+			</array>
+			<key>Icon</key>
+			<string>middlebeach_icon.png</string>
+			<key>Location</key>
+			<string>{31.770374, -81.082640}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Alligators</string>
+			<key>Information</key>
+			<string>The American alligator, the island’s top predator, can be found throughout the island all year long but are more active during the warmer months.</string>
+			<key>Images</key>
+			<array>
+				<string>alligators.png</string>
+			</array>
+			<key>Icon</key>
+			<string>alligators_icon.png</string>
+			<key>Location</key>
+			<string>{31.771652, -81.116160}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Middle Place</string>
+			<key>Information</key>
+			<string>Middle Place is the home of sites like the Tower House which was built by Genesis Project members in 1980 of downed lumber from the island.</string>
+			<key>Images</key>
+			<array>
+				<string>middleplace.png</string>
+			</array>
+			<key>Icon</key>
+			<string>middleplace_icon.png</string>
+			<key>Location</key>
+			<string>{31.804060, -81.106411}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Main Road</string>
+			<key>Information</key>
+			<string>The main road was carved into the island’s interior in the 1760’s. It is considered to be one of the oldest continuously used roads in America.</string>
+			<key>Images</key>
+			<array>
+				<string>mainroad.png</string>
+			</array>
+			<key>Icon</key>
+			<string>mainroad_icon.png</string>
+			<key>Location</key>
+			<string>{31.822372, -81.101054}</string>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Tabbies and Houses</string>
+			<key>Information</key>
+			<string>Meh</string>
+			<key>Images</key>
+			<array>
+				<string>slavetabbies.png</string>
+			</array>
+			<key>Icon</key>
+			<string>slavetabbies_icon.png</string>
+			<key>Location</key>
+			<string>{31.837451, -81.090135}</string>
+		</dict>
+	</array>
+</dict>
+</plist>
