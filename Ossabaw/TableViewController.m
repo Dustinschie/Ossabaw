@@ -34,7 +34,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     
 }
@@ -103,7 +103,11 @@
     }   
 }
 
-
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self setIndex:[indexPath row]];
+    [self performSegueWithIdentifier:@"tableToInfo" sender:self];
+}
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
@@ -126,8 +130,20 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"tableToInfo"]) {
+        JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
+        [jvc setPlace: dict];
+        
+    }
+    
+    else if ([[segue identifier] isEqualToString:@"toInfo"]) {
+        JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
+        [jvc setPlace: dict];
+        
+    }
+
 }
 
 

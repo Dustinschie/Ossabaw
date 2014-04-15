@@ -12,7 +12,7 @@
 @end
 
 @implementation MapViewController
-@synthesize mapView, toolBar, userLocation, places, mapOverlay;
+@synthesize mapView, userLocation, places, mapOverlay;
 
 - (void)viewDidLoad
 {

@@ -7,17 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JournalEntryMakerViewController.h"
 
 @interface JournalViewController : UIViewController
 
-<UIScrollViewDelegate>
+<UIImagePickerControllerDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *button;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIScrollView *topScrollView;
 
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 
 @property (strong, nonatomic) NSMutableDictionary *place;
+@property (strong, nonatomic) IBOutlet UIScrollView *subScrollView;
 
--(IBAction)buttonPressed:(id)sender;
+
+- (IBAction)takePhoto:(id)sender;
+- (IBAction)selectPhoto:(id)sender;
+- (IBAction)cancelButtonPressed:(id)sender;
+- (UIImage *) cropImage: (UIImage *) image toRect: (CGRect) rect;
 @end

@@ -10,6 +10,7 @@
 		5848D2F618F4EF2B006C13D9 /* JournalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848D2F418F4EF2B006C13D9 /* JournalViewController.m */; };
 		5848D2F918F7BB57006C13D9 /* UIBarButtonCamera_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */; };
 		5848D2FB18F7C409006C13D9 /* UIBarButtonAdd_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2FA18F7C409006C13D9 /* UIBarButtonAdd_2x.png */; };
+		586413FB18FC9A2300147180 /* JournalEntryMakerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586413F918FC9A2300147180 /* JournalEntryMakerViewController.m */; };
 		587EDD8618F8212000634925 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587EDD8518F8212000634925 /* TableViewController.m */; };
 		58A0613118F8C5EC004959B0 /* User_Journal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58A0613018F8C5EC004959B0 /* User_Journal.plist */; };
 		58A0613418F8CD67004959B0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0613318F8CD67004959B0 /* WebViewController.m */; };
@@ -73,6 +74,8 @@
 		5848D2F418F4EF2B006C13D9 /* JournalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalViewController.m; sourceTree = "<group>"; };
 		5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonCamera_2x.png; sourceTree = "<group>"; };
 		5848D2FA18F7C409006C13D9 /* UIBarButtonAdd_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonAdd_2x.png; sourceTree = "<group>"; };
+		586413F818FC9A2300147180 /* JournalEntryMakerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalEntryMakerViewController.h; sourceTree = "<group>"; };
+		586413F918FC9A2300147180 /* JournalEntryMakerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalEntryMakerViewController.m; sourceTree = "<group>"; };
 		587EDD8418F8212000634925 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		587EDD8518F8212000634925 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		58A0613018F8C5EC004959B0 /* User_Journal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = User_Journal.plist; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 			children = (
 				58F7F88318EB295C00BAFC4F /* AppDelegate.h */,
 				58F7F88418EB295C00BAFC4F /* AppDelegate.m */,
+				586413F818FC9A2300147180 /* JournalEntryMakerViewController.h */,
+				586413F918FC9A2300147180 /* JournalEntryMakerViewController.m */,
 				5848D2F318F4EF2B006C13D9 /* JournalViewController.h */,
 				5848D2F418F4EF2B006C13D9 /* JournalViewController.m */,
 				58CE6D3818ED0F7A00D80D83 /* MapAnnotation.h */,
@@ -438,6 +443,7 @@
 				58F7F88B18EB295C00BAFC4F /* MapViewController.m in Sources */,
 				58B28B3318EF99E700BBFCFE /* PlaceChildViewController.m in Sources */,
 				5848D2F618F4EF2B006C13D9 /* JournalViewController.m in Sources */,
+				586413FB18FC9A2300147180 /* JournalEntryMakerViewController.m in Sources */,
 				58F7F88118EB295C00BAFC4F /* main.m in Sources */,
 				58CB1CF518EFD5550098FEDE /* MapOverlayRenderer.m in Sources */,
 				58A0613418F8CD67004959B0 /* WebViewController.m in Sources */,

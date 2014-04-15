@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JournalViewController.h"
 
 @interface TableViewController : UITableViewController<UITableViewDataSource, UITableViewDataSource>
 
