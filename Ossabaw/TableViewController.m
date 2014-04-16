@@ -61,7 +61,7 @@
     return [[self places] count];
 }
 
-
+//----------------------------------------------------------------------------------------------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"SettingsCell";
@@ -124,7 +124,13 @@
     return YES;
 }
 
+//----------------------------------------------------------------------------------------------
 #pragma mark - Navigation
+
+-(IBAction)AddButtonPressed:(id)sender
+{
+    [self performSegueWithIdentifier:@"blurryModalSegue" sender:self];
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -140,8 +146,15 @@
         JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
         [jvc setPlace: dict];
-        
     }
+    
+    else if ([[segue identifier] isEqualToString:@"blurryModalSegue"]) {
+        BlurryModalSegue *bms = (BlurryModalSegue *) segue;
+        
+        [bms setBackingImageSaturationDeltaFactor:@(0.45)];
+        [bms setBackingImageTintColor:[[UIColor grayColor] colorWithAlphaComponent:0.1]];
+    }
+    
 
 }
 

@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *places;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *addButton;
+-(IBAction)AddButtonPressed:(id)sender;
 @property NSInteger index;
 
 @end
