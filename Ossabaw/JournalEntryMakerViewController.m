@@ -54,7 +54,6 @@
     [[[self titleTextField] layer] setCornerRadius: 5];
     [[[self titleTextField] layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
     [[[self titleTextField] layer] setBorderWidth: 1.5f];
-    NSLog(@"%f", [[self scrollView] frame].size.height);
     [[self scrollView] setDelegate:self];
 
     [[self scrollView] setAlwaysBounceVertical:YES];
