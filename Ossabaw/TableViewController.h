@@ -12,8 +12,8 @@
 @interface TableViewController : UITableViewController<UITableViewDataSource, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *places;
+@property (strong, nonatomic) NSMutableArray *places;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addButton;
 @property NSInteger index;
-
 
 @end

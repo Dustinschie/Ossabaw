@@ -81,19 +81,19 @@
                                 <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.89999999999999991"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="hgl-S3-Ozg"/>
                     <connections>
                         <outlet property="pageControl" destination="TDz-79-luQ" id="Hfe-de-Wgp"/>
                         <outlet property="scrollView" destination="WsP-tz-Lu9" id="wJI-vy-jYi"/>
                         <outlet property="subScrollView" destination="CMy-H0-fX8" id="uCq-4l-Uyh"/>
-                        <segue destination="0zK-FN-ngE" kind="modal" id="jDc-HB-tRc"/>
+                        <segue destination="0zK-FN-ngE" kind="custom" identifier="blurry" customClass="BlurryModalSegue" id="jDc-HB-tRc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cai-wC-Wqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="360" y="-354"/>
+            <point key="canvasLocation" x="370" y="-414"/>
         </scene>
         <!--Journal Entry Maker View Controller-->
         <scene sceneID="UdN-VY-X7F">
@@ -107,63 +107,74 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="pgl-cy-9Zf">
-                                <rect key="frame" x="0.0" y="57" width="320" height="511"/>
+                            <scrollView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="pgl-cy-9Zf">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kdc-17-VCU">
+                                        <rect key="frame" x="111" y="27" width="97" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMM-gJ-EHE">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                        <rect key="frame" x="0.0" y="63" width="320" height="320"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
                                     </scrollView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Jyt-aI-hl4">
-                                        <rect key="frame" x="141" y="309" width="39" height="37"/>
+                                        <rect key="frame" x="141" y="373" width="39" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="pageIndicatorTintColor" red="0.58585258149999997" green="0.58585258149999997" blue="0.58585258149999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </pageControl>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4lm-Jy-VTO">
-                                        <rect key="frame" x="20" y="374" width="280" height="30"/>
+                                    <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKk-ZY-i9J">
+                                        <rect key="frame" x="0.0" y="412" width="320" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.83801800271739135" green="0.83801800271739135" blue="0.83801800271739135" alpha="1" colorSpace="calibratedRGB"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HXX-QP-JtK">
-                                        <rect key="frame" x="20" y="351" width="33" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Env-Aj-OuO">
-                                        <rect key="frame" x="20" y="412" width="88" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mQb-Ty-S99">
-                                <rect key="frame" x="20" y="30" width="48" height="30"/>
+                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7m-pU-md3">
+                                <rect key="frame" x="0.0" y="20" width="85" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="zRP-5L-KwG">
+                                        <connections>
+                                            <action selector="dismiss:" destination="0zK-FN-ngE" id="UJp-1e-qUh"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </toolbar>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VFZ-HV-Fpr">
+                                <rect key="frame" x="260" y="25" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                                <connections>
+                                    <action selector="switchChanged:" destination="0zK-FN-ngE" eventType="valueChanged" id="nCa-HN-SfR"/>
+                                </connections>
+                            </switch>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="kn3-ks-A36"/>
                     <connections>
-                        <outlet property="cancelButton" destination="mQb-Ty-S99" id="LJO-rU-vO8"/>
+                        <outlet property="colorSwitch" destination="VFZ-HV-Fpr" id="prV-X0-fJ2"/>
                         <outlet property="imageScrollView" destination="UMM-gJ-EHE" id="mOh-QM-VS4"/>
                         <outlet property="pageControl" destination="Jyt-aI-hl4" id="RDv-Qf-Axc"/>
                         <outlet property="scrollView" destination="pgl-cy-9Zf" id="e9O-lp-b9n"/>
-                        <outlet property="titleTextField" destination="4lm-Jy-VTO" id="JMV-HV-n2j"/>
+                        <outlet property="textView" destination="zKk-ZY-i9J" id="Qfq-zj-Q4P"/>
+                        <outlet property="toolBar" destination="I7m-pU-md3" id="Ik0-aM-GPV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pna-Rs-lrh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="763" y="-354"/>
+            <point key="canvasLocation" x="860" y="-414"/>
         </scene>
         <!--Table View Controller - Journal Entries-->
         <scene sceneID="zEN-N0-nVl">
@@ -174,16 +185,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleAspectFill" restorationIdentifier="SettingsCell" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsCell" id="sRp-xu-m2M">
+                            <tableViewCell contentMode="scaleAspectFill" restorationIdentifier="SettingsCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsCell" editingAccessoryType="detailDisclosureButton" id="sRp-xu-m2M">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sRp-xu-m2M" id="mfr-Pe-jEn">
-                                    <rect key="frame" x="0.0" y="0.0" width="253" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="0zK-FN-ngE" kind="modal" trigger="accessoryAction" id="apq-Of-9JE"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -191,8 +199,16 @@
                             <outlet property="delegate" destination="504-2F-xbN" id="qpx-na-3Fa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Journal Entries" id="WGe-JC-31s"/>
+                    <navigationItem key="navigationItem" title="Journal Entries" id="WGe-JC-31s">
+                        <barButtonItem key="leftBarButtonItem" title="Item" systemItem="add" id="W6B-Ws-Nmz">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="504-2F-xbN" id="7Wn-SH-gT7"/>
+                                <segue destination="0zK-FN-ngE" kind="custom" identifier="blurry" customClass="BlurryModalSegue" id="9Xj-Of-dzD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="W6B-Ws-Nmz" id="74e-7g-5n1"/>
                         <outlet property="tableView" destination="57W-hu-DPo" id="MV1-qQ-mY4"/>
                         <segue destination="eXl-fY-U7z" kind="push" identifier="tableToInfo" id="Dzr-kQ-trg"/>
                     </connections>
