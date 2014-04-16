@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JournalEntryMakerViewController.h"
+#import <BlurryModalSegue/BlurryModalSegue.h>
 
 @interface JournalViewController : UIViewController
 

@@ -19,7 +19,8 @@
 -(void) viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"hello");
+//    NSLog(@"hello");
+    
     
 
     [self setTitle: (NSString *)[place objectForKey:@"Name"]];
@@ -137,6 +138,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue isKindOfClass:[BlurryModalSegue class]])
+    {
+        BlurryModalSegue* bms = (BlurryModalSegue*)segue;
+        
+//        bms.backingImageBlurRadius = @(20);
+//        bms.backingImageSaturationDeltaFactor = @(.45);
+//        bms.backingImageTintColor = [[UIColor greenColor] colorWithAlphaComponent:.1];
+    }
+}
 
 //----------------------------------------------------------------------------------------------
 
@@ -158,8 +170,9 @@
     //    [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
     //
     //    [self presentViewController:picker animated:YES completion:nil];
-    JournalEntryMakerViewController *je = [[JournalEntryMakerViewController alloc] init];
-    [self presentViewController:je animated:YES completion:nil];
+//    JournalEntryMakerViewController *je = [[JournalEntryMakerViewController alloc] init];
+//    [self presentViewController:je animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"blurry" sender:self];
 }
 
 //----------------------------------------------------------------------------------------------
@@ -204,5 +217,7 @@
     int pageNumber = floor(([scrollView contentOffset].x - viewWidth / numViews) / viewWidth + 1);
     [[self pageControl] setCurrentPage:pageNumber];
 }
+
+
 
 @end
