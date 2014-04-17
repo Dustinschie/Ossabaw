@@ -14,15 +14,11 @@
 
 @implementation JournalViewController
 
-@synthesize pageControl, scrollView, textView, place, button, subScrollView;
+@synthesize pageControl, scrollView, textView, place, button, subScrollView, editButton;
 
 -(void) viewDidLoad
 {
     [super viewDidLoad];
-//    NSLog(@"hello");
-    
-    
-
     [self setTitle: (NSString *)[place objectForKey:@"Name"]];
     // Edit scrollView with images
     [[self scrollView] setDelegate:self];
@@ -143,10 +139,8 @@
     if ([segue isKindOfClass:[BlurryModalSegue class]])
     {
         BlurryModalSegue* bms = (BlurryModalSegue*)segue;
-        
-//        bms.backingImageBlurRadius = @(20);
-//        bms.backingImageSaturationDeltaFactor = @(.45);
-//        bms.backingImageTintColor = [[UIColor greenColor] colorWithAlphaComponent:.1];
+        [bms setBackingImageSaturationDeltaFactor:@(0.45)];
+        [bms setBackingImageTintColor:[[UIColor grayColor] colorWithAlphaComponent:0.5]];
     }
 }
 
@@ -164,15 +158,16 @@
 
 - (IBAction)selectPhoto:(id)sender
 {
-    //    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    //    [picker setDelegate:self];
-    //    [picker setAllowsEditing:YES];
-    //    [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-    //
-    //    [self presentViewController:picker animated:YES completion:nil];
-//    JournalEntryMakerViewController *je = [[JournalEntryMakerViewController alloc] init];
-//    [self presentViewController:je animated:YES completion:nil];
-    [self performSegueWithIdentifier:@"blurry" sender:self];
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    [picker setDelegate:self];
+    [picker setAllowsEditing:YES];
+    [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+
+    [self presentViewController:picker animated:YES completion:nil];
+}
+- (IBAction)editButtonPressed:(id)sender
+{
+    [self performSegueWithIdentifier:@"blurToEdit" sender:self];
 }
 
 //----------------------------------------------------------------------------------------------

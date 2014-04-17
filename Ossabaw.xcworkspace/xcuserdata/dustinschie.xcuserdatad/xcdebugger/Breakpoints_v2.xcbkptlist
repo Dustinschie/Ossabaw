@@ -9,44 +9,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Ossabaw/JournalEntryMakerViewController.h"
-            timestampString = "419311802.527397"
+            filePath = "Ossabaw/JournalEntryMakerViewController.m"
+            timestampString = "419385881.516936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "textView"
-            landmarkType = "19">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JournalEntryMakerViewController textView]"
-                  moduleName = "Ossabaw"
-                  urlString = "file:///Users/dustinschie/Documents/Ossabaw/Ossabaw/JournalEntryMakerViewController.h"
-                  timestampString = "419311802.563547"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JournalEntryMakerViewController setTextView:]"
-                  moduleName = "Ossabaw"
-                  urlString = "file:///Users/dustinschie/Documents/Ossabaw/Ossabaw/JournalEntryMakerViewController.h"
-                  timestampString = "419311802.563743"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "22">
-               </Location>
-            </Locations>
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-takePhoto:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

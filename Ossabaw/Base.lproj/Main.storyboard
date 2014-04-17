@@ -44,7 +44,6 @@
                     <connections>
                         <outlet property="mapView" destination="OPo-ZB-FnM" id="8GX-Ng-cvZ"/>
                         <segue destination="eXl-fY-U7z" kind="push" identifier="goToInfo" id="az6-b1-akb"/>
-                        <segue destination="eXl-fY-U7z" kind="modal" identifier="toInfo" modalTransitionStyle="flipHorizontal" id="32u-me-18e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
@@ -83,12 +82,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hgl-S3-Ozg"/>
+                    <navigationItem key="navigationItem" id="hgl-S3-Ozg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="l3g-FW-vmK">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="eXl-fY-U7z" id="Dhx-7w-xU3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="l3g-FW-vmK" id="dWA-GR-AHU"/>
                         <outlet property="pageControl" destination="TDz-79-luQ" id="Hfe-de-Wgp"/>
                         <outlet property="scrollView" destination="WsP-tz-Lu9" id="wJI-vy-jYi"/>
                         <outlet property="subScrollView" destination="CMy-H0-fX8" id="uCq-4l-Uyh"/>
-                        <segue destination="0zK-FN-ngE" kind="custom" identifier="blurry" customClass="BlurryModalSegue" id="jDc-HB-tRc"/>
+                        <segue destination="0zK-FN-ngE" kind="custom" identifier="blurToEdit" customClass="BlurryModalSegue" id="caf-Xu-SH1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cai-wC-Wqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -112,8 +118,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kdc-17-VCU">
-                                        <rect key="frame" x="111" y="27" width="97" height="30"/>
+                                        <rect key="frame" x="65" y="25" width="190" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -128,18 +136,17 @@
                                         <color key="pageIndicatorTintColor" red="0.58585258149999997" green="0.58585258149999997" blue="0.58585258149999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </pageControl>
-                                    <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKk-ZY-i9J">
+                                    <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Enter some stuff!" translatesAutoresizingMaskIntoConstraints="NO" id="zKk-ZY-i9J">
                                         <rect key="frame" x="0.0" y="399" width="320" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.83801800271739135" green="0.83801800271739135" blue="0.83801800271739135" alpha="1" colorSpace="calibratedRGB"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <datePicker clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="SpT-wv-SWJ">
-                                        <rect key="frame" x="-1" y="536" width="320" height="162"/>
+                                        <rect key="frame" x="0.0" y="535" width="320" height="162"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
                                         <date key="date" timeIntervalSinceReferenceDate="419378699.50918001">
@@ -149,7 +156,7 @@
                                             <!--1970-01-01 11:00:00 +0000-->
                                         </date>
                                         <timeZone key="timeZone" name="America/Los_Angeles">
-                                            <mutableData key="data">
+                                            <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -167,9 +174,22 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                         </timeZone>
                                     </datePicker>
+                                    <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vz-ps-AFH">
+                                        <rect key="frame" x="20" y="760" width="280" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="doneButtonPressed:" destination="0zK-FN-ngE" eventType="touchUpInside" id="OkW-8y-66I"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
@@ -185,8 +205,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </items>
                                 <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </toolbar>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VFZ-HV-Fpr">
-                                <rect key="frame" x="260" y="25" width="51" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VFZ-HV-Fpr">
+                                <rect key="frame" x="258" y="25" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="switchChanged:" destination="0zK-FN-ngE" eventType="valueChanged" id="nCa-HN-SfR"/>
@@ -196,16 +216,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </view>
                     <connections>
                         <outlet property="colorSwitch" destination="VFZ-HV-Fpr" id="prV-X0-fJ2"/>
+                        <outlet property="doneButton" destination="0vz-ps-AFH" id="8SM-Bb-UQP"/>
                         <outlet property="imageScrollView" destination="UMM-gJ-EHE" id="mOh-QM-VS4"/>
                         <outlet property="pageControl" destination="Jyt-aI-hl4" id="RDv-Qf-Axc"/>
                         <outlet property="scrollView" destination="pgl-cy-9Zf" id="e9O-lp-b9n"/>
                         <outlet property="textView" destination="zKk-ZY-i9J" id="Qfq-zj-Q4P"/>
+                        <outlet property="titleTextField" destination="Kdc-17-VCU" id="hVo-ze-8YR"/>
                         <outlet property="toolBar" destination="I7m-pU-md3" id="Ik0-aM-GPV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pna-Rs-lrh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="860" y="-414"/>
+            <point key="canvasLocation" x="892" y="-420"/>
         </scene>
         <!--Table View Controller - Journal Entries-->
         <scene sceneID="zEN-N0-nVl">
@@ -305,8 +327,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </tabBar>
                     <connections>
                         <segue destination="6r3-u4-BEj" kind="relationship" relationship="viewControllers" id="xUe-0H-5Yz"/>
-                        <segue destination="F7n-2A-3HT" kind="relationship" relationship="viewControllers" id="xNV-i9-ULA"/>
                         <segue destination="7ln-dO-AnR" kind="relationship" relationship="viewControllers" id="Tlq-dK-5Vr"/>
+                        <segue destination="F7n-2A-3HT" kind="relationship" relationship="viewControllers" id="xNV-i9-ULA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
@@ -325,6 +347,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Dzr-kQ-trg"/>
-        <segue reference="jDc-HB-tRc"/>
+        <segue reference="caf-Xu-SH1"/>
     </inferredMetricsTieBreakers>
 </document>

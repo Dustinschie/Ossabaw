@@ -130,6 +130,7 @@
 -(IBAction)AddButtonPressed:(id)sender
 {
     [self performSegueWithIdentifier:@"blurryModalSegue" sender:self];
+    
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -152,7 +153,7 @@
         BlurryModalSegue *bms = (BlurryModalSegue *) segue;
         
         [bms setBackingImageSaturationDeltaFactor:@(0.45)];
-        [bms setBackingImageTintColor:[[UIColor grayColor] colorWithAlphaComponent:0.1]];
+        [bms setBackingImageTintColor:[[UIColor grayColor] colorWithAlphaComponent:0.5]];
     }
     
 
