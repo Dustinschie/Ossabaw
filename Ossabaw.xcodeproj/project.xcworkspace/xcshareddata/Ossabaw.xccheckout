@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DD4F3B5D-90A8-4327-8FA8-3FB134F4E88E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Ossabaw</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>18E116FC-70AA-4E42-9395-660E9B5F347F</key>
+		<string>https://github.com/Dustinschie/Ossabaw.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Ossabaw.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>18E116FC-70AA-4E42-9395-660E9B5F347F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Dustinschie/Ossabaw.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>18E116FC-70AA-4E42-9395-660E9B5F347F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>18E116FC-70AA-4E42-9395-660E9B5F347F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Ossabaw</string>
+		</dict>
+	</array>
+</dict>
+</plist>
