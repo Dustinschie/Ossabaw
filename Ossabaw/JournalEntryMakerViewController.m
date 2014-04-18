@@ -13,7 +13,8 @@
 @end
 
 @implementation JournalEntryMakerViewController
-@synthesize doneButton, pageControl, textView, titleTextField, imageScrollView, scrollView, images, index, toolBar, colorSwitch;
+@synthesize doneButton, pageControl, textView, titleTextField, imageScrollView, scrollView, images,
+            index, toolBar, colorSwitch, locationPicker, datePicker, locations;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +29,7 @@
 {
     [super viewDidLoad];
     [[self toolBar] setClipsToBounds:YES];
+    [self setLocations:[[NSArray alloc] initWithObjects:@"Blue",@"Green",@"Orange",@"Purple",@"Red",@"Yellow" , nil]];
 
     int imgSVWidth = [[self imageScrollView] frame].size.width;
     int imgSVheight = [[self imageScrollView] frame].size.height;
@@ -73,13 +75,32 @@
 
     [[self titleTextField] setDelegate:self];
     
+    
+    [[self locationPicker] setDelegate:self];
+    [[self locationPicker] setDataSource:self];
+    [[[self locationPicker] layer] setCornerRadius:5];
+    
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    NSInteger h = [[self scrollView] frame].size.height * 2;
+//    [[self datePicker] setFrame:CGRectMake(0, h + 50, [[self datePicker] frame].size. width, [[self datePicker] frame].size.height)];
+//    [[self locationPicker] setFrame:CGRectMake(0, h + [[self datePicker] frame].size.height + 10, [[self locationPicker] frame].size.width, [[self locationPicker] frame].size.height)];
+//    [[self doneButton] setFrame:CGRectMake([[self doneButton] frame].origin.x, h + [[self locationPicker] frame].origin.y + [[self locationPicker] frame].size.height, [[self doneButton] frame].size.width, [[self doneButton] frame].size.height)];
+
+    
 }
 
 -(void) viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [[self scrollView] setContentSize:CGSizeMake([[self scrollView] frame].size.width, [[self scrollView] frame].size.height * 1.5)];
-    [[[self scrollView] layer] setCornerRadius:5];
+    NSInteger h = [[self scrollView] frame].size.height * 2;
+    [[self scrollView] setContentSize:CGSizeMake([[self scrollView] frame].size.width, h)];
+//    [[self scrollView] setPagingEnabled:YES];
+    
+//    [[[self scrollView] layer] setCornerRadius:5];
 }
 
 
@@ -99,14 +120,26 @@
 //----------------------------------------------------------------------------------------------
 -(IBAction)takePhoto:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                    message:nil
-                                                   delegate:self
-                                          cancelButtonTitle:@"Cancel"
-                                          otherButtonTitles:@"Take a Photo", @"Camera Roll", nil
-                          ];
-    [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                    message:nil
+//                                                   delegate:self
+//                                          cancelButtonTitle:@"Cancel"
+//                                          otherButtonTitles:@"Take a Photo", @"Camera Roll", nil
+//                          ];
+//    [alert show];
+
+    NSString *title = @"",
+             *cancelTitle = @"Cancel",
+             *camera = @"Take a photo",
+            *cameraRoll = @"Camera Roll";
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle: title
+                                                             delegate:self
+                                                  cancelButtonTitle:cancelTitle
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:camera,cameraRoll, nil
+                                  ];
     
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
     
 
 }
@@ -188,11 +221,51 @@
         [self presentViewController:picker animated:YES completion:nil];
     }
 }
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        [picker setDelegate:self];
+        [picker setAllowsEditing:YES];
+        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:picker animated:YES completion:nil];
+    } else if(buttonIndex == 1){
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        [picker setDelegate:self];
+        [picker setAllowsEditing:YES];
+        [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+
+}
+
+//----------------------------------------------------------------------------------------------
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component
+{
+    return 6;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
+{
+    return [[self locations] objectAtIndex:row];
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component
+{
+    
+}
 //----------------------------------------------------------------------------------------------
 - (void) textViewDidBeginEditing:(UITextView *)textView
 {
     [[self scrollView] setContentOffset:CGPointMake([[self scrollView] contentOffset].x,
-                                                    [[self textView] frame].origin.y - 1.75*[[self textView] frame].size.height)
+                                                    [[self textView] frame].origin.y - 1.75*[[self textView] frame].size.height )
                                animated:YES];
 }
 //----------------------------------------------------------------------------------------------
