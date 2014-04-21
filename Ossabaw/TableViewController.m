@@ -34,7 +34,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
+//    [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
     
     
     
@@ -76,6 +76,10 @@
     
     UIImage *icon = [UIImage imageNamed:[dict objectForKey:@"Icon"]];
     [[cell imageView] setImage:icon];
+//    [[[cell imageView] layer] setCornerRadius:5];
+    [[[cell imageView] layer] setMasksToBounds:YES];
+    
+
     
     NSString *detail = [dict objectForKey:@"Information"];
     [[cell detailTextLabel] setText:detail];

@@ -21,6 +21,7 @@
     MKUserLocation* userLocation;
     NSArray   *places;
     MapOverlay *mapOverlay;
+    BOOL hasOpened;
 }
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -28,6 +29,7 @@
 @property MKUserLocation *userLocation;
 @property (strong, nonatomic) MapOverlay *mapOverlay;
 @property  NSInteger index;
+
 
 //@property (strong, nonatomic) IBOutlet JournalViewController *jvc;
 

@@ -64,8 +64,8 @@
     
     //  setup the outer scroll view
     [[self scrollView] setAlwaysBounceVertical:YES];
-    [[self scrollView] setScrollEnabled:YES];
-    [[self scrollView] setPagingEnabled:NO];
+//    [[self scrollView] setScrollEnabled:YES];
+//    [[self scrollView] setPagingEnabled:NO];
     
     // setup the textview that contains notes
     [[[self textView] layer] setCornerRadius:5];
