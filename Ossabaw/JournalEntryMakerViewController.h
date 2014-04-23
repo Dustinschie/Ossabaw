@@ -8,7 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JournalEntryMakerViewController : UIViewController <UIScrollViewDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@class Journal;
+
+
+
+@interface JournalEntryMakerViewController : UIViewController <UIScrollViewDelegate,
+                                                    UIImagePickerControllerDelegate,
+                                                                UITextFieldDelegate,
+                                                                 UITextViewDelegate,
+                                                              UIActionSheetDelegate,
+                                                                UIAlertViewDelegate,
+                                                             UIPickerViewDataSource,
+                                                                UIPickerViewDelegate,
+                                                  NSFetchedResultsControllerDelegate>
+
 @property (strong, nonatomic) IBOutlet UIScrollView     *scrollView;
 @property (strong, nonatomic) IBOutlet UIScrollView     *imageScrollView;
 @property (strong, nonatomic) IBOutlet UIPageControl    *pageControl;
@@ -24,11 +37,15 @@
 @property                               NSInteger        index;
 @property (strong, nonatomic)           NSArray         *locations;
 
+@property (strong, nonatomic)           NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic)           NSFetchedResultsController *fetchedResultsController;
+
+@property (strong, nonatomic)           Journal         *journal;
+
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)dismiss:(id)sender;
 - (IBAction)switchChanged:(id)sender;
 - (IBAction)doneButtonPressed:(id)sender;
-
 
 - (UIImage *) cropImage: (UIImage *) image toRect: (CGRect) rect;
 

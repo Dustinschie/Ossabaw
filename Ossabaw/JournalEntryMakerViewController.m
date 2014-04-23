@@ -80,16 +80,23 @@
     [[self locationPicker] setDataSource:self];
     [[[self locationPicker] layer] setCornerRadius:5];
     
+    NSError *error = nil;
+    if (! [[self fetchedResultsController] performFetch:&error]) {
+        /*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+    }
+    
 }
 
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    NSInteger h = [[self scrollView] frame].size.height * 2;
-//    [[self datePicker] setFrame:CGRectMake(0, h + 50, [[self datePicker] frame].size. width, [[self datePicker] frame].size.height)];
-//    [[self locationPicker] setFrame:CGRectMake(0, h + [[self datePicker] frame].size.height + 10, [[self locationPicker] frame].size.width, [[self locationPicker] frame].size.height)];
-//    [[self doneButton] setFrame:CGRectMake([[self doneButton] frame].origin.x, h + [[self locationPicker] frame].origin.y + [[self locationPicker] frame].size.height, [[self doneButton] frame].size.width, [[self doneButton] frame].size.height)];
-
+    
     
 }
 

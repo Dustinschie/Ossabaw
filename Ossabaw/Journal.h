@@ -2,34 +2,30 @@
 //  Journal.h
 //  Ossabaw
 //
-//  Created by Dustin Schie on 4/19/14.
+//  Created by Dustin Schie on 4/22/14.
 //  Copyright (c) 2014 Dustin Schie. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Photos;
+@class Photo;
 
 @interface Journal : NSManagedObject
 
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * information;
-@property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * location;
-@property (nonatomic, retain) NSOrderedSet *photos;
+@property (nonatomic, retain) id icon;
+@property (nonatomic, retain) UNKNOWN_TYPE attribute;
+@property (nonatomic, retain) NSSet *photos;
 @end
 
 @interface Journal (CoreDataGeneratedAccessors)
 
-- (void)insertObject:(Photos *)value inPhotosAtIndex:(NSUInteger)idx;
-- (void)removeObjectFromPhotosAtIndex:(NSUInteger)idx;
-- (void)insertPhotos:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
-- (void)removePhotosAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInPhotosAtIndex:(NSUInteger)idx withObject:(Photos *)value;
-- (void)replacePhotosAtIndexes:(NSIndexSet *)indexes withPhotos:(NSArray *)values;
-- (void)addPhotosObject:(Photos *)value;
-- (void)removePhotosObject:(Photos *)value;
-- (void)addPhotos:(NSOrderedSet *)values;
-- (void)removePhotos:(NSOrderedSet *)values;
+- (void)addPhotosObject:(Photo *)value;
+- (void)removePhotosObject:(Photo *)value;
+- (void)addPhotos:(NSSet *)values;
+- (void)removePhotos:(NSSet *)values;
+
 @end

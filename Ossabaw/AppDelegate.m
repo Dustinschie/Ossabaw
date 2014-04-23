@@ -44,6 +44,18 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    NSError *error;
+    if ([self managedObjectContext] != nil) {
+        if ([[self managedObjectContext] hasChanges] && ![[self managedObjectContext] save:&error]) {
+            /*
+			 Replace this implementation with code to handle the error appropriately.
+			 
+			 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+			 */
+			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+			abort();
+        }
+    }
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
@@ -87,9 +99,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"OssabawDataModel" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     return _managedObjectModel;
     
 }
@@ -101,36 +111,78 @@
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
+//    
+//    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Ossabaw.sqlite"];
+//    NSError *error = nil;
+//    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+//    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+//        /**
+//         Replace this implementation with code to handle the error appropriately.
+//         abort() caouse the application to generate a crash log and terminate. You should not use this function in a shipping applicaiton, although it may be useful during development.
+//         
+//         Typing reasons for an error here include:
+//            * The persistent store is not accessible;
+//            * The schema for the peristent store is incompatible with current managed object model.
+//         Check the error messsage to determine what the actual problem was.
+//         
+//         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is point into the application's resources directory instead of a writeable directory.
+//         
+//         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
+//            * Simply deleting the existing store:
+//            [[NSFileManager defaultManager] removeItemAtURL: storeURL error nil];
+//            
+//            * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
+//            @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
+//         
+//         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
+//         
+//         */
+//        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//        abort();
+    NSString *documentsStorePath = [[[self applicationDocumentsDirectory] path] stringByAppendingPathComponent:@"Ossabaw.sqlite"];
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Ossabaw.sqlite"];
-    NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        /**
-         Replace this implementation with code to handle the error appropriately.
-         abort() caouse the application to generate a crash log and terminate. You should not use this function in a shipping applicaiton, although it may be useful during development.
-         
-         Typing reasons for an error here include:
-            * The persistent store is not accessible;
-            * The schema for the peristent store is incompatible with current managed object model.
-         Check the error messsage to determine what the actual problem was.
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is point into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-            * Simply deleting the existing store:
-            [[NSFileManager defaultManager] removeItemAtURL: storeURL error nil];
-            
-            * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-            @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
-        
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+    // if the expected store doesn't exist, copy the default store
+    if (! [[NSFileManager defaultManager] fileExistsAtPath:documentsStorePath]) {
+        NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"Ossabaw" ofType:@"sqlite"];
+        if (defaultStorePath) {
+            [[NSFileManager defaultManager] copyItemAtPath:defaultStorePath toPath:documentsStorePath error:NULL];
+        }
     }
+    
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    // add the default store to our coordinator
+    NSError *error;
+    NSURL *defaultStoreURL = [NSURL fileURLWithPath:documentsStorePath];
+    if (! [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:defaultStoreURL options:nil error:&error]) {
+        /*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 
+		 Typical reasons for an error here include:
+		 * The persistent store is not accessible
+		 * The schema for the persistent store is incompatible with current managed object model
+		 Check the error message to determine what the actual problem was.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+    }
+    NSURL *userStoreURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"UserJournals.sqlite"];
+    if (! [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:userStoreURL options:nil error:&error]) {
+        /*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 
+		 Typical reasons for an error here include:
+		 * The persistent store is not accessible
+		 * The schema for the persistent store is incompatible with current managed object model
+		 Check the error message to determine what the actual problem was.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+    }
+    
     return _persistentStoreCoordinator;
 }
 

@@ -36,6 +36,16 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 //    [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
     
+    NSError *error = nil;
+    if (! [[self fetchedResultsController] performFetch:&error]) {
+        /*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+    }
     
     
     
@@ -51,14 +61,20 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    NSInteger count = [[[self fetchedResultsController] sections] count];
     // Return the number of sections.
-    return 1;
+    return count == 0 ? 1 : count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSInteger numberOfRows = 0;
+    if ([[[self fetchedResultsController] sections] count] > 0) {
+        id<NSFetchedResultsSectionInfo> sectionInfo = [[[self fetchedResultsController] sections] objectAtIndex:section];
+        numberOfRows = [sectionInfo numberOfObjects];
+    }
     // Return the number of rows in the section.
-    return [[self places] count];
+    return numberOfRows;
 }
 
 //----------------------------------------------------------------------------------------------

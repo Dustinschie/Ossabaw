@@ -22,8 +22,6 @@
 		58CB1CEC18EFCA850098FEDE /* MapOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CB1CEB18EFCA850098FEDE /* MapOverlay.m */; };
 		58CB1CF518EFD5550098FEDE /* MapOverlayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CB1CF418EFD5550098FEDE /* MapOverlayRenderer.m */; };
 		58CE6D3A18ED0F7A00D80D83 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CE6D3918ED0F7A00D80D83 /* MapAnnotation.m */; };
-		58D26962190378DC0093AD86 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D26961190378DC0093AD86 /* Photos.m */; };
-		58D26965190378DD0093AD86 /* Journal.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D26964190378DD0093AD86 /* Journal.m */; };
 		58F7F87518EB295C00BAFC4F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58F7F87418EB295C00BAFC4F /* Foundation.framework */; };
 		58F7F87718EB295C00BAFC4F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58F7F87618EB295C00BAFC4F /* CoreGraphics.framework */; };
 		58F7F87918EB295C00BAFC4F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58F7F87818EB295C00BAFC4F /* UIKit.framework */; };
@@ -61,6 +59,8 @@
 		58F7F90318EC72B300BAFC4F /* southbeach_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F7F8EF18EC72B300BAFC4F /* southbeach_icon.png */; };
 		58F7F90418EC72B300BAFC4F /* southbeach.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F7F8F018EC72B300BAFC4F /* southbeach.png */; };
 		58F7F91018EC83BC00BAFC4F /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F7F90E18EC83BC00BAFC4F /* TableViewCell.m */; };
+		58FE798A19076D4F00013B27 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE798919076D4F00013B27 /* Photo.m */; };
+		58FE798D19076D5000013B27 /* Journal.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FE798C19076D5000013B27 /* Journal.m */; };
 		BDD0455FCB0A4D9783D67C18 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D2F40EDD264580ABF3691D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -100,10 +100,6 @@
 		58CB1CF418EFD5550098FEDE /* MapOverlayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapOverlayRenderer.m; sourceTree = "<group>"; };
 		58CE6D3818ED0F7A00D80D83 /* MapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotation.h; sourceTree = "<group>"; };
 		58CE6D3918ED0F7A00D80D83 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
-		58D26960190378DC0093AD86 /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
-		58D26961190378DC0093AD86 /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
-		58D26963190378DD0093AD86 /* Journal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Journal.h; sourceTree = "<group>"; };
-		58D26964190378DD0093AD86 /* Journal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Journal.m; sourceTree = "<group>"; };
 		58F7F87118EB295C00BAFC4F /* Ossabaw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ossabaw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58F7F87418EB295C00BAFC4F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		58F7F87618EB295C00BAFC4F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -147,6 +143,10 @@
 		58F7F8F018EC72B300BAFC4F /* southbeach.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = southbeach.png; path = Images/southbeach.png; sourceTree = SOURCE_ROOT; };
 		58F7F90D18EC83BC00BAFC4F /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		58F7F90E18EC83BC00BAFC4F /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		58FE798819076D4F00013B27 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		58FE798919076D4F00013B27 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		58FE798B19076D5000013B27 /* Journal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Journal.h; sourceTree = "<group>"; };
+		58FE798C19076D5000013B27 /* Journal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Journal.m; sourceTree = "<group>"; };
 		96FF410898EF4A96ABAD71E5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,6 +177,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5867EE841907400A00803413 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				58CE6D3818ED0F7A00D80D83 /* MapAnnotation.h */,
+				58CE6D3918ED0F7A00D80D83 /* MapAnnotation.m */,
+				58CB1CEA18EFCA850098FEDE /* MapOverlay.h */,
+				58CB1CEB18EFCA850098FEDE /* MapOverlay.m */,
+				58CB1CF318EFD5550098FEDE /* MapOverlayRenderer.h */,
+				58CB1CF418EFD5550098FEDE /* MapOverlayRenderer.m */,
+				58F7F88918EB295C00BAFC4F /* MapViewController.h */,
+				58F7F88A18EB295C00BAFC4F /* MapViewController.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		5867EE851907402A00803413 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				58F7F90D18EC83BC00BAFC4F /* TableViewCell.h */,
+				58F7F90E18EC83BC00BAFC4F /* TableViewCell.m */,
+				587EDD8418F8212000634925 /* TableViewController.h */,
+				587EDD8518F8212000634925 /* TableViewController.m */,
+			);
+			name = Table;
+			sourceTree = "<group>";
+		};
+		5867EE861907404C00803413 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				58B28B3018EF99E700BBFCFE /* PlaceChildViewController.h */,
+				58B28B3118EF99E700BBFCFE /* PlaceChildViewController.m */,
+				58B28B3518EF9DA300BBFCFE /* PlaceViewController.h */,
+				58B28B3618EF9DA300BBFCFE /* PlaceViewController.m */,
+			);
+			name = Pages;
+			sourceTree = "<group>";
+		};
+		5867EE871907405A00803413 /* Journal */ = {
+			isa = PBXGroup;
+			children = (
+				586413F818FC9A2300147180 /* JournalEntryMakerViewController.h */,
+				586413F918FC9A2300147180 /* JournalEntryMakerViewController.m */,
+				5848D2F318F4EF2B006C13D9 /* JournalViewController.h */,
+				5848D2F418F4EF2B006C13D9 /* JournalViewController.m */,
+			);
+			name = Journal;
+			sourceTree = "<group>";
+		};
 		58F7F86818EB295C00BAFC4F = {
 			isa = PBXGroup;
 			children = (
@@ -232,10 +280,10 @@
 				58F7F88018EB295C00BAFC4F /* main.m */,
 				58F7F88218EB295C00BAFC4F /* Ossabaw-Prefix.pch */,
 				58C47FC4190350FF006406E2 /* OssabawDataModel.xcdatamodeld */,
-				58D26963190378DD0093AD86 /* Journal.h */,
-				58D26964190378DD0093AD86 /* Journal.m */,
-				58D26960190378DC0093AD86 /* Photos.h */,
-				58D26961190378DC0093AD86 /* Photos.m */,
+				58FE798B19076D5000013B27 /* Journal.h */,
+				58FE798C19076D5000013B27 /* Journal.m */,
+				58FE798819076D4F00013B27 /* Photo.h */,
+				58FE798919076D4F00013B27 /* Photo.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -263,26 +311,10 @@
 			children = (
 				58F7F88318EB295C00BAFC4F /* AppDelegate.h */,
 				58F7F88418EB295C00BAFC4F /* AppDelegate.m */,
-				586413F818FC9A2300147180 /* JournalEntryMakerViewController.h */,
-				586413F918FC9A2300147180 /* JournalEntryMakerViewController.m */,
-				5848D2F318F4EF2B006C13D9 /* JournalViewController.h */,
-				5848D2F418F4EF2B006C13D9 /* JournalViewController.m */,
-				58CE6D3818ED0F7A00D80D83 /* MapAnnotation.h */,
-				58CE6D3918ED0F7A00D80D83 /* MapAnnotation.m */,
-				58CB1CEA18EFCA850098FEDE /* MapOverlay.h */,
-				58CB1CEB18EFCA850098FEDE /* MapOverlay.m */,
-				58CB1CF318EFD5550098FEDE /* MapOverlayRenderer.h */,
-				58CB1CF418EFD5550098FEDE /* MapOverlayRenderer.m */,
-				58F7F88918EB295C00BAFC4F /* MapViewController.h */,
-				58F7F88A18EB295C00BAFC4F /* MapViewController.m */,
-				58B28B3018EF99E700BBFCFE /* PlaceChildViewController.h */,
-				58B28B3118EF99E700BBFCFE /* PlaceChildViewController.m */,
-				58B28B3518EF9DA300BBFCFE /* PlaceViewController.h */,
-				58B28B3618EF9DA300BBFCFE /* PlaceViewController.m */,
-				58F7F90D18EC83BC00BAFC4F /* TableViewCell.h */,
-				58F7F90E18EC83BC00BAFC4F /* TableViewCell.m */,
-				587EDD8418F8212000634925 /* TableViewController.h */,
-				587EDD8518F8212000634925 /* TableViewController.m */,
+				5867EE871907405A00803413 /* Journal */,
+				5867EE841907400A00803413 /* Map */,
+				5867EE861907404C00803413 /* Pages */,
+				5867EE851907402A00803413 /* Table */,
 				58A0613218F8CD67004959B0 /* WebViewController.h */,
 				58A0613318F8CD67004959B0 /* WebViewController.m */,
 			);
@@ -499,11 +531,11 @@
 				587EDD8618F8212000634925 /* TableViewController.m in Sources */,
 				58F7F88518EB295C00BAFC4F /* AppDelegate.m in Sources */,
 				58F7F88B18EB295C00BAFC4F /* MapViewController.m in Sources */,
+				58FE798A19076D4F00013B27 /* Photo.m in Sources */,
 				58B28B3318EF99E700BBFCFE /* PlaceChildViewController.m in Sources */,
 				5848D2F618F4EF2B006C13D9 /* JournalViewController.m in Sources */,
 				586413FB18FC9A2300147180 /* JournalEntryMakerViewController.m in Sources */,
 				58C47FC6190350FF006406E2 /* OssabawDataModel.xcdatamodeld in Sources */,
-				58D26962190378DC0093AD86 /* Photos.m in Sources */,
 				58F7F88118EB295C00BAFC4F /* main.m in Sources */,
 				58CB1CF518EFD5550098FEDE /* MapOverlayRenderer.m in Sources */,
 				58A0613418F8CD67004959B0 /* WebViewController.m in Sources */,
@@ -511,7 +543,7 @@
 				58F7F91018EC83BC00BAFC4F /* TableViewCell.m in Sources */,
 				58CB1CEC18EFCA850098FEDE /* MapOverlay.m in Sources */,
 				58CE6D3A18ED0F7A00D80D83 /* MapAnnotation.m in Sources */,
-				58D26965190378DD0093AD86 /* Journal.m in Sources */,
+				58FE798D19076D5000013B27 /* Journal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
