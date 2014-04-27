@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Journal.h"
+#import "Photo.h"
 
-@class Journal;
-
-
+@protocol JournalAddDelegate;
 
 @interface JournalEntryMakerViewController : UIViewController <UIScrollViewDelegate,
                                                     UIImagePickerControllerDelegate,
@@ -34,6 +34,7 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker     *datePicker;
 
 @property (strong, nonatomic)           NSMutableArray  *images;
+@property (strong, nonatomic)           NSMutableArray  *imageIndexes;
 @property                               NSInteger        index;
 @property (strong, nonatomic)           NSArray         *locations;
 
@@ -41,6 +42,8 @@
 @property (strong, nonatomic)           NSFetchedResultsController *fetchedResultsController;
 
 @property (strong, nonatomic)           Journal         *journal;
+@property (unsafe_unretained, nonatomic) id <JournalAddDelegate> delegate;
+@property                               BOOL            isNewJournal;
 
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)dismiss:(id)sender;
@@ -48,5 +51,15 @@
 - (IBAction)doneButtonPressed:(id)sender;
 
 - (UIImage *) cropImage: (UIImage *) image toRect: (CGRect) rect;
+
+@end
+
+#pragma mark -
+
+@protocol JournalAddDelegate <NSObject>
+
+// recipe == nil on cancel
+- (void)journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)journal;
+
 
 @end

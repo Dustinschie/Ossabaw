@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Journal.h"
 @interface TableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *sublabel;
+@property (strong, nonatomic) Journal *journal;
 
 @end

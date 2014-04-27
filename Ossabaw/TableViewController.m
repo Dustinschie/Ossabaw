@@ -7,6 +7,9 @@
 //
 
 #import "TableViewController.h"
+#import "TableViewCell.h"
+#import "Journal.h"
+
 
 @interface TableViewController ()
 
@@ -37,13 +40,13 @@
 //    [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
     
     NSError *error = nil;
-    if (! [[self fetchedResultsController] performFetch:&error]) {
+    if (![[self fetchedResultsController] performFetch:&error]) {
         /*
 		 Replace this implementation with code to handle the error appropriately.
 		 
 		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
 		 */
-		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		NSLog(@"Unresolved error %@, %@, %@", error, [error userInfo], [error localizedDescription]);
 		abort();
     }
     
@@ -58,7 +61,7 @@
 }
 
 #pragma mark - Table view data source
-
+//----------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger count = [[[self fetchedResultsController] sections] count];
@@ -77,28 +80,15 @@
     return numberOfRows;
 }
 
-//----------------------------------------------------------------------------------------------
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"SettingsCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    // Grab
-    NSDictionary *dict =[[self places] objectAtIndex:indexPath.row];
-    NSString *label =  [dict objectForKey:@"Name"];
-    [[cell textLabel] setText:label];
-    
-    UIImage *icon = [UIImage imageNamed:[dict objectForKey:@"Icon"]];
-    [[cell imageView] setImage:icon];
-//    [[[cell imageView] layer] setCornerRadius:5];
-    [[[cell imageView] layer] setMasksToBounds:YES];
-    
-
-    
-    NSString *detail = [dict objectForKey:@"Information"];
-    [[cell detailTextLabel] setText:detail];
+    // dequeue a TableViewCell, then set its recipe to the recipe for the current row
+    TableViewCell *cell = (TableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MyIdentifier" forIndexPath:indexPath];
+//    if (cell == nil) {
+//        cell = [[TableViewCell alloc] init];
+//    }
+    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
@@ -127,8 +117,10 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self setIndex:[indexPath row]];
-    [self performSegueWithIdentifier:@"tableToInfo" sender:self];
+//    [self setIndex:[indexPath row]];
+    TableViewCell *cell = (TableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
+    [self performSegueWithIdentifier:@"tableToInfo" sender:[cell journal]];
 }
 
 // Override to support rearranging the table view.
@@ -144,22 +136,46 @@
     return YES;
 }
 
-//----------------------------------------------------------------------------------------------
-#pragma mark - Navigation
-
--(IBAction)AddButtonPressed:(id)sender
+- (void) configureCell: (TableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    [self performSegueWithIdentifier:@"blurryModalSegue" sender:self];
-    
+    Journal *journal = (Journal *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+    [cell setJournal:journal];
 }
 
+#pragma mark - Recipe support
+//----------------------------------------------------------------------------------------------
+- (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)journal
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+//----------------------------------------------------------------------------------------------
+
+
+//-(IBAction)AddButtonPressed:(id)sender
+//{
+//    [self performSegueWithIdentifier:@"blurryModalSegue" sender:self];
+//    
+//}
+
+#pragma mark - Navigation
+//----------------------------------------------------------------------------------------------
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"tableToInfo"]) {
         JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
-        [jvc setPlace: dict];
+        Journal *journal = nil;
+        if ([sender isKindOfClass:[Journal class]]) {
+            journal = (Journal *) sender;
+        } else{
+            // the sender is ourselves (user tapped an existing journal)
+            NSIndexPath *indexPath = [[self tableView] indexPathForSelectedRow];
+            journal = (Journal *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
+        }
+        [jvc setJournal:journal];
+        
+//        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
+//        [jvc setPlace: dict];
         
     }
     
@@ -170,14 +186,103 @@
     }
     
     else if ([[segue identifier] isEqualToString:@"blurryModalSegue"]) {
-        BlurryModalSegue *bms = (BlurryModalSegue *) segue;
+
+        JournalEntryMakerViewController *jemvc = (JournalEntryMakerViewController *) segue.destinationViewController;
+        Journal *newJournal = [NSEntityDescription insertNewObjectForEntityForName:@"Journal"
+                                                            inManagedObjectContext:[self managedObjectContext]];
+        [jemvc setDelegate:self];
+        [jemvc setIsNewJournal:YES];
+        [jemvc setJournal:newJournal];
+
+
         
+        
+        BlurryModalSegue *bms = (BlurryModalSegue *) segue;
         [bms setBackingImageSaturationDeltaFactor:@(0.45)];
-        [bms setBackingImageTintColor:[[UIColor grayColor] colorWithAlphaComponent:0.5]];
+//        [bms setBackingImageTintColor:[[UIColor grayColor] colorWithAlphaComponent:0.5]];
     }
     
 
 }
+#pragma mark - Fectched Results Controller
+//----------------------------------------------------------------------------------------------
+- (NSFetchedResultsController *)fetchedResultsController{
+    // Set up the fetched results controller if needed.
+    if (_fetchedResultsController == nil) {
+        // Create the fetch request for the entity.
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        // Edit the entity name as appropriate.
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Journal" inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        // Edit the sort key as appropriate.
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+        aFetchedResultsController.delegate = self;
+        self.fetchedResultsController = aFetchedResultsController;
+    }
+	
+	return _fetchedResultsController;}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [[self tableView] beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = self.tableView;
+	
+	switch(type) {
+		case NSFetchedResultsChangeInsert:
+			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeDelete:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeUpdate:
+			[self configureCell:(TableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+			break;
+			
+		case NSFetchedResultsChangeMove:
+			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+	}
+
+    
+}
+
+- (void) controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type) {
+		case NSFetchedResultsChangeInsert:
+			[self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+			
+		case NSFetchedResultsChangeDelete:
+			[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			break;
+	}
+
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    //  The fetch controller has sent all current change notifications,
+    //  so tell the table view to process all results
+    [[self tableView] endUpdates];
+}
+
+
 
 
 @end

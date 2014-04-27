@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "JournalViewController.h"
 
-@interface TableViewController : UITableViewController<UITableViewDataSource, UITableViewDataSource, NSFetchedResultsControllerDelegate>
+@interface TableViewController : UITableViewController<UITableViewDataSource, UITableViewDataSource, NSFetchedResultsControllerDelegate, JournalAddDelegate>
 
 @property (strong, nonatomic) IBOutlet  UITableView                     *tableView;
 @property (strong, nonatomic)           NSMutableArray                  *places;
 @property (strong, nonatomic) IBOutlet  UIBarButtonItem                 *addButton;
+
 @property (strong, nonatomic)           NSManagedObjectContext          *managedObjectContext;
 @property (strong, nonatomic)           NSFetchedResultsController      *fetchedResultsController;
 

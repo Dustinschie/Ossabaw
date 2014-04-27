@@ -2,7 +2,7 @@
 //  Journal.m
 //  Ossabaw
 //
-//  Created by Dustin Schie on 4/22/14.
+//  Created by Dustin Schie on 4/25/14.
 //  Copyright (c) 2014 Dustin Schie. All rights reserved.
 //
 
@@ -13,10 +13,12 @@
 @implementation Journal
 
 @dynamic date;
+@dynamic icon;
 @dynamic information;
 @dynamic location;
-@dynamic icon;
-@dynamic attribute;
+@dynamic title;
 @dynamic photos;
 
 @end
+
+

@@ -105,16 +105,14 @@
         [[self button] addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
     }
 
-    
-    
-
-   }
+}
 
 
 - (void) viewDidAppear:(BOOL)animated
 {
         [super viewDidAppear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    
     
 }
 
@@ -140,7 +138,7 @@
     {
         BlurryModalSegue* bms = (BlurryModalSegue*)segue;
         [bms setBackingImageSaturationDeltaFactor:@(0.45)];
-        [bms setBackingImageTintColor:[[UIColor grayColor] colorWithAlphaComponent:0.5]];
+//        [bms setBackingImageTintColor:[[UIColor grayColor] colorWithAlphaComponent:0.5]];
     }
 }
 
