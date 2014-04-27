@@ -120,11 +120,11 @@
     // if the expected sotre doesn't exist, copy the default store
     if (![[NSFileManager defaultManager] fileExistsAtPath:documentsStorePath]) {
         NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"Journals" ofType:@"sqlite"];
-        NSLog(@"hello");
+
         if (defaultStorePath)
             [[NSFileManager defaultManager] copyItemAtPath:defaultStorePath toPath:documentsStorePath error:NULL];
+
     }
-    
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     // add the default store to our coordinator
     NSError *error;

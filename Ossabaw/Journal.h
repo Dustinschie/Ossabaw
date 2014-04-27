@@ -2,7 +2,7 @@
 //  Journal.h
 //  Ossabaw
 //
-//  Created by Dustin Schie on 4/25/14.
+//  Created by Dustin Schie on 4/27/14.
 //  Copyright (c) 2014 Dustin Schie. All rights reserved.
 //
 
@@ -14,7 +14,7 @@
 @interface Journal : NSManagedObject
 
 @property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) UIImage *icon;
+@property (nonatomic, retain) id icon;
 @property (nonatomic, retain) NSString * information;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * title;

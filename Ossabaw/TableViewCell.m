@@ -27,33 +27,36 @@
 #define PREP_TIME_WIDTH     80.0
 @implementation TableViewCell
 
+
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
+    NSLog(@"called");
     if (self = [super initWithCoder:aDecoder]) {
-        _journalImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [[self journalImageView] setContentMode:UIViewContentModeScaleAspectFit];
-        [[self contentView] addSubview:[self journalImageView]];
-        
-        _overviewLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [self.overviewLabel setFont:[UIFont systemFontOfSize:12.0]];
-        [self.overviewLabel setTextColor:[UIColor darkGrayColor]];
-        [self.overviewLabel setHighlightedTextColor:[UIColor whiteColor]];
-        [self.contentView addSubview:self.overviewLabel];
-        
-        _dateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        self.dateLabel.textAlignment = NSTextAlignmentRight;
-        [self.dateLabel setFont:[UIFont systemFontOfSize:12.0]];
-        [self.dateLabel setTextColor:[UIColor blackColor]];
-        [self.dateLabel setHighlightedTextColor:[UIColor whiteColor]];
-		self.dateLabel.minimumScaleFactor = 7.0;
-		self.dateLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        [self.contentView addSubview:self.dateLabel];
-        
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [self.nameLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
-        [self.nameLabel setTextColor:[UIColor blackColor]];
-        [self.nameLabel setHighlightedTextColor:[UIColor whiteColor]];
-        [self.contentView addSubview:self.nameLabel];
+        NSLog(@"called2");
+//        _journalImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+//        [[self journalImageView] setContentMode:UIViewContentModeScaleAspectFit];
+//        [[self contentView] addSubview:[self journalImageView]];
+//        
+//        _overviewLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//        [self.overviewLabel setFont:[UIFont systemFontOfSize:12.0]];
+//        [self.overviewLabel setTextColor:[UIColor darkGrayColor]];
+//        [self.overviewLabel setHighlightedTextColor:[UIColor whiteColor]];
+//        [self.contentView addSubview:self.overviewLabel];
+//        
+//        _dateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//        self.dateLabel.textAlignment = NSTextAlignmentRight;
+//        [self.dateLabel setFont:[UIFont systemFontOfSize:12.0]];
+//        [self.dateLabel setTextColor:[UIColor blackColor]];
+//        [self.dateLabel setHighlightedTextColor:[UIColor whiteColor]];
+//		self.dateLabel.minimumScaleFactor = 7.0;
+//		self.dateLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+//        [self.contentView addSubview:self.dateLabel];
+//        
+//        _nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//        [self.nameLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
+//        [self.nameLabel setTextColor:[UIColor blackColor]];
+//        [self.nameLabel setHighlightedTextColor:[UIColor whiteColor]];
+//        [self.contentView addSubview:self.nameLabel];
     }
     return self;
 }
