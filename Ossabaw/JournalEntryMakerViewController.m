@@ -13,8 +13,9 @@
 @end
 
 @implementation JournalEntryMakerViewController
-@synthesize doneButton, pageControl, textView, titleTextField, imageScrollView, scrollView, images,
-            index, toolBar, colorSwitch, locationPicker, datePicker, locations;
+@synthesize doneButton, pageControl, textView, titleTextField, imageScrollView,
+            scrollView, images,index, toolBar, colorSwitch, locationPicker, datePicker,
+            locations, imageIndexes, isNewJournal;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +31,7 @@
     [super viewDidLoad];
     [[self toolBar] setClipsToBounds:YES];
     [self setLocations:[[NSArray alloc] initWithObjects:@"Blue",@"Green",@"Orange",@"Purple",@"Red",@"Yellow" , nil]];
-
+    [self setImages:[[NSMutableArray alloc] init]];
     int imgSVWidth = [[self imageScrollView] frame].size.width;
     int imgSVheight = [[self imageScrollView] frame].size.height;
     
@@ -62,10 +63,16 @@
     //  setup the title
     [[[self titleTextField] layer] setCornerRadius: 5];
     
+    [[self titleTextField] setAttributedPlaceholder:[[NSAttributedString alloc]
+                                                     initWithString:@"Title"
+                                                     attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}]];
+     
+     
+    
     //  setup the outer scroll view
     [[self scrollView] setAlwaysBounceVertical:YES];
-    [[self scrollView] setScrollEnabled:YES];
-    [[self scrollView] setPagingEnabled:NO];
+//    [[self scrollView] setScrollEnabled:YES];
+//    [[self scrollView] setPagingEnabled:NO];
     
     // setup the textview that contains notes
     [[[self textView] layer] setCornerRadius:5];
@@ -80,16 +87,23 @@
     [[self locationPicker] setDataSource:self];
     [[[self locationPicker] layer] setCornerRadius:5];
     
+//    NSError *error = nil;
+//    if (! [[self fetchedResultsController] performFetch:&error]) {
+//        /*
+//		 Replace this implementation with code to handle the error appropriately.
+//		 
+//		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+//		 */
+//		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//		abort();
+//    }
+    
 }
 
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    NSInteger h = [[self scrollView] frame].size.height * 2;
-//    [[self datePicker] setFrame:CGRectMake(0, h + 50, [[self datePicker] frame].size. width, [[self datePicker] frame].size.height)];
-//    [[self locationPicker] setFrame:CGRectMake(0, h + [[self datePicker] frame].size.height + 10, [[self locationPicker] frame].size.width, [[self locationPicker] frame].size.height)];
-//    [[self doneButton] setFrame:CGRectMake([[self doneButton] frame].origin.x, h + [[self locationPicker] frame].origin.y + [[self locationPicker] frame].size.height, [[self doneButton] frame].size.width, [[self doneButton] frame].size.height)];
-
+    
     
 }
 
@@ -120,14 +134,6 @@
 //----------------------------------------------------------------------------------------------
 -(IBAction)takePhoto:(id)sender
 {
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-//                                                    message:nil
-//                                                   delegate:self
-//                                          cancelButtonTitle:@"Cancel"
-//                                          otherButtonTitles:@"Take a Photo", @"Camera Roll", nil
-//                          ];
-//    [alert show];
-
     NSString *title = @"",
              *cancelTitle = @"Cancel",
              *camera = @"Take a photo",
@@ -146,7 +152,21 @@
 
 -(IBAction)dismiss:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self isNewJournal]) {
+        [[[self journal] managedObjectContext] deleteObject:[self journal]];
+        NSError *error = nil;
+        if (![[[self journal] managedObjectContext] save:&error]) {
+            /*
+             Replace this implementation with code to handle the error appropriately.
+             
+             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+             */
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+        [[self delegate] journalEntryMakerViewController:self didAddJournal:nil];
+    }
+    [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
 }
 
 - (IBAction)switchChanged:(id)sender
@@ -165,21 +185,66 @@
 
 - (IBAction)doneButtonPressed:(id)sender
 {
-    // Do some stuff
+    [[self journal] setTitle: [[self titleTextField] text]];
+    [[self journal] setDate: [[self datePicker] date]];
+    [[self journal] setInformation:[[self textView] text]];
     
-     [self dismissViewControllerAnimated:YES completion:nil];
+    if ([[self images] count] != 0) {
+        UIImage *image = [[self images] objectAtIndex:0];
+//        CGSize size = image.size;
+//        CGFloat ratio = 0;
+//        if (size.width > size.height) {
+//            ratio = 44.0 / size.width;
+//        } else {
+//            ratio = 44.0 / size.height;
+//        }
+//        CGRect rect = CGRectMake(0, 0, ratio * size.width, ratio * size.height);
+//        [image drawInRect:rect];
+//        [[self journal] setIcon: UIGraphicsGetImageFromCurrentImageContext()];
+//        UIGraphicsEndImageContext();
+        [[self journal] setIcon:image];
+        UIImage *a = [[self journal] icon];
+        NSLog(@"%d, %d", [a size].width, [a size].height);
+        
+    }
+    
+    NSError *error = nil;
+    if (![[[self journal] managedObjectContext] save:&error]) {
+        /*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+    }
+    [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
 }
-//----------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------gith
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
 
     if (chosenImage.size.width != 0 && chosenImage.size.height != 0) {
+        NSManagedObjectContext *context = [[self journal] managedObjectContext];
+        Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+
+        NSURL *url = [info objectForKey:UIImagePickerControllerReferenceURL];
+        [photo setName: [info objectForKey: [url lastPathComponent]]];
+        
+        NSManagedObject *image = [NSEntityDescription insertNewObjectForEntityForName:@"Image"
+                                                               inManagedObjectContext:[photo managedObjectContext]];
+        [photo setImage:image];
+        // set the image for the image managed object
+        [image setValue:chosenImage forKeyPath:@"image"];
+        [[self journal] addPhotosObject:photo];
+        
         
         [[self images] addObject:chosenImage];
+        NSLog(@"%d", [[self images] count]);
+        [[self imageIndexes] addObject:[NSNumber numberWithInt:[[self images] count] - 1]];
         NSInteger   width =[[self imageScrollView] frame].size.width,
         height = [[self imageScrollView] frame].size.height;
-        
         UIImageView *imageView = [[UIImageView alloc] initWithFrame: CGRectMake(width * index, 0, width, height)];
         [imageView setContentMode: UIViewContentModeScaleAspectFit];
         [imageView setImage:chosenImage];
@@ -187,6 +252,7 @@
         index++;
         [[self imageScrollView] setContentSize:CGSizeMake(width * index,height)];
         [[self pageControl] setNumberOfPages: index];
+        
     }
         [picker dismissViewControllerAnimated:YES completion:nil];
 
@@ -198,9 +264,12 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 //----------------------------------------------------------------------------------------------
-- (void) textFieldDidBeginEditing:(UITextField *)textField
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
+    [textField resignFirstResponder];
+    return NO;
 }
+
 //----------------------------------------------------------------------------------------------
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -240,6 +309,7 @@
 
 }
 
+#pragma mark - UIPickerViewDelegate
 //----------------------------------------------------------------------------------------------
 // returns the number of 'columns' to display.
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -277,6 +347,5 @@
     
     return cropped;
 }
-
 
 @end

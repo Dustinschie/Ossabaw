@@ -18,25 +18,49 @@
 {
 //    mapView.showsUserLocation = YES;
     [super viewDidLoad];
-
+    hasOpened = NO;
     [[self mapView] setDelegate:self];
 
     NSString * filePath = [[NSBundle mainBundle] pathForResource:@"Places" ofType:@"plist"];
     places = [NSDictionary dictionaryWithContentsOfFile:filePath][@"places"];
-//    [[self label] setText:@"Hello"];
-    mapOverlay = [[MapOverlay alloc] init];
-    
-//    [[self mapView] addOverlay:mapOverlay];
-    
-    CLLocationCoordinate2D location = [mapOverlay coordinate];
-    MKCoordinateSpan span = MKCoordinateSpanMake(0.15084913077129, 0.12569636106491);
-//    MKCoordinateRegion region = MKCoordinateRegionForMapRect([mapOverlay boundingMapRect]);
-    MKCoordinateRegion region = MKCoordinateRegionMake(location, span);
-//    MKCoordinateRegion region = MKCoordinateRegionForMapRect([mapOverlay boundingMapRect]);
 
+    
     [[self mapView] setZoomEnabled:YES];
     [[self mapView] setPitchEnabled:NO];
     [[self mapView] setRotateEnabled:NO];
+    
+    
+    //    [[self mapView] setScrollEnabled:NO];
+    [[self mapView] setMapType:MKMapTypeHybrid];
+//    [[[self mapView] layer] setCornerRadius:5];
+}
+
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[self mapView] removeAnnotations:[[self mapView] annotations]];
+    hasOpened = YES;
+    
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    //    [[self label] setText:@"Hello"];
+    mapOverlay = [[MapOverlay alloc] init];
+    
+    //    [[self mapView] addOverlay:mapOverlay];
+    
+    CLLocationCoordinate2D location = [mapOverlay coordinate];
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.15084913077129, 0.12569636106491);
+    //    MKCoordinateRegion region = MKCoordinateRegionForMapRect([mapOverlay boundingMapRect]);
+    MKCoordinateRegion region = MKCoordinateRegionMake(location, span);
+    //    MKCoordinateRegion region = MKCoordinateRegionForMapRect([mapOverlay boundingMapRect]);
+    
+//    [self mapView]
+    
+    [[self mapView] setRegion:region animated:NO];
 
     for (int i = 0; i < [[self places] count]; i++) {
         NSDictionary *place = [[self places] objectAtIndex:i];
@@ -49,21 +73,6 @@
         [[self mapView] addAnnotation:temp];
         
     }
-//    [[self mapView] setScrollEnabled:NO];
-    [[self mapView] setMapType:MKMapTypeHybrid];
-    
-    [[self mapView] setRegion:region animated:YES];
-    
-}
-- (void) viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-- (void) viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
-
 }
 
 
@@ -76,39 +85,43 @@
 //----------------------------------------------------------------------------------------------
 -(MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
+
     if ([annotation isKindOfClass: [MKUserLocation class]])
         return nil;
     
     if ([annotation isKindOfClass: [MapAnnotation class]]){
+
         MKPinAnnotationView* pinView = (MKPinAnnotationView *)[[self mapView] dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
         if (!pinView) {
+            NSLog(@"annotation");
             pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
-            [pinView setPinColor:MKPinAnnotationColorPurple];
-            [pinView setAnimatesDrop: YES];
-            [pinView setCanShowCallout: YES];
-            
-            UIButton * button = [UIButton buttonWithType: UIButtonTypeInfoLight];
-            [button addTarget:nil action:nil forControlEvents: UIControlEventTouchUpInside];
-            
-            [pinView setRightCalloutAccessoryView: button];
-            UIImage *image = [UIImage imageNamed: [(MapAnnotation *) annotation iconDir]];
-            
-            CGRect resizeRect;
-            resizeRect.size.height = image.size.height / 3;
-            resizeRect.size.width = image.size.width   / 3;
-            resizeRect.origin = (CGPoint){0,0};
-            
-            UIGraphicsBeginImageContext(resizeRect.size);
-            [image drawInRect:resizeRect];
-            UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-            
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:resizedImage];
-            [pinView setLeftCalloutAccessoryView: imageView];
-            UIGraphicsEndImageContext();
-
-           
-            return pinView;
         }
+        [pinView setPinColor:MKPinAnnotationColorPurple];
+        [pinView setAnimatesDrop: !hasOpened];
+        [pinView setCanShowCallout: YES];
+        
+        UIButton * button = [UIButton buttonWithType: UIButtonTypeInfoLight];
+        [button addTarget:nil action:nil forControlEvents: UIControlEventTouchUpInside];
+        
+        [pinView setRightCalloutAccessoryView: button];
+        UIImage *image = [UIImage imageNamed: [(MapAnnotation *) annotation iconDir]];
+        
+        CGRect resizeRect;
+        resizeRect.size.height = image.size.height / 3;
+        resizeRect.size.width = image.size.width   / 3;
+        resizeRect.origin = (CGPoint){0,0};
+        
+        UIGraphicsBeginImageContext(resizeRect.size);
+        [image drawInRect:resizeRect];
+        UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+        
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:resizedImage];
+        [pinView setLeftCalloutAccessoryView: imageView];
+        UIGraphicsEndImageContext();
+        
+        
+        return pinView;
+
     }
     return nil;
 }

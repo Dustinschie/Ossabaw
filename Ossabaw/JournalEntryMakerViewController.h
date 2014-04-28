@@ -7,8 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Journal.h"
+#import "Photo.h"
 
-@interface JournalEntryMakerViewController : UIViewController <UIScrollViewDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate, UIAlertViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@protocol JournalAddDelegate;
+
+@interface JournalEntryMakerViewController : UIViewController <UIScrollViewDelegate,
+                                                    UIImagePickerControllerDelegate,
+                                                                UITextFieldDelegate,
+                                                                 UITextViewDelegate,
+                                                              UIActionSheetDelegate,
+                                                                UIAlertViewDelegate,
+                                                             UIPickerViewDataSource,
+                                                                UIPickerViewDelegate,
+                                                  NSFetchedResultsControllerDelegate>
+
 @property (strong, nonatomic) IBOutlet UIScrollView     *scrollView;
 @property (strong, nonatomic) IBOutlet UIScrollView     *imageScrollView;
 @property (strong, nonatomic) IBOutlet UIPageControl    *pageControl;
@@ -21,15 +34,32 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker     *datePicker;
 
 @property (strong, nonatomic)           NSMutableArray  *images;
+@property (strong, nonatomic)           NSMutableArray  *imageIndexes;
 @property                               NSInteger        index;
 @property (strong, nonatomic)           NSArray         *locations;
+
+@property (strong, nonatomic)           NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic)           NSFetchedResultsController *fetchedResultsController;
+
+@property (strong, nonatomic)           Journal         *journal;
+@property (unsafe_unretained, nonatomic) id <JournalAddDelegate> delegate;
+@property                               BOOL            isNewJournal;
 
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)dismiss:(id)sender;
 - (IBAction)switchChanged:(id)sender;
 - (IBAction)doneButtonPressed:(id)sender;
 
-
 - (UIImage *) cropImage: (UIImage *) image toRect: (CGRect) rect;
+
+@end
+
+#pragma mark -
+
+@protocol JournalAddDelegate <NSObject>
+
+// recipe == nil on cancel
+- (void)journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)journal;
+
 
 @end
