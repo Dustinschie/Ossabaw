@@ -15,7 +15,7 @@
 
 @interface JournalViewController : UIViewController
 
-<UIImagePickerControllerDelegate, UIScrollViewDelegate>
+<UIImagePickerControllerDelegate, UIScrollViewDelegate, JournalAddDelegate>
 @property (strong, nonatomic) IBOutlet  UIButton        *button;
 @property (strong, nonatomic) IBOutlet  UIPageControl   *pageControl;
 @property (strong, nonatomic) IBOutlet  UIScrollView    *scrollView;
@@ -33,5 +33,6 @@
 - (IBAction)selectPhoto:(id)sender;
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)editButtonPressed:(id)sender;
+- (IBAction)enlargePhoto:(id)sender;
 - (UIImage *) cropImage: (UIImage *) image toRect: (CGRect) rect;
 @end

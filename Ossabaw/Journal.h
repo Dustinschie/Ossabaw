@@ -14,7 +14,7 @@
 @interface Journal : NSManagedObject
 
 @property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) id icon;
+@property (nonatomic, retain) UIImage* icon;
 @property (nonatomic, retain) NSString * information;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * title;

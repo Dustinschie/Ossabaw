@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Journal.h"
 
 @interface TableCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet    UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet    UILabel *subtitleLabel;
+@property (weak, nonatomic) IBOutlet    UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet    UIImageView *thumbnailImageView;
+@property (strong, nonatomic)   Journal *   journal;
 
 @end

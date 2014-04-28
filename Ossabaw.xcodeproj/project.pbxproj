@@ -11,8 +11,6 @@
 		5848D2F918F7BB57006C13D9 /* UIBarButtonCamera_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */; };
 		5848D2FB18F7C409006C13D9 /* UIBarButtonAdd_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2FA18F7C409006C13D9 /* UIBarButtonAdd_2x.png */; };
 		584B3BF7190D92C300006AB1 /* Journal.m in Sources */ = {isa = PBXBuildFile; fileRef = 584B3BF6190D92C300006AB1 /* Journal.m */; };
-		584B3BFC190D98CF00006AB1 /* TableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 584B3BFA190D98CF00006AB1 /* TableCell.m */; };
-		584B3BFD190D98CF00006AB1 /* TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 584B3BFB190D98CF00006AB1 /* TableCell.xib */; };
 		58590E5B190CE32600CA58B3 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58590E5A190CE32600CA58B3 /* Photo.m */; };
 		586413FB18FC9A2300147180 /* JournalEntryMakerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586413F918FC9A2300147180 /* JournalEntryMakerViewController.m */; };
 		587EDD8618F8212000634925 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587EDD8518F8212000634925 /* TableViewController.m */; };
@@ -21,6 +19,8 @@
 		58B28B3318EF99E700BBFCFE /* PlaceChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B28B3118EF99E700BBFCFE /* PlaceChildViewController.m */; };
 		58B28B3418EF99E700BBFCFE /* PlaceChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B28B3218EF99E700BBFCFE /* PlaceChildViewController.xib */; };
 		58B28B3718EF9DA300BBFCFE /* PlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B28B3618EF9DA300BBFCFE /* PlaceViewController.m */; };
+		58B8B9A3190DD518009C8885 /* TableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B8B9A1190DD517009C8885 /* TableCell.m */; };
+		58B8B9A4190DD518009C8885 /* TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58B8B9A2190DD517009C8885 /* TableCell.xib */; };
 		58C47FC319035092006406E2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58C47FC219035092006406E2 /* CoreData.framework */; };
 		58C47FC6190350FF006406E2 /* OssabawDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 58C47FC4190350FF006406E2 /* OssabawDataModel.xcdatamodeld */; };
 		58CB1CEC18EFCA850098FEDE /* MapOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 58CB1CEB18EFCA850098FEDE /* MapOverlay.m */; };
@@ -84,9 +84,6 @@
 		5848D2FA18F7C409006C13D9 /* UIBarButtonAdd_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonAdd_2x.png; sourceTree = "<group>"; };
 		584B3BF5190D92C300006AB1 /* Journal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Journal.h; sourceTree = "<group>"; };
 		584B3BF6190D92C300006AB1 /* Journal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Journal.m; sourceTree = "<group>"; };
-		584B3BF9190D98CF00006AB1 /* TableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCell.h; sourceTree = "<group>"; };
-		584B3BFA190D98CF00006AB1 /* TableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableCell.m; sourceTree = "<group>"; };
-		584B3BFB190D98CF00006AB1 /* TableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableCell.xib; sourceTree = "<group>"; };
 		58590E59190CE32600CA58B3 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		58590E5A190CE32600CA58B3 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		586413F818FC9A2300147180 /* JournalEntryMakerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalEntryMakerViewController.h; sourceTree = "<group>"; };
@@ -101,6 +98,9 @@
 		58B28B3218EF99E700BBFCFE /* PlaceChildViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceChildViewController.xib; sourceTree = "<group>"; };
 		58B28B3518EF9DA300BBFCFE /* PlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceViewController.h; sourceTree = "<group>"; };
 		58B28B3618EF9DA300BBFCFE /* PlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceViewController.m; sourceTree = "<group>"; };
+		58B8B9A0190DD517009C8885 /* TableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCell.h; sourceTree = "<group>"; };
+		58B8B9A1190DD517009C8885 /* TableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableCell.m; sourceTree = "<group>"; };
+		58B8B9A2190DD517009C8885 /* TableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableCell.xib; sourceTree = "<group>"; };
 		58C47FC219035092006406E2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		58C47FC5190350FF006406E2 /* OssabawDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OssabawDataModel.xcdatamodel; sourceTree = "<group>"; };
 		58CB1CEA18EFCA850098FEDE /* MapOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapOverlay.h; sourceTree = "<group>"; };
@@ -216,8 +216,8 @@
 				58F7F90E18EC83BC00BAFC4F /* TableViewCell.m */,
 				587EDD8418F8212000634925 /* TableViewController.h */,
 				587EDD8518F8212000634925 /* TableViewController.m */,
-				584B3BF9190D98CF00006AB1 /* TableCell.h */,
-				584B3BFA190D98CF00006AB1 /* TableCell.m */,
+				58B8B9A0190DD517009C8885 /* TableCell.h */,
+				58B8B9A1190DD517009C8885 /* TableCell.m */,
 			);
 			name = Table;
 			sourceTree = "<group>";
@@ -378,7 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				58F7F88618EB295C00BAFC4F /* Main.storyboard */,
-				584B3BFB190D98CF00006AB1 /* TableCell.xib */,
+				58B8B9A2190DD517009C8885 /* TableCell.xib */,
 				58B28B3218EF99E700BBFCFE /* PlaceChildViewController.xib */,
 			);
 			name = "Storyboards and Nibs";
@@ -480,7 +480,7 @@
 				58F7F8FE18EC72B300BAFC4F /* middleplace.png in Resources */,
 				58A0613118F8C5EC004959B0 /* User_Journal.plist in Resources */,
 				58F7F8FB18EC72B300BAFC4F /* middlebeach_icon.png in Resources */,
-				584B3BFD190D98CF00006AB1 /* TableCell.xib in Resources */,
+				58B8B9A4190DD518009C8885 /* TableCell.xib in Resources */,
 				58F7F8FD18EC72B300BAFC4F /* middleplace_icon.png in Resources */,
 				58F7F8F418EC72B300BAFC4F /* boardinghouse_icon.png in Resources */,
 				58F7F87F18EB295C00BAFC4F /* InfoPlist.strings in Resources */,
@@ -556,7 +556,7 @@
 				58CB1CF518EFD5550098FEDE /* MapOverlayRenderer.m in Sources */,
 				58A0613418F8CD67004959B0 /* WebViewController.m in Sources */,
 				58B28B3718EF9DA300BBFCFE /* PlaceViewController.m in Sources */,
-				584B3BFC190D98CF00006AB1 /* TableCell.m in Sources */,
+				58B8B9A3190DD518009C8885 /* TableCell.m in Sources */,
 				58590E5B190CE32600CA58B3 /* Photo.m in Sources */,
 				58F7F91018EC83BC00BAFC4F /* TableViewCell.m in Sources */,
 				58CB1CEC18EFCA850098FEDE /* MapOverlay.m in Sources */,

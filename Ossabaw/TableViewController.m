@@ -9,14 +9,15 @@
 #import "TableViewController.h"
 #import "TableViewCell.h"
 #import "Journal.h"
+#import "TableCell.h"
 
 
 @interface TableViewController ()
-
+@property (strong, nonatomic) NSString *cellReuseName;
 @end
 
 @implementation TableViewController
-@synthesize places;
+@synthesize places, cellReuseName;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,6 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    cellReuseName = @"MyIdentifier";
+    [[self tableView] registerNib:[UINib nibWithNibName:@"TableCell" bundle:[NSBundle mainBundle]]
+           forCellReuseIdentifier: cellReuseName];
+    
     NSString * filePath = [[NSBundle mainBundle] pathForResource:@"Places" ofType:@"plist"];
     places = [NSDictionary dictionaryWithContentsOfFile:filePath][@"places"];
     [[self tableView] setDelegate:self];
@@ -84,23 +89,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // dequeue a TableViewCell, then set its recipe to the recipe for the current row
-    TableViewCell *cell = (TableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"MyIdentifier" forIndexPath:indexPath];
+    TableCell *cell = (TableCell *)[tableView dequeueReusableCellWithIdentifier:cellReuseName forIndexPath:indexPath];
 //    if (cell == nil) {
-//        cell = [[TableViewCell alloc] init];
+//        UIViewController *temp = [[UIViewController alloc] initWithNibName:@"TableCell" bundle:nil];
+//        cell = (TableCell *)[temp view];
 //    }
     [self configureCell:cell atIndexPath:indexPath];
+
     
     return cell;
 }
 
-
-
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return 84;
 }
+
+
+#pragma mark - UITableViewDelegate
+//// Override to support conditional editing of the table view.
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Return NO if you do not want the specified item to be editable.
+//    return YES;
+//}
 
 
 
@@ -109,10 +121,21 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+        NSManagedObjectContext *context = [[self fetchedResultsController] managedObjectContext];
+        [context deleteObject:[[self fetchedResultsController] objectAtIndexPath:indexPath]];
+        
+        // save the context
+        NSError *error;
+        if (![context save:&error]) {
+            /*
+			 Replace this implementation with code to handle the error appropriately.
+			 
+			 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+			 */
+			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+			abort();
+        }
+    }
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,13 +159,13 @@
     return YES;
 }
 
-- (void) configureCell: (TableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void) configureCell: (TableCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     Journal *journal = (Journal *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
     [cell setJournal:journal];
 }
 
-#pragma mark - Recipe support
+#pragma mark - journal support
 //----------------------------------------------------------------------------------------------
 - (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)journal
 {
@@ -249,7 +272,7 @@
 			break;
 			
 		case NSFetchedResultsChangeUpdate:
-			[self configureCell:(TableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+			[self configureCell:(TableCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
 			break;
 			
 		case NSFetchedResultsChangeMove:

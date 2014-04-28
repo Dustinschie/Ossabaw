@@ -10,6 +10,6 @@
 #import "Journal.h"
 @interface TableViewCell : UITableViewCell
 
-@property (strong, nonatomic) Journal *journal;
+@property (strong, nonatomic)               Journal *journal;
 
 @end

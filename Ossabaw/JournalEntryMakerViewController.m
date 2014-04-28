@@ -31,7 +31,7 @@
     [super viewDidLoad];
     [[self toolBar] setClipsToBounds:YES];
     [self setLocations:[[NSArray alloc] initWithObjects:@"Blue",@"Green",@"Orange",@"Purple",@"Red",@"Yellow" , nil]];
-
+    [self setImages:[[NSMutableArray alloc] init]];
     int imgSVWidth = [[self imageScrollView] frame].size.width;
     int imgSVheight = [[self imageScrollView] frame].size.height;
     
@@ -191,27 +191,33 @@
     
     if ([[self images] count] != 0) {
         UIImage *image = [[self images] objectAtIndex:0];
-        CGSize size = image.size;
-        CGFloat ratio = 0;
-        if (size.width > size.height) {
-            ratio = 44.0 / size.width;
-        } else {
-            ratio = 44.0 / size.height;
-        }
-        CGRect rect = CGRectMake(0, 0, ratio * size.width, ratio * size.height);
-        [image drawInRect:rect];
-        [[self journal] setIcon: UIGraphicsGetImageFromCurrentImageContext()];
-        UIGraphicsEndImageContext();
-//        
-//        for (NSNumber *num  in [self imageIndexes]) {
-//            NSManagedObjectContext *context = [[self journal] managedObjectContext];
-//            Photo * photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
-//            [[self journal] addPhotosObject:photo];
-//            
+//        CGSize size = image.size;
+//        CGFloat ratio = 0;
+//        if (size.width > size.height) {
+//            ratio = 44.0 / size.width;
+//        } else {
+//            ratio = 44.0 / size.height;
 //        }
+//        CGRect rect = CGRectMake(0, 0, ratio * size.width, ratio * size.height);
+//        [image drawInRect:rect];
+//        [[self journal] setIcon: UIGraphicsGetImageFromCurrentImageContext()];
+//        UIGraphicsEndImageContext();
+        [[self journal] setIcon:image];
+        UIImage *a = [[self journal] icon];
+        NSLog(@"%d, %d", [a size].width, [a size].height);
+        
     }
     
-    
+    NSError *error = nil;
+    if (![[[self journal] managedObjectContext] save:&error]) {
+        /*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+    }
     [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
 }
 //----------------------------------------------------------------------------------------------gith
@@ -222,8 +228,10 @@
     if (chosenImage.size.width != 0 && chosenImage.size.height != 0) {
         NSManagedObjectContext *context = [[self journal] managedObjectContext];
         Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+
         NSURL *url = [info objectForKey:UIImagePickerControllerReferenceURL];
         [photo setName: [info objectForKey: [url lastPathComponent]]];
+        
         NSManagedObject *image = [NSEntityDescription insertNewObjectForEntityForName:@"Image"
                                                                inManagedObjectContext:[photo managedObjectContext]];
         [photo setImage:image];
@@ -232,8 +240,8 @@
         [[self journal] addPhotosObject:photo];
         
         
-        
         [[self images] addObject:chosenImage];
+        NSLog(@"%d", [[self images] count]);
         [[self imageIndexes] addObject:[NSNumber numberWithInt:[[self images] count] - 1]];
         NSInteger   width =[[self imageScrollView] frame].size.width,
         height = [[self imageScrollView] frame].size.height;
