@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "TableViewController.h"
+#import "MapViewController.h"
 #import "Journal.h"
 
 @interface AppDelegate ()
@@ -23,15 +24,21 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize tabBarController = _tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    UITabBarController *tabBarController = (UITabBarController *)[[self window] rootViewController];
-    UINavigationController *navController = [[tabBarController viewControllers] objectAtIndex:0];
     
+    [self setTabBarController: (UITabBarController *)[[self window] rootViewController]];
+    
+    UINavigationController *navController = [[[self tabBarController] viewControllers] objectAtIndex:0];
     TableViewController *tableViewController = (TableViewController *)[navController topViewController];
     [tableViewController setManagedObjectContext:[self managedObjectContext]];
+    
+//    // Override point for customization after application launch.
+//    UINavigationController *navController2 = [[[self tabBarController] viewControllers] objectAtIndex:1];
+//    MapViewController *mapViewController = (MapViewController *)[navController2 topViewController];
+//    [mapViewController setManagedObjectContext:[self managedObjectContext]];
     
     return YES;
 }
@@ -180,9 +187,18 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+#pragma mark - UITabVarControllerDelegate
 
+//- (void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+//{
+//    [[viewController navigationController] popToRootViewControllerAnimated:YES];
+//}
 
-
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    [[viewController navigationController] popToRootViewControllerAnimated:YES];
+    return YES;
+}
 
 
 

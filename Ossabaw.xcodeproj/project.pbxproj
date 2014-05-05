@@ -13,6 +13,9 @@
 		584B3BF7190D92C300006AB1 /* Journal.m in Sources */ = {isa = PBXBuildFile; fileRef = 584B3BF6190D92C300006AB1 /* Journal.m */; };
 		58590E5B190CE32600CA58B3 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 58590E5A190CE32600CA58B3 /* Photo.m */; };
 		586413FB18FC9A2300147180 /* JournalEntryMakerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 586413F918FC9A2300147180 /* JournalEntryMakerViewController.m */; };
+		587B77C419148DB80014348D /* DropPinMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B77C319148DB80014348D /* DropPinMapViewController.m */; };
+		587B77C61914B1010014348D /* map_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 587B77C51914B1010014348D /* map_icon.png */; };
+		587B77C81915FAB20014348D /* sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 587B77C71915FAB20014348D /* sky.png */; };
 		587EDD8618F8212000634925 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587EDD8518F8212000634925 /* TableViewController.m */; };
 		58A0613118F8C5EC004959B0 /* User_Journal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58A0613018F8C5EC004959B0 /* User_Journal.plist */; };
 		58A0613418F8CD67004959B0 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0613318F8CD67004959B0 /* WebViewController.m */; };
@@ -62,7 +65,6 @@
 		58F7F90218EC72B300BAFC4F /* slavetabbies.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F7F8EE18EC72B300BAFC4F /* slavetabbies.png */; };
 		58F7F90318EC72B300BAFC4F /* southbeach_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F7F8EF18EC72B300BAFC4F /* southbeach_icon.png */; };
 		58F7F90418EC72B300BAFC4F /* southbeach.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F7F8F018EC72B300BAFC4F /* southbeach.png */; };
-		58F7F91018EC83BC00BAFC4F /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F7F90E18EC83BC00BAFC4F /* TableViewCell.m */; };
 		BDD0455FCB0A4D9783D67C18 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 47D2F40EDD264580ABF3691D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,10 @@
 		58590E5A190CE32600CA58B3 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		586413F818FC9A2300147180 /* JournalEntryMakerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalEntryMakerViewController.h; sourceTree = "<group>"; };
 		586413F918FC9A2300147180 /* JournalEntryMakerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalEntryMakerViewController.m; sourceTree = "<group>"; };
+		587B77C219148DB80014348D /* DropPinMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropPinMapViewController.h; sourceTree = "<group>"; };
+		587B77C319148DB80014348D /* DropPinMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropPinMapViewController.m; sourceTree = "<group>"; };
+		587B77C51914B1010014348D /* map_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_icon.png; sourceTree = "<group>"; };
+		587B77C71915FAB20014348D /* sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky.png; sourceTree = "<group>"; };
 		587EDD8418F8212000634925 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		587EDD8518F8212000634925 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		58A0613018F8C5EC004959B0 /* User_Journal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = User_Journal.plist; sourceTree = "<group>"; };
@@ -150,8 +156,6 @@
 		58F7F8EE18EC72B300BAFC4F /* slavetabbies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = slavetabbies.png; path = Images/slavetabbies.png; sourceTree = SOURCE_ROOT; };
 		58F7F8EF18EC72B300BAFC4F /* southbeach_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = southbeach_icon.png; path = Images/southbeach_icon.png; sourceTree = SOURCE_ROOT; };
 		58F7F8F018EC72B300BAFC4F /* southbeach.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = southbeach.png; path = Images/southbeach.png; sourceTree = SOURCE_ROOT; };
-		58F7F90D18EC83BC00BAFC4F /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
-		58F7F90E18EC83BC00BAFC4F /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		96FF410898EF4A96ABAD71E5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,8 +216,6 @@
 		5867EE851907402A00803413 /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				58F7F90D18EC83BC00BAFC4F /* TableViewCell.h */,
-				58F7F90E18EC83BC00BAFC4F /* TableViewCell.m */,
 				587EDD8418F8212000634925 /* TableViewController.h */,
 				587EDD8518F8212000634925 /* TableViewController.m */,
 				58B8B9A0190DD517009C8885 /* TableCell.h */,
@@ -240,6 +242,8 @@
 				586413F918FC9A2300147180 /* JournalEntryMakerViewController.m */,
 				5848D2F318F4EF2B006C13D9 /* JournalViewController.h */,
 				5848D2F418F4EF2B006C13D9 /* JournalViewController.m */,
+				587B77C219148DB80014348D /* DropPinMapViewController.h */,
+				587B77C319148DB80014348D /* DropPinMapViewController.m */,
 			);
 			name = Journal;
 			sourceTree = "<group>";
@@ -339,6 +343,8 @@
 		58F7F90518EC72BA00BAFC4F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				587B77C71915FAB20014348D /* sky.png */,
+				587B77C51914B1010014348D /* map_icon.png */,
 				5848D2FA18F7C409006C13D9 /* UIBarButtonAdd_2x.png */,
 				5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */,
 				58F7F8DD18EC72B200BAFC4F /* alligators_icon.png */,
@@ -478,6 +484,7 @@
 				58B28B3418EF99E700BBFCFE /* PlaceChildViewController.xib in Resources */,
 				58F7F8FA18EC72B300BAFC4F /* map.png in Resources */,
 				58F7F8FE18EC72B300BAFC4F /* middleplace.png in Resources */,
+				587B77C81915FAB20014348D /* sky.png in Resources */,
 				58A0613118F8C5EC004959B0 /* User_Journal.plist in Resources */,
 				58F7F8FB18EC72B300BAFC4F /* middlebeach_icon.png in Resources */,
 				58B8B9A4190DD518009C8885 /* TableCell.xib in Resources */,
@@ -490,6 +497,7 @@
 				58F7F8F318EC72B300BAFC4F /* bg.png in Resources */,
 				58F7F90318EC72B300BAFC4F /* southbeach_icon.png in Resources */,
 				58F7F8F118EC72B300BAFC4F /* alligators_icon.png in Resources */,
+				587B77C61914B1010014348D /* map_icon.png in Resources */,
 				58F7F88818EB295C00BAFC4F /* Main.storyboard in Resources */,
 				58F7F8F818EC72B300BAFC4F /* mainroad_icon.png in Resources */,
 				58F7F8F918EC72B300BAFC4F /* mainroad.png in Resources */,
@@ -558,7 +566,7 @@
 				58B28B3718EF9DA300BBFCFE /* PlaceViewController.m in Sources */,
 				58B8B9A3190DD518009C8885 /* TableCell.m in Sources */,
 				58590E5B190CE32600CA58B3 /* Photo.m in Sources */,
-				58F7F91018EC83BC00BAFC4F /* TableViewCell.m in Sources */,
+				587B77C419148DB80014348D /* DropPinMapViewController.m in Sources */,
 				58CB1CEC18EFCA850098FEDE /* MapOverlay.m in Sources */,
 				58CE6D3A18ED0F7A00D80D83 /* MapAnnotation.m in Sources */,
 				584B3BF7190D92C300006AB1 /* Journal.m in Sources */,

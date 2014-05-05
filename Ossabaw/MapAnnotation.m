@@ -10,12 +10,17 @@
 
 @implementation MapAnnotation
 
-@synthesize title, iconDir, coordinate, index;
+@synthesize title, iconDir, index, coordinate, pinColor;
 
 - (id)initWithLocation:(CLLocationCoordinate2D)coord
 {   self = [super init];
     if (self)
         coordinate = coord;
     return self;
+}
+
+- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate
+{
+    coordinate = newCoordinate;
 }
 @end

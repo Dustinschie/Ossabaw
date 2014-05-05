@@ -12,7 +12,7 @@
 @end
 
 @implementation MapViewController
-@synthesize mapView, userLocation, places, mapOverlay;
+@synthesize mapView, userLocation, places, mapOverlay, journals;
 
 - (void)viewDidLoad
 {
@@ -31,7 +31,6 @@
     
     
     //    [[self mapView] setScrollEnabled:NO];
-    [[self mapView] setMapType:MKMapTypeHybrid];
 //    [[[self mapView] layer] setCornerRadius:5];
 }
 
@@ -46,8 +45,6 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    //    [[self label] setText:@"Hello"];
     mapOverlay = [[MapOverlay alloc] init];
     
     //    [[self mapView] addOverlay:mapOverlay];
@@ -67,12 +64,33 @@
         CGPoint pt = CGPointFromString(place[@"Location"]);
         MapAnnotation *temp = [[MapAnnotation alloc] initWithLocation: CLLocationCoordinate2DMake(pt.x, pt.y)];
         [temp setTitle: place[@"Name"]];
+        [temp setPinColor:MKPinAnnotationColorPurple];
         [temp setSubtitle:place[@"Information"]];
         [temp setIconDir: place[@"Icon"]];
         [temp setIndex: i];
         [[self mapView] addAnnotation:temp];
-        
     }
+
+//    NSLog(@"%d hello", [[[self fetchedResultsController] fetchedObjects] count]);
+//    int i = 0;
+//    for (Journal *journal in [[self fetchedResultsController] fetchedObjects]) {
+//        NSString *location = [journal location];
+//        if ([location length] > 0) {
+//            CGPoint pt = CGPointFromString([journal location]);
+//            MapAnnotation *temp = [[MapAnnotation alloc] initWithLocation:CLLocationCoordinate2DMake(pt.x, pt.y)];
+//            [temp setTitle:[journal title]];
+//            [temp setPinColor:MKPinAnnotationColorGreen];
+//            [temp setSubtitle:[journal information]];
+//            [temp setIndex:i];
+//            i++;
+//            [[self journals] addObject:journals];
+//            [[self mapView] addAnnotation:temp];
+//            
+//        }
+//
+//    }
+
+    
 }
 
 
@@ -96,16 +114,23 @@
             NSLog(@"annotation");
             pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
         }
-        [pinView setPinColor:MKPinAnnotationColorPurple];
         [pinView setAnimatesDrop: !hasOpened];
+        MapAnnotation *anAnnotation = (MapAnnotation *) annotation;
+        [pinView setPinColor:[anAnnotation pinColor]];
         [pinView setCanShowCallout: YES];
         
         UIButton * button = [UIButton buttonWithType: UIButtonTypeInfoLight];
         [button addTarget:nil action:nil forControlEvents: UIControlEventTouchUpInside];
         
         [pinView setRightCalloutAccessoryView: button];
-        UIImage *image = [UIImage imageNamed: [(MapAnnotation *) annotation iconDir]];
-        
+        UIImage *image;
+        if ([[anAnnotation iconDir] length] > 0) {
+            image = [UIImage imageNamed: [anAnnotation iconDir]];
+        } else{
+            NSLog(@"hello");
+//            image = [[journals objectAtIndex: [anAnnotation index]] icon];
+        }
+
         CGRect resizeRect;
         resizeRect.size.height = image.size.height / 3;
         resizeRect.size.width = image.size.width   / 3;
@@ -114,8 +139,9 @@
         UIGraphicsBeginImageContext(resizeRect.size);
         [image drawInRect:resizeRect];
         UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-        
         UIImageView *imageView = [[UIImageView alloc] initWithImage:resizedImage];
+        [imageView setContentMode:UIViewContentModeScaleAspectFill];
+//        [imageView setImage:image];
         [pinView setLeftCalloutAccessoryView: imageView];
         UIGraphicsEndImageContext();
         
@@ -135,7 +161,8 @@
         MapAnnotation *thisAnnotation = annotation;
         
         [self setIndex:[thisAnnotation index]];
-        [self performSegueWithIdentifier:@"goToInfo" sender:self];
+        
+        [self performSegueWithIdentifier:@"goToInfo" sender:[places objectAtIndex:[thisAnnotation index]]];
         
     }
 //    MKMapRect mRect = self.mapView.visibleMapRect;
@@ -162,21 +189,7 @@
 {
     CLLocationCoordinate2D bottomLeft = [self getSWCoordinate:mRect];
     CLLocationCoordinate2D topRight = [self getNECoordinate:mRect];
-//    NSArray *temp = [[NSArray alloc] initWithObjects:
-//                         [NSNumber numberWithDouble:bottomLeft.latitude],
-//                         [NSNumber numberWithDouble:bottomLeft.longitude],
-//                         [NSNumber numberWithDouble:topRight.latitude],
-//                         [NSNumber numberWithDouble:topRight.longitude], nil];
-//    
-//    NSLog(@"\n%@\n%@\n%@\n%@", [NSNumber numberWithDouble:bottomLeft.latitude],
-//                                [NSNumber numberWithDouble:bottomLeft.longitude],
-//                                [NSNumber numberWithDouble:topRight.latitude],
-//                                [NSNumber numberWithDouble:topRight.longitude]);
-    
-//    NSLog(@"\n%f\n%f\n%f\n%f", bottomLeft.latitude,
-//                              bottomLeft.longitude,
-//                              topRight.latitude,
-//                               topRight.longitude);
+
     return @[ [NSNumber numberWithDouble:bottomLeft.latitude],
               [NSNumber numberWithDouble:bottomLeft.longitude],
               [NSNumber numberWithDouble:topRight.latitude],
@@ -212,7 +225,7 @@
 {
         if ([[segue identifier] isEqualToString:@"goToInfo"]) {
             JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: (NSDictionary *) sender];
             [jvc setPlace: dict];
             
         }
@@ -224,6 +237,24 @@
         
         }
    
+}
+
+-(IBAction)changeMap:(id)sender
+{
+    switch ([[self segControl] selectedSegmentIndex]) {
+        case 0:
+            [[self mapView] setMapType:MKMapTypeStandard];
+            break;
+        case 1:
+            [[self mapView] setMapType:MKMapTypeHybrid];
+            break;
+        case 2:
+            [[self mapView] setMapType:MKMapTypeSatellite];
+            break;
+        default:
+            break;
+    }
+    
 }
 
 @end

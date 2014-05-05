@@ -20,96 +20,13 @@
 {
     [super viewDidLoad];
     [scrollView setDelegate:self];
-//    [self setTitle: (NSString *)[place objectForKey:@"Name"]];
-//    // Edit scrollView with images
-//    [[self scrollView] setDelegate:self];
-//    NSInteger numberOfViews = [[place objectForKey:@"Images"] count];
-//    [[self scrollView] setContentSize:
-//                            CGSizeMake([[self scrollView] frame].size.width * numberOfViews,
-//                                       [[self scrollView] frame].size.height)];
-//    [[self scrollView] setShowsHorizontalScrollIndicator:NO];
-//    [[self scrollView] setShowsVerticalScrollIndicator:NO];
-//    [[self scrollView] setPagingEnabled:YES];
-//    [[self scrollView] setAlwaysBounceVertical:NO];
-//    [[self scrollView] setAlwaysBounceHorizontal:YES];
-//    for (int i = 0; i < numberOfViews; i++) {
-//        CGFloat xOrigin = i * [[self scrollView] frame].size.width;
-//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:
-//                              CGRectMake(xOrigin, 0,
-//                                         [[self scrollView] frame].size.width,
-//                                         [[self scrollView] frame].size.height)];
-//        UIImage *image = [UIImage imageNamed:[[place objectForKey:@"Images"] objectAtIndex: i]];
-//        
-//        if ([image size].width > [image size].height) {
-//            CGRect cropRect = CGRectMake(([image size].width - [image size].height) / 2, 0,
-//                                         [image size].height, [image size].height);
-//            image = [self cropImage:image toRect:cropRect];
-//        }
-//        
-//        else if ([image size].width < [image size].height) {
-//            CGRect cropRect = CGRectMake(0, ([image size].height - [image size].width) / 2,
-//                                         [image size].width, [image size].width);
-//            image = [self cropImage:image toRect:cropRect];
-//        }
-//        
-//        [imageView setImage: image];
-//        [imageView setContentMode: UIViewContentModeScaleAspectFill];
-//        [[self scrollView] addSubview:imageView];
-//    }
-//    //set the scroll view content size
-//    [[self scrollView] setContentSize: CGSizeMake([[self scrollView] frame].size.width * numberOfViews,
-//                                                  [[self scrollView] frame].size.height)];
-//    
-//    //set the number of dots in pageControl
-//    [[self pageControl] setNumberOfPages:numberOfViews];
-//    
-//    
-//    [[self subScrollView] setContentSize:CGSizeMake([[self subScrollView] frame].size.width * 1.25,
-//                                                    [[self subScrollView] frame].size.height)];
-//    [[self subScrollView] setAlwaysBounceVertical:NO];
-//    [[self subScrollView] setAlwaysBounceHorizontal:NO];
-//    [[self subScrollView] setPagingEnabled:YES];
-//    
-//    //  set Text View
-//    [self setTextView: [[UITextView alloc] init]];
-//    [[self textView] setFrame:CGRectMake(0, 0, [[self subScrollView] frame].size.width,
-//                                         [[self subScrollView] frame].size.height)];
-//    
-//    [[self textView] setText:(NSString *)[place objectForKey:@"Information"]];
-//    [[self textView] setEditable:NO];
-//    
-//    [[self subScrollView] addSubview:[self textView]];
-//    
-//    [self setButton: [[UIButton alloc] init]];
-//    [[self button] setFrame:CGRectMake([[self subScrollView] frame].size.width, 0,
-//                                       [[self subScrollView] frame].size.width * 0.25,
-//                                       [[self subScrollView] frame].size.height)];
-//
-////    [[self button] setTitle:@"+" forState:UIControlStateNormal];
-//    UIImage *buttonImage = [UIImage imageNamed:@"UIBarButtonCamera_2x.png"];
-//    [[self button] setImage:buttonImage forState:UIControlStateNormal];
-//    
-//    [[self subScrollView] addSubview: [self button]];
-//    
-//    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                        message:@"Device has no Camera"
-//                                                       delegate:nil
-//                                              cancelButtonTitle:@"OK"
-//                                              otherButtonTitles: nil];
-//        [alert show];
-//        [[self button] addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    else{
-//        [[self button] addTarget:self action:@selector(takePhoto:) forControlEvents:UIControlEventTouchUpInside];
-//    }
-
+    
 }
 
 
 - (void) viewDidAppear:(BOOL)animated
 {
-        [super viewDidAppear:animated];
+    [super viewDidAppear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     if ([self journal] != nil) {
         [self setTitle:[[self journal] title]];
@@ -124,23 +41,46 @@
         int i = 0;
         for (Photo* photo in [[self journal] photos]) {
             UIImage * image = [[photo image] valueForKey:@"image"];
-//            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * width, 0, width, height)];
-//            [imageView setContentMode:UIViewContentModeScaleAspectFill];
-//            [imageView setImage:image];
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            [button setFrame:CGRectMake(width * i, 0, width, height)];
-            [button setImage:image forState:UIControlStateNormal];
-            
-//            [[[button imageView] layer] setMasksToBounds:YES];
-//            [[button imageView] setFrame:CGRectMake(width * i, 0, width, height)];
-//            [[button imageView] setContentMode:UIViewContentModeScaleAspectFill];
-//            [[button imageView] setImage:image];
-            [button addTarget:self action:@selector(enlargePhoto:) forControlEvents:UIControlEventTouchDownRepeat];
+            UIButton *aButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [aButton setFrame:CGRectMake(width * i, 0, width, height)];
+            [aButton setContentMode:UIViewContentModeScaleAspectFill];
+            [aButton setImage:image forState:UIControlStateNormal];
+            [aButton addTarget:self action:@selector(enlargePhoto:) forControlEvents:UIControlEventTouchDownRepeat];
             
             i++;
-            [[self scrollView] addSubview:button
-             ];
+            [[self scrollView] addSubview:aButton];
         }
+    }
+    else if([self place] != nil){
+        [[self editButton] setEnabled:NO];
+        [self setTitle:[place objectForKey:@"Name"]];
+        [[self textView] setText:[place objectForKey:@"Information"]];
+        NSArray *images = [[self place] objectForKey:@"Images"];
+        int num_of_photos = [images count],
+                    width =[[self scrollView] frame].size.width,
+                    height = [[self scrollView] frame].size.height;
+        NSLog(@"%d", num_of_photos);
+        
+        [[self pageControl] setNumberOfPages:num_of_photos];
+        [[self scrollView] setContentSize:CGSizeMake(width* num_of_photos, height)];
+        
+        int i = 0;
+        for (NSString *imageName in images) {
+            UIImage *image = [UIImage imageNamed:imageName];
+            UIButton *aButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [[aButton imageView] setFrame:CGRectMake(0, 0, width, height)];
+            [[aButton imageView] setContentMode:UIViewContentModeScaleAspectFill];
+
+            [aButton setFrame:CGRectMake(width * i, 0, width, height)];
+            
+            
+            [aButton setImage:image forState:UIControlStateNormal];
+            [aButton addTarget:self action:@selector(enlargePhoto:) forControlEvents:UIControlEventTouchDownRepeat];
+            
+            i++;
+            [[self scrollView] addSubview:aButton];
+        }
+
         
     }
 
@@ -154,12 +94,11 @@
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    NSLog(@"gone");
+    for (UIView *view in [[self scrollView] subviews]) {
+        [view removeFromSuperview];
+    }
 }
-
-//-(void) scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-////    CGFloat
-//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -173,8 +112,7 @@
     {
         JournalEntryMakerViewController *jemvc = (JournalEntryMakerViewController *) segue.destinationViewController;
         [jemvc setDelegate:self];
-        [jemvc setIsNewJournal:NO];
-        [jemvc setJournal:[self journal]];
+        [jemvc setJournal:[self journal] andIsNewJournal:NO];
 
         BlurryModalSegue* bms = (BlurryModalSegue*)segue;
         [bms setBackingImageSaturationDeltaFactor:@(0.45)];
@@ -253,16 +191,32 @@
 }
 //----------------------------------------------------------------------------------------------
 
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+- (void) scrollViewDidScroll:(UIScrollView *)aScrollView
 {
-    CGFloat viewWidth = [scrollView frame].size.width;
-    int numViews = [[scrollView subviews] count];
-    int pageNumber = floor(([scrollView contentOffset].x - viewWidth / numViews) / viewWidth + 1);
-    [[self pageControl] setCurrentPage:pageNumber];
+    CGFloat viewWidth = [aScrollView frame].size.width;
+    int numViews = [[aScrollView subviews] count];
+    double pageNumber = ([aScrollView contentOffset].x - viewWidth / numViews) / viewWidth + 1;
+    if (pageNumber <= [[self pageControl] numberOfPages]) {
+        int pgnum = floor(pageNumber);
+        if (pgnum == [[self pageControl] numberOfPages]) {
+            [aScrollView setContentSize:CGSizeMake(viewWidth * (numViews + 1), [aScrollView frame].size.height)];
+        }
+        [[self pageControl] setCurrentPage:pgnum];
+    } else{
+        [aScrollView setContentOffset:CGPointZero animated:NO];
+        [aScrollView setContentSize:CGSizeMake(viewWidth * numViews, [aScrollView frame].size.height)];
+    }
+
+    
+    
 }
 
-- (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)journal
+- (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)aJournal
 {
+    if (journal != nil)
+        [self setJournal:aJournal];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

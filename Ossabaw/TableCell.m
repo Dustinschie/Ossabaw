@@ -16,8 +16,16 @@
 
 - (void)awakeFromNib
 {
+//    [[self layer] setMasksToBounds:YES];
+//    [[self layer] setCornerRadius:[[self thumbnailImageView] frame].size.height / 2];
+    [[[self thumbnailImageView] layer] setMasksToBounds:YES];
+    int cornerRadius =[[self thumbnailImageView] frame].size.height / 2;
+    [[[self thumbnailImageView] layer] setCornerRadius: cornerRadius];
+    [self setBackgroundColor:[UIColor clearColor]];
+    [[self contentView] setBackgroundColor:[UIColor clearColor]];
+    [[[self contentView] superview] setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.80]];
     [[self layer] setMasksToBounds:YES];
-    [[self layer] setCornerRadius:5];
+//    [[self layer] setCornerRadius:cornerRadius];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -34,10 +42,11 @@
 	}
     [[self thumbnailImageView] setContentMode:UIViewContentModeScaleAspectFill];
     [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-	self.thumbnailImageView.image = _journal.icon;
+    [[self thumbnailImageView] setImage: [_journal icon]];
+
 	self.titleLabel.text = (_journal.title.length > 0) ? _journal.title : @"-";
 	self.subtitleLabel.text = (_journal.information != nil) ? _journal.information : @"-";
-	self.dateLabel.text = (_journal.date != nil) ? [NSDateFormatter localizedStringFromDate:_journal.date dateStyle:NSDateFormatterShortStyle timeStyle:nil] : @"-";
+	self.dateLabel.text = (_journal.date != nil) ? [NSDateFormatter localizedStringFromDate:_journal.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterNoStyle] : @"-";
 }
 
 @end

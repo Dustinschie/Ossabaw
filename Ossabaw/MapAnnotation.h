@@ -22,9 +22,10 @@
 @property (nonatomic, copy) NSString    *title;
 @property (nonatomic, copy) NSString    *subtitle;
 @property (nonatomic, copy) NSString   *iconDir;
-@property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property NSInteger index;
+@property MKPinAnnotationColor pinColor;
 
 - (id) initWithLocation: (CLLocationCoordinate2D) coord;
+- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate;
 
 @end

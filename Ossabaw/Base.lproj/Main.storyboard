@@ -40,15 +40,30 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="u1e-5L-l1D"/>
-                    <navigationItem key="navigationItem" id="Y67-de-U0V"/>
+                    <navigationItem key="navigationItem" id="Y67-de-U0V">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="raS-Gz-X0K">
+                            <rect key="frame" x="8" y="7" width="304" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Standard"/>
+                                <segment title="Hybrid"/>
+                                <segment title="Satellite"/>
+                            </segments>
+                            <connections>
+                                <action selector="changeMap:" destination="CZ4-MO-1fc" eventType="valueChanged" id="bkx-JU-Ovp"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="OPo-ZB-FnM" id="8GX-Ng-cvZ"/>
+                        <outlet property="segControl" destination="raS-Gz-X0K" id="dRe-ee-e5v"/>
                         <segue destination="eXl-fY-U7z" kind="push" identifier="goToInfo" id="az6-b1-akb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-151" y="-414"/>
+            <point key="canvasLocation" x="-102" y="-414"/>
         </scene>
         <!--Journal View Controller-->
         <scene sceneID="HhJ-Jj-Ejb">
@@ -100,7 +115,78 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cai-wC-Wqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="314" y="-414"/>
+            <point key="canvasLocation" x="388" y="-414"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="MEY-kI-Gie">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="LpI-vK-w6b" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J0E-XJ-N86" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="886" y="-414"/>
+        </scene>
+        <!--Drop Pin Map View Controller-->
+        <scene sceneID="bbZ-yP-0uz">
+            <objects>
+                <viewController id="hOB-xp-tHl" customClass="DropPinMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xwr-Rm-kqc"/>
+                        <viewControllerLayoutGuide type="bottom" id="GGY-lB-3yZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="w5P-Wq-6j5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gUc-VP-cAi">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0zd-bE-HEs">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="done" id="JQt-42-TgY">
+                                        <connections>
+                                            <action selector="dismiss:" destination="hOB-xp-tHl" id="bKT-OR-nd8"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="D95-jp-u9v"/>
+                                    <barButtonItem style="plain" id="NDs-fR-FfS">
+                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="FeG-Ee-Mez">
+                                            <rect key="frame" x="65" y="6" width="179" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Standard"/>
+                                                <segment title="Hybrid"/>
+                                                <segment title="Satellite"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="changeMap:" destination="hOB-xp-tHl" eventType="valueChanged" id="4rv-Yu-vPe"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GYQ-WT-OLh"/>
+                                    <barButtonItem tag="1" systemItem="cancel" id="wFs-Nb-CPZ">
+                                        <connections>
+                                            <action selector="dismiss:" destination="hOB-xp-tHl" id="Ujf-xa-atb"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HdM-OB-Zwl"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="0zd-bE-HEs" id="cvr-qs-RIf"/>
+                        <outlet property="doneButton" destination="0zd-bE-HEs" id="BCl-bk-VeT"/>
+                        <outlet property="mapView" destination="gUc-VP-cAi" id="mcQ-ee-3JV"/>
+                        <outlet property="segControl" destination="FeG-Ee-Mez" id="scF-t2-gJO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oIh-op-PKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1355" y="341"/>
         </scene>
         <!--Journal Entry Maker View Controller-->
         <scene sceneID="UdN-VY-X7F">
@@ -143,12 +229,21 @@
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.83801800271739135" green="0.83801800271739135" blue="0.83801800271739135" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sgm-x1-ZvG">
+                                        <rect key="frame" x="1" y="625" width="318" height="225"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                                        <state key="normal" title="Map" backgroundImage="map_icon.png"/>
+                                        <connections>
+                                            <segue destination="hOB-xp-tHl" kind="modal" modalTransitionStyle="flipHorizontal" id="F5Q-ha-qqH"/>
+                                        </connections>
+                                    </button>
                                     <datePicker clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="SpT-wv-SWJ" userLabel="DatePicker">
-                                        <rect key="frame" x="20" y="598" width="280" height="162"/>
+                                        <rect key="frame" x="0.0" y="850" width="320" height="162"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
                                         <date key="date" timeIntervalSinceReferenceDate="419378699.50918001">
@@ -179,11 +274,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
 </data>
                                         </timeZone>
                                     </datePicker>
-                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TH3-x2-rdU" userLabel="LocationPicker">
-                                        <rect key="frame" x="20" y="800" width="280" height="162"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
-                                    </pickerView>
                                     <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vz-ps-AFH">
                                         <rect key="frame" x="20" y="1050" width="280" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -204,7 +294,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <rect key="frame" x="0.0" y="20" width="85" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem systemItem="cancel" id="zRP-5L-KwG">
+                                    <barButtonItem style="plain" systemItem="cancel" id="zRP-5L-KwG">
                                         <connections>
                                             <action selector="dismiss:" destination="0zK-FN-ngE" id="UJp-1e-qUh"/>
                                         </connections>
@@ -226,7 +316,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="datePicker" destination="SpT-wv-SWJ" id="qp7-7Y-ekB"/>
                         <outlet property="doneButton" destination="0vz-ps-AFH" id="8SM-Bb-UQP"/>
                         <outlet property="imageScrollView" destination="UMM-gJ-EHE" id="mOh-QM-VS4"/>
-                        <outlet property="locationPicker" destination="TH3-x2-rdU" id="rm8-FZ-gXj"/>
+                        <outlet property="mapButton" destination="Sgm-x1-ZvG" id="igy-JB-wik"/>
                         <outlet property="pageControl" destination="Jyt-aI-hl4" id="RDv-Qf-Axc"/>
                         <outlet property="scrollView" destination="pgl-cy-9Zf" id="e9O-lp-b9n"/>
                         <outlet property="textView" destination="zKk-ZY-i9J" id="Qfq-zj-Q4P"/>
@@ -236,22 +326,34 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pna-Rs-lrh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="835" y="-419"/>
+            <point key="canvasLocation" x="933" y="341"/>
         </scene>
-        <!--Table View Controller - Journal Entries-->
+        <!--Table View Controller-->
         <scene sceneID="zEN-N0-nVl">
             <objects>
                 <tableViewController id="504-2F-xbN" customClass="TableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" id="57W-hu-DPo">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="57W-hu-DPo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="Xd1-dA-Za8">
+                            <rect key="frame" x="0.0" y="64" width="320" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l9X-gZ-mh4">
+                                    <rect key="frame" x="0.0" y="-2" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyIdentifier" rowHeight="84" id="sRp-xu-m2M" customClass="TableCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="84"/>
+                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyIdentifier" id="sRp-xu-m2M" customClass="TableCell">
+                                <rect key="frame" x="0.0" y="128" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sRp-xu-m2M" id="mfr-Pe-jEn">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="83"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -261,28 +363,40 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="504-2F-xbN" id="qpx-na-3Fa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Journal Entries" id="WGe-JC-31s">
+                    <navigationItem key="navigationItem" id="WGe-JC-31s">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Item" systemItem="add" id="W6B-Ws-Nmz">
                             <connections>
                                 <segue destination="0zK-FN-ngE" kind="custom" identifier="blurryModalSegue" customClass="BlurryModalSegue" id="gmm-d0-xWt"/>
                             </connections>
                         </barButtonItem>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="uFt-Uc-pZh">
+                            <rect key="frame" x="50" y="7" width="224" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Name"/>
+                                <segment title="Date"/>
+                            </segments>
+                        </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="W6B-Ws-Nmz" id="74e-7g-5n1"/>
+                        <outlet property="searchBar" destination="l9X-gZ-mh4" id="nbf-ej-tUa"/>
+                        <outlet property="segControl" destination="uFt-Uc-pZh" id="HW1-g8-0rV"/>
                         <outlet property="tableView" destination="57W-hu-DPo" id="MV1-qQ-mY4"/>
+                        <outlet property="topView" destination="Xd1-dA-Za8" id="K9R-uk-fck"/>
                         <segue destination="eXl-fY-U7z" kind="push" identifier="tableToInfo" id="Dzr-kQ-trg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="REe-hD-COD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-151" y="341"/>
+            <point key="canvasLocation" x="-150" y="325"/>
         </scene>
         <!--Navigation Controller - Journal-->
         <scene sceneID="cXt-f7-Vi7">
             <objects>
                 <navigationController definesPresentationContext="YES" id="6r3-u4-BEj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Journal" image="second" id="E1h-nf-q8c"/>
+                    <tabBarItem key="tabBarItem" title="Journal" image="UITabBarMostViewed_2x" id="E1h-nf-q8c"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="W9q-P5-CuM">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -328,7 +442,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tabBarController id="8YX-ce-x5E" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="JQR-rB-NYL">
+                    <tabBar key="tabBar" opaque="NO" contentMode="scaleToFill" id="JQR-rB-NYL">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -345,8 +459,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
+        <image name="UITabBarMostViewed_2x" width="23" height="23"/>
         <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="map_icon.png" width="954" height="674"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -354,7 +469,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gmm-d0-xWt"/>
         <segue reference="Dzr-kQ-trg"/>
+        <segue reference="gmm-d0-xWt"/>
     </inferredMetricsTieBreakers>
 </document>

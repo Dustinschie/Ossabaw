@@ -14,8 +14,7 @@
 
 @implementation JournalEntryMakerViewController
 @synthesize doneButton, pageControl, textView, titleTextField, imageScrollView,
-            scrollView, images,index, toolBar, colorSwitch, locationPicker, datePicker,
-            locations, imageIndexes, isNewJournal;
+            scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,7 +29,6 @@
 {
     [super viewDidLoad];
     [[self toolBar] setClipsToBounds:YES];
-    [self setLocations:[[NSArray alloc] initWithObjects:@"Blue",@"Green",@"Orange",@"Purple",@"Red",@"Yellow" , nil]];
     [self setImages:[[NSMutableArray alloc] init]];
     int imgSVWidth = [[self imageScrollView] frame].size.width;
     int imgSVheight = [[self imageScrollView] frame].size.height;
@@ -53,7 +51,7 @@
     [[self imageScrollView] setDelegate:self];
     [[self imageScrollView] setContentSize:CGSizeMake(imgSVWidth, imgSVheight)];
     
-    [self setIndex:1];
+
     
     //  setup pageControl
     [[self pageControl] setNumberOfPages: index];
@@ -71,38 +69,32 @@
     
     //  setup the outer scroll view
     [[self scrollView] setAlwaysBounceVertical:YES];
-//    [[self scrollView] setScrollEnabled:YES];
-//    [[self scrollView] setPagingEnabled:NO];
     
     // setup the textview that contains notes
     [[[self textView] layer] setCornerRadius:5];
     [[self textView] setDelegate:self];
+    
     // setup the done button
     [[[self doneButton] layer] setCornerRadius:5];
 
     [[self titleTextField] setDelegate:self];
-    
-    
-    [[self locationPicker] setDelegate:self];
-    [[self locationPicker] setDataSource:self];
-    [[[self locationPicker] layer] setCornerRadius:5];
-    
-//    NSError *error = nil;
-//    if (! [[self fetchedResultsController] performFetch:&error]) {
-//        /*
-//		 Replace this implementation with code to handle the error appropriately.
-//		 
-//		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-//		 */
-//		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//		abort();
-//    }
+
+    [[self mapButton] setAlpha:0.75];
     
 }
 
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[[self mapButton] layer] setMasksToBounds:YES];
+    [[[self mapButton] layer] setCornerRadius:5];
+    if (![self isNewJournal]) {
+        [[self titleTextField] setText:[[self journal] title]];
+        [[self textView] setText:[[self journal] information]];
+        [[self datePicker] setDate:[[self journal] date]];
+        [self stockImageScrollView];
+    }
+    
     
     
 }
@@ -123,21 +115,59 @@
     [super didReceiveMemoryWarning];
     NSLog(@"Problems!");
 }
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+        DropPinMapViewController *dpmvc = (DropPinMapViewController *) segue.destinationViewController;
+    
+        [dpmvc setDelegate:self];
+}
+
+
+
+#pragma mark - ScrollViewDelegate
 //----------------------------------------------------------------------------------------------
 - (void) scrollViewDidScroll:(UIScrollView *)aScrollView
 {
+
     CGFloat viewWidth = [aScrollView frame].size.width;
     int numViews = [[aScrollView subviews] count];
-    int pageNumber = floor(([aScrollView contentOffset].x - viewWidth / numViews) / viewWidth + 1);
-    [[self pageControl] setCurrentPage:pageNumber];
+    double pageNumber = ([aScrollView contentOffset].x - viewWidth / numViews) / viewWidth + 1;
+    if (pageNumber <= [[self pageControl] numberOfPages]) {
+        int pgnum = floor(pageNumber);
+        if (pgnum == [[self pageControl] numberOfPages]) {
+            [aScrollView setContentSize:CGSizeMake(viewWidth * (numViews + 1), [aScrollView frame].size.height)];
+        }
+        [self setIndex:pgnum];
+        [[self pageControl] setCurrentPage:pgnum];
+    } else{
+        [aScrollView setContentOffset:CGPointZero animated:NO];
+        [aScrollView setContentSize:CGSizeMake(viewWidth * numViews, [aScrollView frame].size.height)];
+    }
+    
+//    CGFloat viewWidth = [aScrollView frame].size.width;
+//    int numViews = [[aScrollView subviews] count];
+//    int pageNumber = floor(([aScrollView contentOffset].x - viewWidth / numViews) / viewWidth + 1);
+//    
+//    [[self pageControl] setCurrentPage:pageNumber];
+//    
+//    [self setIndex:pageNumber];
+}
+#pragma mark - AddPinDelegate
+//----------------------------------------------------------------------------------------------
+- (void) dropPinMapViewController:(DropPinMapViewController *)dropPinMapViewController
+                   didAddLocation:(NSString *)location
+{
+    [[self journal] setLocation:location];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 //----------------------------------------------------------------------------------------------
 -(IBAction)takePhoto:(id)sender
 {
     NSString *title = @"",
              *cancelTitle = @"Cancel",
-             *camera = @"Take a photo",
-            *cameraRoll = @"Camera Roll";
+             *camera = @"Camera",
+            *cameraRoll = @"Photo Library";
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle: title
                                                              delegate:self
                                                   cancelButtonTitle:cancelTitle
@@ -188,24 +218,11 @@
     [[self journal] setTitle: [[self titleTextField] text]];
     [[self journal] setDate: [[self datePicker] date]];
     [[self journal] setInformation:[[self textView] text]];
-    
-    if ([[self images] count] != 0) {
-        UIImage *image = [[self images] objectAtIndex:0];
-//        CGSize size = image.size;
-//        CGFloat ratio = 0;
-//        if (size.width > size.height) {
-//            ratio = 44.0 / size.width;
-//        } else {
-//            ratio = 44.0 / size.height;
-//        }
-//        CGRect rect = CGRectMake(0, 0, ratio * size.width, ratio * size.height);
-//        [image drawInRect:rect];
-//        [[self journal] setIcon: UIGraphicsGetImageFromCurrentImageContext()];
-//        UIGraphicsEndImageContext();
-        [[self journal] setIcon:image];
-        UIImage *a = [[self journal] icon];
-        NSLog(@"%d, %d", [a size].width, [a size].height);
+    if ([[self images] count] != 0 && [[self journal] icon] == nil) {
+        Photo *photo = [[self images] objectAtIndex:0];
+        [[self journal] setIcon:[[photo image] valueForKey:@"image"]];
         
+        UIImage *a = [[self journal] icon];
     }
     
     NSError *error = nil;
@@ -218,16 +235,32 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
     }
+    NSLog(@"hello");
     [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
 }
-//----------------------------------------------------------------------------------------------gith
+
+-(IBAction)openMap:(id)sender
+{
+    [self performSegueWithIdentifier:@"openMap" sender:self];
+}
+
+- (IBAction)removePhoto:(id)sender
+{
+    NSLog(@"%d removes", [sender tag]);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Options" message:@"What do want to do?"
+                                                   delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Delete Image", @"Set as Icon", nil];
+    [alert show];
+    
+}
+//----------------------------------------------------------------------------------------------
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
 
     if (chosenImage.size.width != 0 && chosenImage.size.height != 0) {
         NSManagedObjectContext *context = [[self journal] managedObjectContext];
-        Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+        Photo *photo = [NSEntityDescription insertNewObjectForEntityForName:@"Photo"
+                                                     inManagedObjectContext:context];
 
         NSURL *url = [info objectForKey:UIImagePickerControllerReferenceURL];
         [photo setName: [info objectForKey: [url lastPathComponent]]];
@@ -235,23 +268,28 @@
         NSManagedObject *image = [NSEntityDescription insertNewObjectForEntityForName:@"Image"
                                                                inManagedObjectContext:[photo managedObjectContext]];
         [photo setImage:image];
-        // set the image for the image managed object
+        // set the image for the managed object "image"
         [image setValue:chosenImage forKeyPath:@"image"];
         [[self journal] addPhotosObject:photo];
+        [[self images] addObject:photo];
         
-        
-        [[self images] addObject:chosenImage];
-        NSLog(@"%d", [[self images] count]);
-        [[self imageIndexes] addObject:[NSNumber numberWithInt:[[self images] count] - 1]];
         NSInteger   width =[[self imageScrollView] frame].size.width,
         height = [[self imageScrollView] frame].size.height;
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame: CGRectMake(width * index, 0, width, height)];
-        [imageView setContentMode: UIViewContentModeScaleAspectFit];
-        [imageView setImage:chosenImage];
-        [[self imageScrollView] addSubview:imageView];
-        index++;
-        [[self imageScrollView] setContentSize:CGSizeMake(width * index,height)];
-        [[self pageControl] setNumberOfPages: index];
+        
+        UIImage * anImage = [[photo image] valueForKey:@"image"];
+        UIButton *aButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        int count = [[self images] count];
+        [aButton setFrame:CGRectMake(width * count, 0, width, height)];
+        [aButton setImage:anImage forState:UIControlStateNormal];
+        [aButton addTarget:self action:@selector(removePhoto:)
+          forControlEvents:UIControlEventTouchDownRepeat];
+
+        [aButton setTag:count];
+        
+        [[self imageScrollView] addSubview:aButton];
+        [[self imageScrollView] setContentSize:CGSizeMake(width * (count + 1),height)];
+        [[self pageControl] setNumberOfPages: count + 1];
         
     }
         [picker dismissViewControllerAnimated:YES completion:nil];
@@ -273,23 +311,37 @@
 //----------------------------------------------------------------------------------------------
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([title isEqualToString:@"Take a Photo"]) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        [picker setDelegate:self];
-        [picker setAllowsEditing:YES];
-        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:picker animated:YES completion:nil];
-    }
-    else if ([title isEqualToString:@"Camera Roll"]) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        [picker setDelegate:self];
-        [picker setAllowsEditing:YES];
-        [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        
-        [self presentViewController:picker animated:YES completion:nil];
+
+    Photo *photo = [[self images] objectAtIndex:[self index] - 1];
+    switch (buttonIndex) {
+        case 2:
+        {
+            [[self journal] setIcon:[[photo image] valueForKey:@"image"]];
+            break;
+        }
+        case 1:
+        {
+            BOOL isFirst = YES;
+            for (UIView *subView in [[self imageScrollView] subviews]) {
+                if (isFirst) {
+                    isFirst = NO;
+                    continue;
+                }
+                [subView removeFromSuperview];
+            }
+            [[self journal] removePhotosObject:photo];
+            [[self images] removeAllObjects];
+            NSManagedObjectContext *context = [photo managedObjectContext];
+            [context deleteObject:photo];
+            [self stockImageScrollView];
+            break;
+        }
+        default:
+            break;
     }
 }
+
+
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
@@ -309,35 +361,40 @@
 
 }
 
-#pragma mark - UIPickerViewDelegate
-//----------------------------------------------------------------------------------------------
-// returns the number of 'columns' to display.
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-// returns the # of rows in each component..
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent: (NSInteger)component
-{
-    return 6;
-}
-
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row   forComponent:(NSInteger)component
-{
-    return [[self locations] objectAtIndex:row];
-}
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row   inComponent:(NSInteger)component
-{
-    
-}
+#pragma mark - textViewDelegate
 //----------------------------------------------------------------------------------------------
 - (void) textViewDidBeginEditing:(UITextView *)textView
 {
+        [[self scrollView] setPagingEnabled:NO];
     [[self scrollView] setContentOffset:CGPointMake([[self scrollView] contentOffset].x,
                                                     [[self textView] frame].origin.y - 1.75*[[self textView] frame].size.height )
                                animated:YES];
+    
 }
+
+- (void) textViewDidEndEditing:(UITextView *)textView
+{
+    [[self scrollView] setPagingEnabled:YES];
+    
+}
+
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+{
+    if ([[textView text] isEqualToString:@"Enter some stuff!"]) {
+        [textView setText:@""];
+    }
+    return YES;
+}
+
+
+//-(void) textViewDidChangeSelection:(UITextView *)atextView
+//{
+//        [[self scrollView] setContentOffset:CGPointMake([[self scrollView] contentOffset].x,
+//                                                    [atextView frame].origin.y - 1.75*[atextView frame].size.height)
+//                                   animated:YES];
+//}
+
+
 //----------------------------------------------------------------------------------------------
 - (UIImage *) cropImage: (UIImage *) image toRect: (CGRect) rect
 {
@@ -346,6 +403,35 @@
     CGImageRelease(imageRef);
     
     return cropped;
+}
+
+- (void) setJournal:(Journal *)journal andIsNewJournal: (BOOL) isNewJournal{
+    [self setIsNewJournal:isNewJournal];
+    [self setJournal:journal];
+}
+
+- (void) stockImageScrollView
+{
+    int i = 1,
+    width = [[self imageScrollView] frame].size.width,
+    height = [[self imageScrollView] frame].size.height;
+    for (Photo *photo in [[self journal] photos]) {
+        [[self images] addObject:photo];
+        UIImage * image = [[photo image] valueForKey:@"image"];
+        UIButton *aButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [aButton setFrame:CGRectMake(width * i, 0, width, height)];
+        //dfg;ojwrg nlaijg nlzifjg nozkfgj aleij lgnsk jgnlz jg
+        [[aButton imageView] setContentMode:UIViewContentModeScaleAspectFill];
+        //dfg;ojwrg nlaijg nlzifjg nozkfgj aleij lgnsk jgnlz jg
+        [aButton setImage:image forState:UIControlStateNormal];
+        [aButton addTarget:self action:@selector(removePhoto:)
+          forControlEvents:UIControlEventTouchDownRepeat];
+        [aButton setTag:i];
+        i++;
+        [[self imageScrollView] addSubview:aButton];
+    }
+    [[self imageScrollView] setContentSize:CGSizeMake(i * width, height)];
+    [[self pageControl] setNumberOfPages:i];
 }
 
 @end

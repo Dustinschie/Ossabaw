@@ -7,7 +7,6 @@
 //
 
 #import "TableViewController.h"
-#import "TableViewCell.h"
 #import "Journal.h"
 #import "TableCell.h"
 
@@ -42,8 +41,9 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//    [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
-    
+    [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
+    UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sky.png"]];
+    [[self tableView] setBackgroundView:bg];
     NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
@@ -102,19 +102,11 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 84;
+    return 70;
 }
 
 
 #pragma mark - UITableViewDelegate
-//// Override to support conditional editing of the table view.
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    // Return NO if you do not want the specified item to be editable.
-//    return YES;
-//}
-
-
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -141,7 +133,8 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    [self setIndex:[indexPath row]];
-    TableViewCell *cell = (TableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    TableCell *cell = (TableCell *)[tableView cellForRowAtIndexPath:indexPath];
+//    [cell setBackgroundColor:[UIColor clearColor]];
     
     [self performSegueWithIdentifier:@"tableToInfo" sender:[cell journal]];
 }
@@ -169,7 +162,10 @@
 //----------------------------------------------------------------------------------------------
 - (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)journal
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (![[self presentedViewController] isBeingDismissed]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+
 }
 //----------------------------------------------------------------------------------------------
 
@@ -214,8 +210,7 @@
         Journal *newJournal = [NSEntityDescription insertNewObjectForEntityForName:@"Journal"
                                                             inManagedObjectContext:[self managedObjectContext]];
         [jemvc setDelegate:self];
-        [jemvc setIsNewJournal:YES];
-        [jemvc setJournal:newJournal];
+        [jemvc setJournal:newJournal andIsNewJournal:YES];
 
 
         
@@ -248,10 +243,11 @@
         // nil for section name key path means "no sections".
         NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
         aFetchedResultsController.delegate = self;
-        self.fetchedResultsController = aFetchedResultsController;
+        [self setFetchedResultsController: aFetchedResultsController];
     }
 	
-	return _fetchedResultsController;}
+	return _fetchedResultsController;
+}
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
@@ -260,7 +256,7 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    UITableView *tableView = self.tableView;
+    UITableView *tableView = [self tableView];
 	
 	switch(type) {
 		case NSFetchedResultsChangeInsert:
@@ -288,11 +284,11 @@
 {
     switch(type) {
 		case NSFetchedResultsChangeInsert:
-			[self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			[[self tableView] insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeDelete:
-			[self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			[[self tableView] deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
 			break;
 	}
 
