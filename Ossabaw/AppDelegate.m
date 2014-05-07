@@ -13,9 +13,7 @@
 
 @interface AppDelegate ()
 
-@property (readonly, nonatomic) NSManagedObjectContext  *managedObjectContext;
-@property (readonly, nonatomic) NSManagedObjectModel    *managedObjectModel;
-@property (readonly, nonatomic) NSPersistentStoreCoordinator    *persistentStoreCoordinator;
+
 
 @end
 

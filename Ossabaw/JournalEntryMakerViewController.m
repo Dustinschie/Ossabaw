@@ -246,7 +246,6 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
     }
-    NSLog(@"hello");
     [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
 }
 

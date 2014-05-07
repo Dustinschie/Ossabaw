@@ -16,6 +16,9 @@
 
 - (void)viewDidLoad
 {
+    AppDelegate * appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [self setManagedObjectContext:[appDelegate managedObjectContext]];
+    
 //    mapView.showsUserLocation = YES;
     [super viewDidLoad];
     hasOpened = NO;
@@ -72,27 +75,6 @@
         [temp setIndex: i];
         [[self mapView] addAnnotation:temp];
     }
-
-//    NSLog(@"%d hello", [[[self fetchedResultsController] fetchedObjects] count]);
-//    int i = 0;
-//    for (Journal *journal in [[self fetchedResultsController] fetchedObjects]) {
-//        NSString *location = [journal location];
-//        if ([location length] > 0) {
-//            CGPoint pt = CGPointFromString([journal location]);
-//            MapAnnotation *temp = [[MapAnnotation alloc] initWithLocation:CLLocationCoordinate2DMake(pt.x, pt.y)];
-//            [temp setTitle:[journal title]];
-//            [temp setPinColor:MKPinAnnotationColorGreen];
-//            [temp setSubtitle:[journal information]];
-//            [temp setIndex:i];
-//            i++;
-//            [[self journals] addObject:journals];
-//            [[self mapView] addAnnotation:temp];
-//            
-//        }
-//
-//    }
-
-    
 }
 
 
@@ -105,9 +87,6 @@
 //----------------------------------------------------------------------------------------------
 -(MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-
-    if ([annotation isKindOfClass: [MKUserLocation class]])
-        return nil;
     
     if ([annotation isKindOfClass: [MapAnnotation class]]){
 
@@ -126,28 +105,28 @@
         
         [pinView setRightCalloutAccessoryView: button];
         UIImage *image;
-        if ([[anAnnotation iconDir] length] > 0) {
-            image = [UIImage imageNamed: [anAnnotation iconDir]];
-        } else{
-            NSLog(@"hello");
-//            image = [[journals objectAtIndex: [anAnnotation index]] icon];
+        if ([anAnnotation journal] == nil) {
+            if ([[anAnnotation iconDir] length] > 0) {
+//                image = [UIImage imageNamed: [anAnnotation iconDir]];
+                image = [UIImage imageWithCGImage:[UIImage imageNamed:[anAnnotation iconDir]].CGImage
+                                            scale:2.5
+                                      orientation:UIImageOrientationUp];
+            } else{
+                NSLog(@"iconDir is empty!");
+            }
+        }else{
+            
         }
-
-        CGRect resizeRect;
-        resizeRect.size.height = image.size.height / 3;
-        resizeRect.size.width = image.size.width   / 3;
-        resizeRect.origin = (CGPoint){0,0};
         
-        UIGraphicsBeginImageContext(resizeRect.size);
-        [image drawInRect:resizeRect];
-        UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:resizedImage];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        
+        CGRect rect = [imageView frame];
+        [imageView setFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, [pinView  frame].size.height)];
         [imageView setContentMode:UIViewContentModeScaleAspectFill];
-//        [imageView setImage:image];
         [pinView setLeftCalloutAccessoryView: imageView];
-        UIGraphicsEndImageContext();
-        
-        
+        [[[pinView leftCalloutAccessoryView] layer] setMasksToBounds:YES];
+        [[[pinView leftCalloutAccessoryView] layer] setCornerRadius:5];
+    
         return pinView;
 
     }
@@ -257,6 +236,97 @@
             break;
     }
     
+}
+
+- (void) configureAnnotations
+{
+    [[self mapView] removeAnnotations:[[self mapView] annotations]];
+    for (Journal * journal in [[self fetchedResultsController] fetchedObjects]) {
+        MapAnnotation *annotation = [[MapAnnotation alloc] init];
+        [annotation setJournal:journal];
+        [annotation setPinColor:MKPinAnnotationColorGreen];
+        [[self mapView] addAnnotation:annotation];
+    }
+}
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    // Set up the fetched results controller if needed.
+    if (_fetchedResultsController == nil) {
+        // Create the fetch request for the entity.
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        // Edit the entity name as appropriate.
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Journal"
+                                                  inManagedObjectContext:self.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        // Edit the sort key as appropriate.
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc]
+                                                                 initWithFetchRequest:fetchRequest
+                                                                 managedObjectContext:[self managedObjectContext]
+                                                                 sectionNameKeyPath:nil
+                                                                 cacheName:@"Root"];
+        aFetchedResultsController.delegate = self;
+        [self setFetchedResultsController: aFetchedResultsController];
+    }
+//	[self configureAnnotations];
+	return _fetchedResultsController;
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+- (void) controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+        {
+            [self fetchedResultsChangeInsert:anObject];
+            break;
+        }
+        case NSFetchedResultsChangeDelete:
+        {
+            [self fetchedResultsChangeDelete:anObject];
+            break;
+        }
+        case NSFetchedResultsChangeUpdate:
+        {
+            [self fetchedResultsChangeUpdate:anObject];
+            break;
+        }
+        case NSFetchedResultsChangeMove:
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)fetchedResultsChangeInsert: (MapAnnotation *)annotation
+{
+    [[self mapView] addAnnotation:annotation];
+}
+- (void)fetchedResultsChangeDelete: (MapAnnotation *)annotation
+{
+    [[self mapView] removeAnnotation:annotation];
+}
+- (void)fetchedResultsChangeUpdate: (MapAnnotation *)annotation
+{
+    [self fetchedResultsChangeDelete:annotation];
+    [self fetchedResultsChangeInsert:annotation];
 }
 
 @end

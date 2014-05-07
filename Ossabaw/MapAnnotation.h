@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "Journal.h"
 
 @interface MapAnnotation : NSObject<MKAnnotation>
 {
@@ -21,7 +22,8 @@
 }
 @property (nonatomic, copy) NSString    *title;
 @property (nonatomic, copy) NSString    *subtitle;
-@property (nonatomic, copy) NSString   *iconDir;
+@property (nonatomic, copy) NSString    *iconDir;
+@property (nonatomic, copy) Journal     *journal;
 @property NSInteger index;
 @property MKPinAnnotationColor pinColor;
 

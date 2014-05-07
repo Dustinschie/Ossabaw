@@ -9,6 +9,7 @@
 #import "TableViewController.h"
 #import "Journal.h"
 #import "TableCell.h"
+#import "UIImage+ImageEffects.h"
 
 
 @interface TableViewController ()
@@ -31,7 +32,8 @@
 {
     [super viewDidLoad];
     cellReuseName = @"MyIdentifier";
-    [[self tableView] registerNib:[UINib nibWithNibName:@"TableCell" bundle:[NSBundle mainBundle]]
+    [[self tableView] registerNib:[UINib nibWithNibName:@"TableCell"
+                                                 bundle:[NSBundle mainBundle]]
            forCellReuseIdentifier: cellReuseName];
     
     NSString * filePath = [[NSBundle mainBundle] pathForResource:@"Places" ofType:@"plist"];
@@ -42,8 +44,12 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
-    UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sky.png"]];
+    UIImageView *bg = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"sky.png"] applyExtraLightEffect]];
+    [[self tableView] setContentMode:UIViewContentModeScaleAspectFill];
+
+    [[[self tableView] layer] setMasksToBounds:YES];
     [[self tableView] setBackgroundView:bg];
+//    [[[[self tableView] backgroundView] superview] setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.8]];
     NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
@@ -55,8 +61,21 @@
 		abort();
     }
     
+}
+
+ - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                 duration:(NSTimeInterval)duration
+{
     
-    
+    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(M_PI / 2)];
+    }
+    else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight){
+        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(-M_PI / 2)];
+    }
+    else {
+        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(0.0)];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,6 +121,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     return 70;
 }
 
@@ -129,12 +149,16 @@
         }
     }
 }
+//- (BOOL) tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return YES;
+//}
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    [self setIndex:[indexPath row]];
     TableCell *cell = (TableCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setBackgroundColor:[UIColor clearColor]];
     
     [self performSegueWithIdentifier:@"tableToInfo" sender:[cell journal]];
 }
@@ -143,6 +167,7 @@
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
       toIndexPath:(NSIndexPath *)toIndexPath
 {
+    
 }
 
 
@@ -171,6 +196,7 @@
     Journal *journal = (Journal *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
     [cell setJournal:journal];
 }
+
 
 #pragma mark - journal support
 //----------------------------------------------------------------------------------------------

@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+
+#import "AppDelegate.h"
+
 #import "MapAnnotation.h"
 #import "PlaceViewController.h"
 #import "MapOverlay.h"
