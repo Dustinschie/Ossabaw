@@ -32,28 +32,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OPo-ZB-FnM">
+                            <mapView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="OPo-ZB-FnM">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
+                            <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="raS-Gz-X0K">
+                                <rect key="frame" x="8" y="20" width="304" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="9Xb-qU-m41"/>
+                                    <constraint firstAttribute="width" constant="304" id="Hab-dN-raW"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Hybrid"/>
+                                    <segment title="Satellite"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeMap:" destination="CZ4-MO-1fc" eventType="valueChanged" id="bkx-JU-Ovp"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OPo-ZB-FnM" firstAttribute="width" secondItem="2VE-Yg-loa" secondAttribute="width" id="3WH-Zm-3ku"/>
+                            <constraint firstItem="OPo-ZB-FnM" firstAttribute="top" secondItem="2VE-Yg-loa" secondAttribute="top" id="4LB-2F-YRU"/>
+                            <constraint firstAttribute="bottom" secondItem="OPo-ZB-FnM" secondAttribute="bottom" constant="48" id="HO4-OC-duJ"/>
+                            <constraint firstItem="OPo-ZB-FnM" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" id="QW8-Fs-ifO"/>
+                            <constraint firstItem="OPo-ZB-FnM" firstAttribute="centerX" secondItem="raS-Gz-X0K" secondAttribute="centerX" id="V8Z-Yp-T0h"/>
+                            <constraint firstItem="raS-Gz-X0K" firstAttribute="top" secondItem="2VE-Yg-loa" secondAttribute="top" constant="20" id="WW1-Ak-1iF"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="First" image="first" id="u1e-5L-l1D"/>
                     <navigationItem key="navigationItem" id="Y67-de-U0V">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="raS-Gz-X0K">
-                            <rect key="frame" x="8" y="7" width="304" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Standard"/>
-                                <segment title="Hybrid"/>
-                                <segment title="Satellite"/>
-                            </segments>
-                            <connections>
-                                <action selector="changeMap:" destination="CZ4-MO-1fc" eventType="valueChanged" id="bkx-JU-Ovp"/>
-                            </connections>
-                        </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="OPo-ZB-FnM" id="8GX-Ng-cvZ"/>
@@ -186,7 +198,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIh-op-PKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1355" y="341"/>
+            <point key="canvasLocation" x="1384" y="325"/>
         </scene>
         <!--Journal Entry Maker View Controller-->
         <scene sceneID="UdN-VY-X7F">
@@ -326,7 +338,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pna-Rs-lrh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="933" y="341"/>
+            <point key="canvasLocation" x="935" y="325"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="zEN-N0-nVl">
@@ -340,13 +352,18 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <rect key="frame" x="0.0" y="64" width="320" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l9X-gZ-mh4">
+                                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="l9X-gZ-mh4">
                                     <rect key="frame" x="0.0" y="-2" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="l9X-gZ-mh4" secondAttribute="bottom" id="6bL-c9-tFE"/>
+                                <constraint firstItem="l9X-gZ-mh4" firstAttribute="leading" secondItem="Xd1-dA-Za8" secondAttribute="leading" id="LfR-Lm-oaN"/>
+                                <constraint firstAttribute="centerX" secondItem="l9X-gZ-mh4" secondAttribute="centerX" id="tj9-d9-P40"/>
+                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyIdentifier" id="sRp-xu-m2M" customClass="TableCell">
@@ -469,7 +486,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Dzr-kQ-trg"/>
-        <segue reference="gmm-d0-xWt"/>
+        <segue reference="az6-b1-akb"/>
+        <segue reference="caf-Xu-SH1"/>
     </inferredMetricsTieBreakers>
 </document>

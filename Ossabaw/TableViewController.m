@@ -94,7 +94,7 @@
 //        UIViewController *temp = [[UIViewController alloc] initWithNibName:@"TableCell" bundle:nil];
 //        cell = (TableCell *)[temp view];
 //    }
-    [self configureCell:cell atIndexPath:indexPath];
+
 
     
     return cell;
@@ -109,7 +109,7 @@
 #pragma mark - UITableViewDelegate
 
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)    tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
@@ -140,7 +140,8 @@
 }
 
 // Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
+      toIndexPath:(NSIndexPath *)toIndexPath
 {
 }
 
@@ -150,6 +151,19 @@
 {
     // Return NO if you do not want the item to be re-orderable.
     return YES;
+}
+
+// Override to support lazy loading of cell
+- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell
+ forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+        [self configureCell:(TableCell *)cell atIndexPath:indexPath];
+}
+
+- (void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell
+ forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ((TableCell *) cell).journal = nil;
 }
 
 - (void) configureCell: (TableCell *)cell atIndexPath:(NSIndexPath *)indexPath

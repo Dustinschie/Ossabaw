@@ -12,7 +12,8 @@
 @class Journal;
 @class Photo;
 
-@interface JournalViewController : UIViewController<UIImagePickerControllerDelegate, UIScrollViewDelegate, JournalAddDelegate>
+@interface JournalViewController : UIViewController
+<UIImagePickerControllerDelegate,UIScrollViewDelegate, JournalAddDelegate>
 @property (strong, nonatomic) IBOutlet  UIButton        *button;
 @property (strong, nonatomic) IBOutlet  UIPageControl   *pageControl;
 @property (strong, nonatomic) IBOutlet  UIScrollView    *scrollView;

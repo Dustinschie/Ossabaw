@@ -83,6 +83,17 @@
     
 }
 
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+//  this method forces the orientation to be portrait only
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -118,7 +129,7 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
         DropPinMapViewController *dpmvc = (DropPinMapViewController *) segue.destinationViewController;
-    
+        [dpmvc setCoord:[[self journal] location]];
         [dpmvc setDelegate:self];
 }
 
@@ -405,8 +416,8 @@
     return cropped;
 }
 
-- (void) setJournal:(Journal *)journal andIsNewJournal: (BOOL) isNewJournal{
-    [self setIsNewJournal:isNewJournal];
+- (void) setJournal:(Journal *)journal andIsNewJournal: (BOOL) thisIsNewJournal{
+    [self setIsNewJournal:thisIsNewJournal];
     [self setJournal:journal];
 }
 

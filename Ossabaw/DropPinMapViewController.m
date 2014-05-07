@@ -27,20 +27,27 @@
 {
     [super viewDidLoad];
     [[self mapView] setDelegate:self];
-    
     // Do any additional setup after loading the view.
     [[self segControl] addTarget:self
                           action:@selector(changeMap:)
                 forControlEvents:UIControlEventValueChanged];
     
+}
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    
     CLLocationCoordinate2D coord;
+    NSLog(@"%@", [self location]);
     if ([self location] == nil)
+        
         coord = CLLocationCoordinate2DMake(31.839120, -81.092040);
     else{
         CGPoint point = CGPointFromString([self location]);
         coord = CLLocationCoordinate2DMake(point.x, point.y);
     }
-
+    
     [self setPin:[[MapAnnotation alloc] initWithLocation:coord]];
     
     [[self mapView] addAnnotation:[self pin]];
@@ -100,6 +107,7 @@
 - (void) setCoord:(NSString *)aLocation
 {
     [self setLocation:aLocation];
+    NSLog(@"%@", [self location]);
 }
 #pragma mark - MKMapViewDelegate
 - (void)    mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view

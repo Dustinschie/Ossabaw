@@ -12,7 +12,7 @@
 @end
 
 @implementation MapViewController
-@synthesize mapView, userLocation, places, mapOverlay, journals;
+@synthesize mapView, userLocation, places, mapOverlay, journals, segControl;
 
 - (void)viewDidLoad
 {
@@ -28,6 +28,7 @@
     [[self mapView] setZoomEnabled:YES];
     [[self mapView] setPitchEnabled:NO];
     [[self mapView] setRotateEnabled:NO];
+    [[[self segControl] layer] setCornerRadius:5];
     
     
     //    [[self mapView] setScrollEnabled:NO];
@@ -45,9 +46,10 @@
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
     mapOverlay = [[MapOverlay alloc] init];
     
-    //    [[self mapView] addOverlay:mapOverlay];
+    [[self mapView] addOverlay:mapOverlay];
     
     CLLocationCoordinate2D location = [mapOverlay coordinate];
     MKCoordinateSpan span = MKCoordinateSpanMake(0.15084913077129, 0.12569636106491);
@@ -174,14 +176,14 @@
 
 
 //----------------------------------------------------------------------------------------------
--(MKOverlayRenderer *) mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
-{
-    return [[MapOverlayRenderer alloc] initWithOverlay:overlay];
-//    return [[MKOverlayRenderer alloc] initWithOverlay:overlay];
-    
-//    return nil;
-    
-}
+//-(MKOverlayRenderer *) mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay
+//{
+//    return [[MapOverlayRenderer alloc] initWithOverlay:overlay];
+////    return [[MKOverlayRenderer alloc] initWithOverlay:overlay];
+//    
+////    return nil;
+//    
+//}
 
 
 //----------------------------------------------------------------------------------------------

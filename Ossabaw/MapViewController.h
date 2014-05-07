@@ -25,15 +25,15 @@
     MapOverlay *mapOverlay;
     BOOL hasOpened;
 }
-@property (strong, nonatomic) IBOutlet UISegmentedControl *segControl;
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet  UISegmentedControl              *segControl;
+@property (strong, nonatomic) IBOutlet  MKMapView                       *mapView;
 @property (strong, nonatomic)           NSManagedObjectContext          *managedObjectContext;
 @property (strong, nonatomic)           NSFetchedResultsController      *fetchedResultsController;
-@property NSArray   *places;
-@property MKUserLocation *userLocation;
-@property (strong, nonatomic) MapOverlay *mapOverlay;
-@property (strong, nonatomic) NSMutableArray *journals;
-@property  NSInteger index;
+@property                               NSArray                         *places;
+@property                               MKUserLocation                  *userLocation;
+@property (strong, nonatomic)           MapOverlay                      *mapOverlay;
+@property (strong, nonatomic)           NSMutableArray                  *journals;
+@property                               NSInteger                        index;
 -(IBAction)changeMap:(id)sender;
 
 -(CLLocationCoordinate2D) getCoordinateFromMapRectanglePoint: (double)x  y: (double) y;
