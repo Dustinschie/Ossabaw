@@ -13,6 +13,7 @@
 @end
 
 @implementation DropPinMapViewController
+@synthesize mapOverlay;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,15 +32,29 @@
     [[self segControl] addTarget:self
                           action:@selector(changeMap:)
                 forControlEvents:UIControlEventValueChanged];
+    [[[self toolBar] layer] setMasksToBounds:YES];
+    [[[self toolBar] layer] setCornerRadius:5];
     
 }
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [self setMapOverlay: [[MapOverlay alloc] init]];
+    
+    CLLocationCoordinate2D location = [mapOverlay coordinate];
+    MKCoordinateSpan span = MKCoordinateSpanMake(0.15084913077129, 0.12569636106491);
+    //    MKCoordinateRegion region = MKCoordinateRegionForMapRect([mapOverlay boundingMapRect]);
+    MKCoordinateRegion region = MKCoordinateRegionMake(location, span);
+    //    MKCoordinateRegion region = MKCoordinateRegionForMapRect([mapOverlay boundingMapRect]);
+    
+    //    [self mapView]
+    
+    [[self mapView] setRegion:region animated:NO];
+
 
     
     CLLocationCoordinate2D coord;
-    NSLog(@"%@", [self location]);
     if ([self location] == nil)
         
         coord = CLLocationCoordinate2DMake(31.839120, -81.092040);

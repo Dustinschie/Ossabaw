@@ -31,16 +31,16 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[[self tabBarController] tabBar] setHidden:NO];
 
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[[self tabBarController] tabBar] setHidden:NO];
     cellReuseName = @"MyIdentifier";
     
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
-        [[self tableView] registerNib:[UINib nibWithNibName:@"TableCell"
+    [[self tableView] registerNib:[UINib nibWithNibName:@"TableCell"
                                                  bundle:[NSBundle mainBundle]]
            forCellReuseIdentifier: cellReuseName];
     
@@ -54,11 +54,9 @@
     [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
     UIImageView *bg = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"sky.png"] applyLightEffect]];
     [[self tableView] setContentMode:UIViewContentModeScaleAspectFill];
-
+    
     [[[self tableView] layer] setMasksToBounds:YES];
     [[self tableView] setBackgroundView:bg];
-//    [[[[self navigationController] navigationBar] layer] setMasksToBounds:YES];
-//    [[[[self navigationController] navigationBar] layer] setCornerRadius:5];
     NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
@@ -69,23 +67,23 @@
 		NSLog(@"Unresolved error %@, %@, %@", error, [error userInfo], [error localizedDescription]);
 		abort();
     }
+
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+}
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
     
 }
-
-// - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-//                                 duration:(NSTimeInterval)duration
-//{
-//    
-//    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-//        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(M_PI / 2)];
-//    }
-//    else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight){
-//        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(-M_PI / 2)];
-//    }
-//    else {
-//        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(0.0)];
-//    }
-//}
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 -(BOOL)shouldAutorotate
 {
     return YES;

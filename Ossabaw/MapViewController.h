@@ -19,7 +19,8 @@
 #import "JournalViewController.h"
 #import "Journal.h"
 
-@interface MapViewController : UIViewController <MKMapViewDelegate, NSFetchedResultsControllerDelegate>
+@interface MapViewController : UIViewController
+<MKMapViewDelegate, NSFetchedResultsControllerDelegate>
 {
     MKMapView* mapView;
     UIToolbar* toolBar;

@@ -21,16 +21,17 @@
 {
     [super viewDidLoad];
     [scrollView setDelegate:self];
-//    [[self view] setBackgroundColor:[UIColor clearColor]];
     UIImage *bgImage = [[ UIImage imageNamed:@"sky.png"]applyLightEffect];
     [[self backgroundImageView] setImage:bgImage];
     [[self view] sendSubviewToBack:[self backgroundImageView]];
     [[[self scrollView] layer] setMasksToBounds:YES];
     [[[self scrollView] layer] setCornerRadius:5];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [super viewWillAppear:animated];
     [[[self tabBarController] tabBar] setHidden:YES];
     [[self textView] setTextColor:[UIColor whiteColor]];
@@ -86,30 +87,13 @@
             i++;
             [[self scrollView] addSubview:aButton];
         }
-        
-        
     }
-    
-
-}
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
-//  this method forces the orientation to be portrait only
-- (NSUInteger)supportedInterfaceOrientations
-{
-    NSLog(@"hello");
-    return UIInterfaceOrientationMaskPortrait;
-}
-
--(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-	[super willRotateToInterfaceOrientation:UIInterfaceOrientationPortrait duration:duration];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+        NSLog(@"will apear");
+
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -118,7 +102,6 @@
     for (UIView *view in [[self scrollView] subviews]) {
         [view removeFromSuperview];
     }
-    [self setJournal:nil];
     [self setTitle:nil];
     [self setTextView:nil];
     

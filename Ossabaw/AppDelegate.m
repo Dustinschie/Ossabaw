@@ -28,7 +28,6 @@
 {
     
     [self setTabBarController: (UITabBarController *)[[self window] rootViewController]];
-    
     UINavigationController *navController = [[[self tabBarController] viewControllers] objectAtIndex:0];
     TableViewController *tableViewController = (TableViewController *)[navController topViewController];
     [tableViewController setManagedObjectContext:[self managedObjectContext]];

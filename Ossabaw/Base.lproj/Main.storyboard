@@ -96,13 +96,13 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WsP-tz-Lu9">
                                 <rect key="frame" x="0.0" y="64" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lm-uh-n6E">
-                                <rect key="frame" x="0.0" y="392" width="320" height="127"/>
+                                <rect key="frame" x="0.0" y="392" width="320" height="176"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="TDz-79-luQ">
@@ -134,14 +134,6 @@
             </objects>
             <point key="canvasLocation" x="388" y="-414"/>
         </scene>
-        <!--Page View Controller-->
-        <scene sceneID="MEY-kI-Gie">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="LpI-vK-w6b" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J0E-XJ-N86" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="886" y="-414"/>
-        </scene>
         <!--Drop Pin Map View Controller-->
         <scene sceneID="bbZ-yP-0uz">
             <objects>
@@ -154,11 +146,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gUc-VP-cAi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gUc-VP-cAi">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0zd-bE-HEs">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zd-bE-HEs">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
@@ -192,6 +184,15 @@
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GGY-lB-3yZ" firstAttribute="top" secondItem="0zd-bE-HEs" secondAttribute="bottom" id="0aB-vg-HFz"/>
+                            <constraint firstAttribute="trailing" secondItem="0zd-bE-HEs" secondAttribute="trailing" id="51k-2C-ihw"/>
+                            <constraint firstItem="0zd-bE-HEs" firstAttribute="top" secondItem="gUc-VP-cAi" secondAttribute="bottom" constant="-44" id="Mvg-nh-euz"/>
+                            <constraint firstItem="0zd-bE-HEs" firstAttribute="leading" secondItem="w5P-Wq-6j5" secondAttribute="leading" id="Tfi-mA-uNl"/>
+                            <constraint firstItem="gUc-VP-cAi" firstAttribute="top" secondItem="w5P-Wq-6j5" secondAttribute="top" id="fbF-Jx-NsW"/>
+                            <constraint firstAttribute="trailing" secondItem="gUc-VP-cAi" secondAttribute="trailing" id="heH-5H-0a6"/>
+                            <constraint firstItem="gUc-VP-cAi" firstAttribute="leading" secondItem="w5P-Wq-6j5" secondAttribute="leading" id="xCI-TQ-Vm0"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HdM-OB-Zwl"/>
                     <connections>
@@ -199,6 +200,7 @@
                         <outlet property="doneButton" destination="0zd-bE-HEs" id="BCl-bk-VeT"/>
                         <outlet property="mapView" destination="gUc-VP-cAi" id="mcQ-ee-3JV"/>
                         <outlet property="segControl" destination="FeG-Ee-Mez" id="scF-t2-gJO"/>
+                        <outlet property="toolBar" destination="0zd-bE-HEs" id="Hx8-cz-uYa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oIh-op-PKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
