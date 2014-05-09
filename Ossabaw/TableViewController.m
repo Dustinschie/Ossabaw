@@ -28,11 +28,19 @@
     return self;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[[self tabBarController] tabBar] setHidden:NO];
+
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     cellReuseName = @"MyIdentifier";
-    [[self tableView] registerNib:[UINib nibWithNibName:@"TableCell"
+    
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
+        [[self tableView] registerNib:[UINib nibWithNibName:@"TableCell"
                                                  bundle:[NSBundle mainBundle]]
            forCellReuseIdentifier: cellReuseName];
     
@@ -44,12 +52,13 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
-    UIImageView *bg = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"sky.png"] applyExtraLightEffect]];
+    UIImageView *bg = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"sky.png"] applyLightEffect]];
     [[self tableView] setContentMode:UIViewContentModeScaleAspectFill];
 
     [[[self tableView] layer] setMasksToBounds:YES];
     [[self tableView] setBackgroundView:bg];
-//    [[[[self tableView] backgroundView] superview] setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.8]];
+//    [[[[self navigationController] navigationBar] layer] setMasksToBounds:YES];
+//    [[[[self navigationController] navigationBar] layer] setCornerRadius:5];
     NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
@@ -63,21 +72,28 @@
     
 }
 
- - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                 duration:(NSTimeInterval)duration
+// - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+//                                 duration:(NSTimeInterval)duration
+//{
+//    
+//    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
+//        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(M_PI / 2)];
+//    }
+//    else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight){
+//        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(-M_PI / 2)];
+//    }
+//    else {
+//        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(0.0)];
+//    }
+//}
+-(BOOL)shouldAutorotate
 {
-    
-    if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) {
-        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(M_PI / 2)];
-    }
-    else if (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight){
-        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(-M_PI / 2)];
-    }
-    else {
-        [[[self tableView] backgroundView] setTransform: CGAffineTransformMakeRotation(0.0)];
-    }
+    return YES;
 }
-
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -151,15 +167,18 @@
 }
 //- (BOOL) tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 //{
-//    return YES;
+//    return NO;
 //}
+- (BOOL) tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    [self setIndex:[indexPath row]];
     TableCell *cell = (TableCell *)[tableView cellForRowAtIndexPath:indexPath];
-    [cell setBackgroundColor:[UIColor clearColor]];
-    
     [self performSegueWithIdentifier:@"tableToInfo" sender:[cell journal]];
 }
 
@@ -191,12 +210,21 @@
     ((TableCell *) cell).journal = nil;
 }
 
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TableCell *cell = (TableCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell setBackgroundColor:[UIColor clearColor]];
+}
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TableCell *cell = (TableCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
+}
 - (void) configureCell: (TableCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     Journal *journal = (Journal *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
     [cell setJournal:journal];
 }
-
 
 #pragma mark - journal support
 //----------------------------------------------------------------------------------------------
@@ -232,6 +260,7 @@
             journal = (Journal *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
         }
         [jvc setJournal:journal];
+
         
 //        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
 //        [jvc setPlace: dict];

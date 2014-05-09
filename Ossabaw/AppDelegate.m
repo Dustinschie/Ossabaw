@@ -32,7 +32,8 @@
     UINavigationController *navController = [[[self tabBarController] viewControllers] objectAtIndex:0];
     TableViewController *tableViewController = (TableViewController *)[navController topViewController];
     [tableViewController setManagedObjectContext:[self managedObjectContext]];
-    
+    [[[[self tabBarController] tabBar] layer] setMasksToBounds:YES];
+    [[[[self tabBarController] tabBar] layer] setCornerRadius:5];
 //    // Override point for customization after application launch.
 //    UINavigationController *navController2 = [[[self tabBarController] viewControllers] objectAtIndex:1];
 //    MapViewController *mapViewController = (MapViewController *)[navController2 topViewController];

@@ -81,6 +81,7 @@
 
     [[self mapButton] setAlpha:0.75];
     
+    
 }
 
 - (BOOL)shouldAutorotate
