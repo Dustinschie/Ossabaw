@@ -7,6 +7,7 @@
 //
 
 #import "JournalViewController.h"
+#import "UIImage+ImageEffects.h"
 
 @interface JournalViewController ()
 
@@ -20,16 +21,24 @@
 {
     [super viewDidLoad];
     [scrollView setDelegate:self];
-    
+    UIImage *bgImage = [[ UIImage imageNamed:@"sky.png"]applyLightEffect];
+    [[self backgroundImageView] setImage:bgImage];
+    [[self view] sendSubviewToBack:[self backgroundImageView]];
+    [[[self scrollView] layer] setMasksToBounds:YES];
+    [[[self scrollView] layer] setCornerRadius:5];
+
 }
 
-
-- (void) viewDidAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    [[[self tabBarController] tabBar] setHidden:YES];
+    [[self textView] setTextColor:[UIColor whiteColor]];
     if ([self journal] != nil) {
         [self setTitle:[[self journal] title]];
+        
         [[self textView] setText:[[self journal] information]];
         int num_of_photos = [[[self journal] photos] count],
         width =[[self scrollView] frame].size.width,
@@ -57,8 +66,8 @@
         [[self textView] setText:[place objectForKey:@"Information"]];
         NSArray *images = [[self place] objectForKey:@"Images"];
         int num_of_photos = [images count],
-                    width =[[self scrollView] frame].size.width,
-                    height = [[self scrollView] frame].size.height;
+        width =[[self scrollView] frame].size.width,
+        height = [[self scrollView] frame].size.height;
         NSLog(@"%d", num_of_photos);
         
         [[self pageControl] setNumberOfPages:num_of_photos];
@@ -70,7 +79,7 @@
             UIButton *aButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [[aButton imageView] setFrame:CGRectMake(0, 0, width, height)];
             [[aButton imageView] setContentMode:UIViewContentModeScaleAspectFill];
-
+            
             [aButton setFrame:CGRectMake(width * i, 0, width, height)];
             
             
@@ -80,24 +89,24 @@
             i++;
             [[self scrollView] addSubview:aButton];
         }
-
-        
     }
-
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void) viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-   }
+        [super viewDidAppear:animated];
+
+}
 
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    NSLog(@"gone");
     for (UIView *view in [[self scrollView] subviews]) {
         [view removeFromSuperview];
     }
+    [self setTitle:nil];
+    [self setTextView:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning

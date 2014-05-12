@@ -19,13 +19,14 @@
 //    [[self layer] setMasksToBounds:YES];
 //    [[self layer] setCornerRadius:[[self thumbnailImageView] frame].size.height / 2];
     [[[self thumbnailImageView] layer] setMasksToBounds:YES];
-    int cornerRadius =[[self thumbnailImageView] frame].size.height / 2;
-    [[[self thumbnailImageView] layer] setCornerRadius: cornerRadius];
+    [[[self thumbnailImageView] layer] setCornerRadius: 5];
+    
     [self setBackgroundColor:[UIColor clearColor]];
     [[self contentView] setBackgroundColor:[UIColor clearColor]];
-    [[[self contentView] superview] setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.80]];
+//    [[[self contentView] superview] setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.80]];
     [[self layer] setMasksToBounds:YES];
-//    [[self layer] setCornerRadius:cornerRadius];
+    [[[self line] layer] setCornerRadius:1];
+    [[self layer] setCornerRadius:5];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

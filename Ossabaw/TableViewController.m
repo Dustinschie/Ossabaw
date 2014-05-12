@@ -9,6 +9,7 @@
 #import "TableViewController.h"
 #import "Journal.h"
 #import "TableCell.h"
+#import "UIImage+ImageEffects.h"
 
 
 @interface TableViewController ()
@@ -27,11 +28,20 @@
     return self;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[[self tabBarController] tabBar] setHidden:NO];
     cellReuseName = @"MyIdentifier";
-    [[self tableView] registerNib:[UINib nibWithNibName:@"TableCell" bundle:[NSBundle mainBundle]]
+    
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
+    [[self tableView] registerNib:[UINib nibWithNibName:@"TableCell"
+                                                 bundle:[NSBundle mainBundle]]
            forCellReuseIdentifier: cellReuseName];
     
     NSString * filePath = [[NSBundle mainBundle] pathForResource:@"Places" ofType:@"plist"];
@@ -42,7 +52,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
-    UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sky.png"]];
+    UIImageView *bg = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"sky.png"] applyLightEffect]];
+    [[self tableView] setContentMode:UIViewContentModeScaleAspectFill];
+    
+    [[[self tableView] layer] setMasksToBounds:YES];
     [[self tableView] setBackgroundView:bg];
     NSError *error = nil;
     if (![[self fetchedResultsController] performFetch:&error]) {
@@ -54,11 +67,31 @@
 		NSLog(@"Unresolved error %@, %@, %@", error, [error userInfo], [error localizedDescription]);
 		abort();
     }
-    
-    
+
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+}
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
     
 }
-
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -102,6 +135,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     return 70;
 }
 
@@ -129,13 +163,20 @@
         }
     }
 }
+//- (BOOL) tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return NO;
+//}
+- (BOOL) tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    [self setIndex:[indexPath row]];
     TableCell *cell = (TableCell *)[tableView cellForRowAtIndexPath:indexPath];
-//    [cell setBackgroundColor:[UIColor clearColor]];
-    
     [self performSegueWithIdentifier:@"tableToInfo" sender:[cell journal]];
 }
 
@@ -143,6 +184,7 @@
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
       toIndexPath:(NSIndexPath *)toIndexPath
 {
+    
 }
 
 
@@ -166,6 +208,16 @@
     ((TableCell *) cell).journal = nil;
 }
 
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TableCell *cell = (TableCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell setBackgroundColor:[UIColor clearColor]];
+}
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TableCell *cell = (TableCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
+}
 - (void) configureCell: (TableCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     Journal *journal = (Journal *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
@@ -206,6 +258,7 @@
             journal = (Journal *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
         }
         [jvc setJournal:journal];
+
         
 //        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
 //        [jvc setPlace: dict];

@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet    UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet    UIImageView *thumbnailImageView;
 @property (strong, nonatomic)   Journal *   journal;
+@property (strong, nonatomic) IBOutlet UIView *line;
 
 @end

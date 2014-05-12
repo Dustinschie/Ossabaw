@@ -12,5 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UITabBarController* tabBarController;
+@property (readonly, nonatomic) NSManagedObjectContext  *managedObjectContext;
+@property (readonly, nonatomic) NSManagedObjectModel    *managedObjectModel;
+@property (readonly, nonatomic) NSPersistentStoreCoordinator    *persistentStoreCoordinator;
 
 @end

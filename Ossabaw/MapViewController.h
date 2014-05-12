@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+
+#import "AppDelegate.h"
+
 #import "MapAnnotation.h"
 #import "PlaceViewController.h"
 #import "MapOverlay.h"
@@ -16,7 +19,8 @@
 #import "JournalViewController.h"
 #import "Journal.h"
 
-@interface MapViewController : UIViewController <MKMapViewDelegate, NSFetchedResultsControllerDelegate>
+@interface MapViewController : UIViewController
+<MKMapViewDelegate, NSFetchedResultsControllerDelegate>
 {
     MKMapView* mapView;
     UIToolbar* toolBar;

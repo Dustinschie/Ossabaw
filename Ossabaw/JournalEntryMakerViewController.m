@@ -81,6 +81,7 @@
 
     [[self mapButton] setAlpha:0.75];
     
+    
 }
 
 - (BOOL)shouldAutorotate
@@ -246,7 +247,6 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
     }
-    NSLog(@"hello");
     [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
 }
 

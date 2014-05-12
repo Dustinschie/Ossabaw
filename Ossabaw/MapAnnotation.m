@@ -23,4 +23,5 @@
 {
     coordinate = newCoordinate;
 }
+
 @end

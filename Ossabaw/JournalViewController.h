@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet  UIBarButtonItem *editButton;
 
 @property (strong, nonatomic) IBOutlet  UITextView      *textView;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 
 @property (strong, nonatomic)           NSMutableDictionary *place;
