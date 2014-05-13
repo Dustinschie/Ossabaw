@@ -31,12 +31,18 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+<<<<<<< HEAD
+=======
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
+    [super viewDidAppear:animated];
+>>>>>>> FETCH_HEAD
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [[[self tabBarController] tabBar] setHidden:YES];
     [[self textView] setTextColor:[UIColor whiteColor]];
     if ([self journal] != nil) {
         [self setTitle:[[self journal] title]];
+        
         [[self textView] setText:[[self journal] information]];
         int num_of_photos = [[[self journal] photos] count],
         width =[[self scrollView] frame].size.width,
@@ -92,7 +98,7 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-        NSLog(@"will apear");
+        [super viewDidAppear:animated];
 
 }
 
