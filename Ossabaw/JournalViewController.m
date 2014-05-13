@@ -31,8 +31,8 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
     [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [[[self tabBarController] tabBar] setHidden:YES];
     [[self textView] setTextColor:[UIColor whiteColor]];
     if ([self journal] != nil) {

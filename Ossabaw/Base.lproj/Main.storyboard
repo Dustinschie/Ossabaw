@@ -359,21 +359,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <rect key="frame" x="0.0" y="64" width="320" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <searchBar contentMode="redraw" searchBarStyle="minimal" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9X-gZ-mh4">
-                                    <rect key="frame" x="0.0" y="-2" width="320" height="44"/>
+                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGW-IU-Q3V">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="504-2F-xbN" id="8W0-Ek-gfC"/>
+                                    </connections>
                                 </searchBar>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="l9X-gZ-mh4" secondAttribute="bottom" id="6bL-c9-tFE"/>
-                                <constraint firstItem="l9X-gZ-mh4" firstAttribute="leading" secondItem="Xd1-dA-Za8" secondAttribute="leading" id="LfR-Lm-oaN"/>
-                                <constraint firstAttribute="centerX" secondItem="l9X-gZ-mh4" secondAttribute="centerX" id="tj9-d9-P40"/>
-                            </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyIdentifier" id="sRp-xu-m2M" customClass="TableCell">
@@ -404,18 +399,30 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <segment title="Name"/>
                                 <segment title="Date"/>
                             </segments>
+                            <connections>
+                                <action selector="sorterKeyChanged:" destination="504-2F-xbN" eventType="valueChanged" id="dVF-04-1mB"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="W6B-Ws-Nmz" id="74e-7g-5n1"/>
-                        <outlet property="searchBar" destination="l9X-gZ-mh4" id="nbf-ej-tUa"/>
-                        <outlet property="segControl" destination="uFt-Uc-pZh" id="HW1-g8-0rV"/>
+                        <outlet property="searchDisplayController" destination="oOk-q2-xHd" id="AlC-CR-hKw"/>
+                        <outlet property="segControl" destination="uFt-Uc-pZh" id="aob-0s-suc"/>
                         <outlet property="tableView" destination="57W-hu-DPo" id="MV1-qQ-mY4"/>
                         <outlet property="topView" destination="Xd1-dA-Za8" id="K9R-uk-fck"/>
                         <segue destination="eXl-fY-U7z" kind="push" identifier="tableToInfo" id="Dzr-kQ-trg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="REe-hD-COD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="oOk-q2-xHd">
+                    <connections>
+                        <outlet property="delegate" destination="504-2F-xbN" id="ozj-GS-C74"/>
+                        <outlet property="searchBar" destination="NGW-IU-Q3V" id="GSW-AZ-SX4"/>
+                        <outlet property="searchContentsController" destination="504-2F-xbN" id="j8D-2p-jKa"/>
+                        <outlet property="searchResultsDataSource" destination="504-2F-xbN" id="DPc-UO-oOT"/>
+                        <outlet property="searchResultsDelegate" destination="504-2F-xbN" id="w1U-gq-Feq"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-150" y="325"/>
         </scene>
@@ -497,7 +504,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="az6-b1-akb"/>
-        <segue reference="caf-Xu-SH1"/>
+        <segue reference="gmm-d0-xWt"/>
+        <segue reference="Dzr-kQ-trg"/>
     </inferredMetricsTieBreakers>
 </document>

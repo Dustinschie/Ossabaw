@@ -13,11 +13,15 @@
 
 
 @interface TableViewController ()
+{
+    BOOL changed;
+}
 @property (strong, nonatomic) NSString *cellReuseName;
+@property (strong, nonatomic) NSString *key;
 @end
 
 @implementation TableViewController
-@synthesize places, cellReuseName;
+@synthesize places, cellReuseName, key;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,6 +39,8 @@
 }
 - (void)viewDidLoad
 {
+    key = @"title";
+    changed = true;
     [super viewDidLoad];
     [[[self tabBarController] tabBar] setHidden:NO];
     cellReuseName = @"MyIdentifier";
@@ -96,6 +102,32 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)sorterKeyChanged:(id)sender
+{
+    switch ([[self segControl] selectedSegmentIndex]) {
+        case 0:
+            [self setKey:@"title"];
+            
+            break;
+        case 1:
+            [self setKey:@"date"];
+            break;
+        default:
+            break;
+    }
+    changed = true;
+    NSError *error = nil;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        /*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@, %@", error, [error userInfo], [error localizedDescription]);
+		abort();
+    }
+    [[self tableView] reloadData];
 }
 
 #pragma mark - Table view data source
@@ -233,14 +265,6 @@
     }
 
 }
-//----------------------------------------------------------------------------------------------
-
-
-//-(IBAction)AddButtonPressed:(id)sender
-//{
-//    [self performSegueWithIdentifier:@"blurryModalSegue" sender:self];
-//    
-//}
 
 #pragma mark - Navigation
 //----------------------------------------------------------------------------------------------
@@ -278,9 +302,6 @@
                                                             inManagedObjectContext:[self managedObjectContext]];
         [jemvc setDelegate:self];
         [jemvc setJournal:newJournal andIsNewJournal:YES];
-
-
-        
         
         BlurryModalSegue *bms = (BlurryModalSegue *) segue;
         [bms setBackingImageSaturationDeltaFactor:@(0.45)];
@@ -289,11 +310,26 @@
     
 
 }
+- (void)filterContentForSearchText:(NSString *)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultsPredicate = [NSPredicate predicateWithFormat:@"SELF contains[cd] %@", searchText];
+}
+#pragma mark - UISearchDisplayController delegate methods
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
+}
 #pragma mark - Fectched Results Controller
 //----------------------------------------------------------------------------------------------
 - (NSFetchedResultsController *)fetchedResultsController{
     // Set up the fetched results controller if needed.
-    if (_fetchedResultsController == nil) {
+    if (changed) {
         // Create the fetch request for the entity.
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         // Edit the entity name as appropriate.
@@ -301,7 +337,7 @@
         [fetchRequest setEntity:entity];
         
         // Edit the sort key as appropriate.
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
         
         [fetchRequest setSortDescriptors:sortDescriptors];
@@ -311,8 +347,9 @@
         NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
         aFetchedResultsController.delegate = self;
         [self setFetchedResultsController: aFetchedResultsController];
+        changed = false;
     }
-	
+
 	return _fetchedResultsController;
 }
 
