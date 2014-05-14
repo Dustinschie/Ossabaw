@@ -43,6 +43,7 @@
 @property (unsafe_unretained, nonatomic) id <JournalAddDelegate> delegate;
 @property                               BOOL            isNewJournal;
 @property (strong, nonatomic) IBOutlet UIButton *mapButton;
+@property (strong, nonatomic)           UIImagePickerController *imagePicker;
 
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)dismiss:(id)sender;

@@ -93,24 +93,49 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WsP-tz-Lu9">
-                                <rect key="frame" x="0.0" y="64" width="320" height="320"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </scrollView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lm-uh-n6E">
-                                <rect key="frame" x="0.0" y="392" width="320" height="176"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="TDz-79-luQ">
-                                <rect key="frame" x="141" y="370" width="39" height="37"/>
+                                <rect key="frame" x="141" y="377" width="39" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="pageIndicatorTintColor" red="0.58585258149999997" green="0.58585258149999997" blue="0.58585258149999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" fixedFrame="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v7O-eO-60W">
+                                <rect key="frame" x="0.0" y="64" width="320" height="320"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ZCX-x6-dNQ">
+                                    <size key="itemSize" width="320" height="320"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCellID" id="9c5-E0-lMb">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="eXl-fY-U7z" id="eGz-Sr-zhJ"/>
+                                    <outlet property="delegate" destination="eXl-fY-U7z" id="23c-NO-tGx"/>
+                                    <outletCollection property="gestureRecognizers" destination="2mb-zx-MWJ" appends="YES" id="uv7-qD-c4N"/>
+                                </connections>
+                            </collectionView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z14-6M-AhF">
+                                <rect key="frame" x="0.0" y="407" width="320" height="161"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -123,16 +148,69 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundImageView" destination="l5J-n1-xFq" id="M16-UU-ZUx"/>
+                        <outlet property="collectionView" destination="v7O-eO-60W" id="nf4-Fn-riz"/>
                         <outlet property="editButton" destination="l3g-FW-vmK" id="dWA-GR-AHU"/>
                         <outlet property="pageControl" destination="TDz-79-luQ" id="Hfe-de-Wgp"/>
-                        <outlet property="scrollView" destination="WsP-tz-Lu9" id="wJI-vy-jYi"/>
-                        <outlet property="textView" destination="5lm-uh-n6E" id="Wqy-17-WyP"/>
+                        <outlet property="textView" destination="z14-6M-AhF" id="SWd-Zg-SLg"/>
                         <segue destination="0zK-FN-ngE" kind="custom" identifier="blurToEdit" customClass="BlurryModalSegue" id="caf-Xu-SH1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cai-wC-Wqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="2mb-zx-MWJ">
+                    <connections>
+                        <action selector="doubleTappedCell:" destination="eXl-fY-U7z" id="y1f-7Q-plL"/>
+                        <outlet property="delegate" destination="eXl-fY-U7z" id="gPN-EZ-Iq5"/>
+                        <segue destination="P9p-A4-gFM" kind="modal" identifier="blurToImage" customClass="BlurryModalSegue" modalTransitionStyle="crossDissolve" id="Dkr-u4-gFj"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="388" y="-414"/>
+        </scene>
+        <!--Image Collection View Controller-->
+        <scene sceneID="cJX-fs-Hfc">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="P9p-A4-gFM" customClass="ImageCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="mJY-ri-3dJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="w5O-jM-VIJ">
+                            <size key="itemSize" width="320" height="567"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="collectionCellID" id="ssi-jg-cph">
+                                <rect key="frame" x="0.0" y="1" width="320" height="567"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="567"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="P9p-A4-gFM" id="8se-1B-oQT"/>
+                            <outlet property="delegate" destination="P9p-A4-gFM" id="wJd-iT-gio"/>
+                            <outletCollection property="gestureRecognizers" destination="s6B-f0-esn" appends="YES" id="fDB-X8-q6x"/>
+                        </connections>
+                    </collectionView>
+                    <connections>
+                        <outlet property="collectionView" destination="mJY-ri-3dJ" id="ltn-N4-k1d"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s2S-97-sbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="s6B-f0-esn">
+                    <connections>
+                        <action selector="close:" destination="P9p-A4-gFM" id="Sd4-x6-pFN"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="879" y="-414"/>
         </scene>
         <!--Drop Pin Map View Controller-->
         <scene sceneID="bbZ-yP-0uz">
@@ -358,16 +436,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <view key="tableHeaderView" contentMode="scaleToFill" id="Xd1-dA-Za8">
                             <rect key="frame" x="0.0" y="64" width="320" height="42"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NGW-IU-Q3V">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="504-2F-xbN" id="8W0-Ek-gfC"/>
-                                    </connections>
-                                </searchBar>
-                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
@@ -400,29 +468,19 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 <segment title="Date"/>
                             </segments>
                             <connections>
-                                <action selector="sorterKeyChanged:" destination="504-2F-xbN" eventType="valueChanged" id="dVF-04-1mB"/>
+                                <action selector="sorterKeyChanged:" destination="504-2F-xbN" eventType="valueChanged" id="zzN-bB-P9X"/>
                             </connections>
                         </segmentedControl>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="W6B-Ws-Nmz" id="74e-7g-5n1"/>
-                        <outlet property="searchDisplayController" destination="oOk-q2-xHd" id="AlC-CR-hKw"/>
-                        <outlet property="segControl" destination="uFt-Uc-pZh" id="aob-0s-suc"/>
+                        <outlet property="segControl" destination="uFt-Uc-pZh" id="HW1-g8-0rV"/>
                         <outlet property="tableView" destination="57W-hu-DPo" id="MV1-qQ-mY4"/>
                         <outlet property="topView" destination="Xd1-dA-Za8" id="K9R-uk-fck"/>
                         <segue destination="eXl-fY-U7z" kind="push" identifier="tableToInfo" id="Dzr-kQ-trg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="REe-hD-COD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="oOk-q2-xHd">
-                    <connections>
-                        <outlet property="delegate" destination="504-2F-xbN" id="ozj-GS-C74"/>
-                        <outlet property="searchBar" destination="NGW-IU-Q3V" id="GSW-AZ-SX4"/>
-                        <outlet property="searchContentsController" destination="504-2F-xbN" id="j8D-2p-jKa"/>
-                        <outlet property="searchResultsDataSource" destination="504-2F-xbN" id="DPc-UO-oOT"/>
-                        <outlet property="searchResultsDelegate" destination="504-2F-xbN" id="w1U-gq-Feq"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-150" y="325"/>
         </scene>
@@ -504,7 +562,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gmm-d0-xWt"/>
         <segue reference="Dzr-kQ-trg"/>
+        <segue reference="caf-Xu-SH1"/>
     </inferredMetricsTieBreakers>
 </document>

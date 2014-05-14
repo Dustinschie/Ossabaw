@@ -10,59 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ossabaw/JournalEntryMakerViewController.h"
-            timestampString = "420837901.460901"
+            timestampString = "421731388.370111"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "mapButton"
             landmarkType = "19">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Ossabaw/JournalViewController.h"
-            timestampString = "421596734.754246"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "topScrollView"
-            landmarkType = "19">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JournalViewController topScrollView]"
-                  moduleName = "Ossabaw"
-                  urlString = "file:///Users/dustinschie/Documents/Ossabaw/Ossabaw/JournalViewController.h"
-                  timestampString = "421596734.845437"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JournalViewController setTopScrollView:]"
-                  moduleName = "Ossabaw"
-                  urlString = "file:///Users/dustinschie/Documents/Ossabaw/Ossabaw/JournalViewController.h"
-                  timestampString = "421596734.847727"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "22">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

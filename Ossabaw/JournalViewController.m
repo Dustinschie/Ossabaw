@@ -8,91 +8,50 @@
 
 #import "JournalViewController.h"
 #import "UIImage+ImageEffects.h"
+#import <QuartzCore/QuartzCore.h>
 
-@interface JournalViewController ()
+@interface JournalViewController (){
+}
 
 @end
 
 @implementation JournalViewController
 
-@synthesize pageControl, scrollView, textView, place, button, subScrollView, editButton, journal;
+@synthesize pageControl, textView, place, button, editButton, journal;
 
 -(void) viewDidLoad
 {
     [super viewDidLoad];
-    [scrollView setDelegate:self];
     UIImage *bgImage = [[ UIImage imageNamed:@"sky.png"]applyLightEffect];
     [[self backgroundImageView] setImage:bgImage];
     [[self view] sendSubviewToBack:[self backgroundImageView]];
-    [[[self scrollView] layer] setMasksToBounds:YES];
-    [[[self scrollView] layer] setCornerRadius:5];
 
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
-<<<<<<< HEAD
-=======
+    [[self collectionView] reloadData];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [super viewDidAppear:animated];
->>>>>>> FETCH_HEAD
     [super viewWillAppear:animated];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [[[self tabBarController] tabBar] setHidden:YES];
-    [[self textView] setTextColor:[UIColor whiteColor]];
     if ([self journal] != nil) {
         [self setTitle:[[self journal] title]];
         
         [[self textView] setText:[[self journal] information]];
-        int num_of_photos = [[[self journal] photos] count],
-        width =[[self scrollView] frame].size.width,
-        height = [[self scrollView] frame].size.height;
+        int num_of_photos = [[[self journal] photos] count];
         
         [[self pageControl] setNumberOfPages:num_of_photos];
-        [[self scrollView] setContentSize:CGSizeMake(width* num_of_photos, height)];
-        
-        int i = 0;
-        for (Photo* photo in [[self journal] photos]) {
-            UIImage * image = [[photo image] valueForKey:@"image"];
-            UIButton *aButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            [aButton setFrame:CGRectMake(width * i, 0, width, height)];
-            [aButton setContentMode:UIViewContentModeScaleAspectFill];
-            [aButton setImage:image forState:UIControlStateNormal];
-            [aButton addTarget:self action:@selector(enlargePhoto:) forControlEvents:UIControlEventTouchDownRepeat];
-            
-            i++;
-            [[self scrollView] addSubview:aButton];
-        }
     }
     else if([self place] != nil){
         [[self editButton] setEnabled:NO];
         [self setTitle:[place objectForKey:@"Name"]];
         [[self textView] setText:[place objectForKey:@"Information"]];
         NSArray *images = [[self place] objectForKey:@"Images"];
-        int num_of_photos = [images count],
-        width =[[self scrollView] frame].size.width,
-        height = [[self scrollView] frame].size.height;
-        NSLog(@"%d", num_of_photos);
+        int num_of_photos = [images count];
         
         [[self pageControl] setNumberOfPages:num_of_photos];
-        [[self scrollView] setContentSize:CGSizeMake(width* num_of_photos, height)];
-        
-        int i = 0;
-        for (NSString *imageName in images) {
-            UIImage *image = [UIImage imageNamed:imageName];
-            UIButton *aButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            [[aButton imageView] setFrame:CGRectMake(0, 0, width, height)];
-            [[aButton imageView] setContentMode:UIViewContentModeScaleAspectFill];
-            
-            [aButton setFrame:CGRectMake(width * i, 0, width, height)];
-            
-            
-            [aButton setImage:image forState:UIControlStateNormal];
-            [aButton addTarget:self action:@selector(enlargePhoto:) forControlEvents:UIControlEventTouchDownRepeat];
-            
-            i++;
-            [[self scrollView] addSubview:aButton];
-        }
     }
 }
 
@@ -105,11 +64,9 @@
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    for (UIView *view in [[self scrollView] subviews]) {
-        [view removeFromSuperview];
-    }
     [self setTitle:nil];
     [self setTextView:nil];
+    [[self collectionView] reloadData];
     
 }
 
@@ -121,16 +78,28 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue isKindOfClass:[BlurryModalSegue class]])
+    if ([[segue identifier] isEqualToString:@"blurToEdit"])
     {
         JournalEntryMakerViewController *jemvc = (JournalEntryMakerViewController *) segue.destinationViewController;
         [jemvc setDelegate:self];
         [jemvc setJournal:[self journal] andIsNewJournal:NO];
-
         BlurryModalSegue* bms = (BlurryModalSegue*)segue;
         [bms setBackingImageSaturationDeltaFactor:@(0.45)];
-//        [bms setBackingImageTintColor:[[UIColor grayColor] colorWithAlphaComponent:0.5]];
+    }else if ([[segue identifier] isEqualToString:@"blurToImage"]){
+        ImageCollectionViewController* icvc = (ImageCollectionViewController *) segue.destinationViewController;
+        [icvc setJournal:journal];
+        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, self.view.opaque, 0.0);
+        [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        image = [image applyLightEffect];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        [[icvc collectionView] setBackgroundView:imageView];
+        
+//        [bms setBackingImageTintColor:[[UIColor darkGrayColor] colorWithAlphaComponent:0.1]];
+        
     }
+
 }
 
 //----------------------------------------------------------------------------------------------
@@ -179,31 +148,28 @@
     
     return cropped;
 }
-
-//----------------------------------------------------------------------------------------------
-- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (IBAction)doubleTappedCell:(id)sender
 {
-    UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    NSInteger   width =[[self scrollView] frame].size.width,
-                height = [[self scrollView] frame].size.height,
-                views = [[[self scrollView] subviews] count];
+    CGPoint tappedPoint = [sender locationInView:self.collectionView];
+    NSIndexPath *tappedCellPath = [self.collectionView indexPathForItemAtPoint:tappedPoint];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame: CGRectMake(width * views, 0, width, height)];
-    [imageView setContentMode: UIViewContentModeScaleAspectFill];
-    [imageView setImage:chosenImage];
-    [[self scrollView] addSubview:imageView];
-    [[self scrollView] setContentSize:CGSizeMake(width * (views + 1),height)];
-    [[self pageControl] setNumberOfPages: views + 1];
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
+    if (tappedCellPath)
+    {
+        UICollectionViewCell *cell = (UICollectionViewCell *)[self.collectionView cellForItemAtIndexPath:tappedCellPath];
+        [self.collectionView selectItemAtIndexPath:tappedCellPath
+                                          animated:YES
+                                    scrollPosition:UICollectionViewScrollPositionNone];
+        
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enlarge Photo Button Pressed"
+                                                    message:@"Needs implementation"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+    [alert show];
 }
-
-- (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
+#pragma mark - UIScrollViewDelegate
 //----------------------------------------------------------------------------------------------
-
 - (void) scrollViewDidScroll:(UIScrollView *)aScrollView
 {
     CGFloat viewWidth = [aScrollView frame].size.width;
@@ -219,17 +185,54 @@
         [aScrollView setContentOffset:CGPointZero animated:NO];
         [aScrollView setContentSize:CGSizeMake(viewWidth * numViews, [aScrollView frame].size.height)];
     }
-
-    
-    
 }
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+//{
+//    NSIndexPath *indexPath = [[[self collectionView] indexPathsForVisibleItems] objectAtIndex:0];
+//    [[self collectionView] scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+//}
+#pragma mark - journal support
+//----------------------------------------------------------------------------------------------
 
-- (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)aJournal
+- (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)journal
 {
-    if (journal != nil)
-        [self setJournal:aJournal];
+    [self setJournal:journal];
+    if (![[self presentedViewController] isBeingDismissed]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
     
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
+#pragma mark - CollectionView
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [[[self journal] photos] count];
+}
+
+- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"hell");
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCellID"
+                                                                          forIndexPath:indexPath];
+    Photo *photo;
+    photo = [[[[self journal] photos] allObjects] objectAtIndex:indexPath.item];
+    
+    
+//    Photo *photo = [[[[self journal] photos] allObjects] objectAtIndex:indexPath.row - 1];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[collectionView frame]];
+    [[imageView layer] setMasksToBounds:YES];
+    [[imageView layer] setCornerRadius:5];
+//    NSLog(@"%d %f %f", indexPath.row, imageView.frame.size.width, imageView.frame.size.width);
+    [imageView setImage:[[photo image] valueForKey:@"image"]];
+    [imageView setContentMode:UIViewContentModeScaleAspectFill];
+    [cell setBackgroundView:imageView];
+    return cell;
+}
+
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//
+//
+//}
 
 @end

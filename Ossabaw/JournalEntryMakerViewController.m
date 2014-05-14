@@ -14,7 +14,7 @@
 
 @implementation JournalEntryMakerViewController
 @synthesize doneButton, pageControl, textView, titleTextField, imageScrollView,
-            scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal;
+scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imagePicker;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setImagePicker:[[UIImagePickerController alloc] init]];
     [[self toolBar] setClipsToBounds:YES];
     [self setImages:[[NSMutableArray alloc] init]];
     int imgSVWidth = [[self imageScrollView] frame].size.width;
@@ -266,7 +267,12 @@
 //----------------------------------------------------------------------------------------------
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *chosenImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *newImage = [UIImage imageWithCGImage:chosenImage.CGImage];
+    if (newImage.size.height != chosenImage.size.height) {
+        chosenImage = [UIImage imageWithCGImage:chosenImage.CGImage scale:1.0 orientation:UIImageOrientationRight];
+    }
+    NSLog(@"%f, %f", chosenImage.size.width, chosenImage.size.height);
 
     if (chosenImage.size.width != 0 && chosenImage.size.height != 0) {
         NSManagedObjectContext *context = [[self journal] managedObjectContext];
@@ -356,18 +362,15 @@
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        [picker setDelegate:self];
-        [picker setAllowsEditing:YES];
-        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:picker animated:YES completion:nil];
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [imagePicker setDelegate:self];
+
+        [self presentViewController:imagePicker animated:YES completion:nil];
     } else if(buttonIndex == 1){
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        [picker setDelegate:self];
-        [picker setAllowsEditing:YES];
-        [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [imagePicker setDelegate:self];
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         
-        [self presentViewController:picker animated:YES completion:nil];
+        [self presentViewController:imagePicker animated:YES completion:nil];
     }
 
 }
