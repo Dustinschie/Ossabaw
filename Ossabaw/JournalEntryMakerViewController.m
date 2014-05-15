@@ -249,6 +249,9 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
 		abort();
     }
     [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
+    [[self delegate] journalEntryMakerViewController:self
+                                     didTitleChange:[[self titleTextField] text]
+                               didInformationChange:[[self textView] text]];
 }
 
 -(IBAction)openMap:(id)sender

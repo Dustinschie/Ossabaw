@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5831FA9919231211004C9390 /* ImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831FA9819231211004C9390 /* ImageCollectionViewController.m */; };
 		5831FAA119244BDC004C9390 /* BounceButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831FAA019244BDC004C9390 /* BounceButtonView.m */; };
+		5831FAA519245FE2004C9390 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5831FAA419245FE2004C9390 /* Social.framework */; };
 		5848D2F618F4EF2B006C13D9 /* JournalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848D2F418F4EF2B006C13D9 /* JournalViewController.m */; };
 		5848D2F918F7BB57006C13D9 /* UIBarButtonCamera_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */; };
 		5848D2FB18F7C409006C13D9 /* UIBarButtonAdd_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2FA18F7C409006C13D9 /* UIBarButtonAdd_2x.png */; };
@@ -88,6 +89,7 @@
 		5831FA9819231211004C9390 /* ImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewController.m; sourceTree = "<group>"; };
 		5831FA9F19244BDC004C9390 /* BounceButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BounceButtonView.h; sourceTree = "<group>"; };
 		5831FAA019244BDC004C9390 /* BounceButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BounceButtonView.m; sourceTree = "<group>"; };
+		5831FAA419245FE2004C9390 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		5848D2F318F4EF2B006C13D9 /* JournalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalViewController.h; sourceTree = "<group>"; };
 		5848D2F418F4EF2B006C13D9 /* JournalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalViewController.m; sourceTree = "<group>"; };
 		5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonCamera_2x.png; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5831FAA519245FE2004C9390 /* Social.framework in Frameworks */,
 				58C47FC319035092006406E2 /* CoreData.framework in Frameworks */,
 				58F7F8AD18EB2B0300BAFC4F /* MapKit.framework in Frameworks */,
 				58F7F87718EB295C00BAFC4F /* CoreGraphics.framework in Frameworks */,
@@ -288,6 +291,7 @@
 		58F7F87318EB295C00BAFC4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5831FAA419245FE2004C9390 /* Social.framework */,
 				58C47FC219035092006406E2 /* CoreData.framework */,
 				58F7F8AC18EB2B0300BAFC4F /* MapKit.framework */,
 				58F7F87418EB295C00BAFC4F /* Foundation.framework */,

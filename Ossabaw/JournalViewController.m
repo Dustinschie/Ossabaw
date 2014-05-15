@@ -53,7 +53,6 @@
     [[[self tabBarController] tabBar] setHidden:YES];
     if ([self journal] != nil) {
         [self setTitle:[[self journal] title]];
-        
         [[self textView] setText:[[self journal] information]];
         int num_of_photos = [[[self journal] photos] count];
         
@@ -214,10 +213,10 @@
 - (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)ajournal
 {
     [self setJournal:ajournal];
+    
     if (![[self presentedViewController] isBeingDismissed]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-    
 }
 #pragma mark - CollectionView
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -248,10 +247,37 @@
     //  Collapse all menu item buttons and remove menu item view once a menu item is selected
     [[self menuButton] sendActionsForControlEvents:UIControlEventTouchUpInside];
     
-    //  set your custom action for each selected menu item button
-    NSString *alertViewTitle = [NSString stringWithFormat:@"Menu Item %x is selected", (short)index];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertViewTitle message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
+    NSString *serviceType;
+    int i = index;
+    switch (i) {
+        case 0:
+            serviceType = SLServiceTypeFacebook;
+            break;
+        case 3:
+            serviceType = SLServiceTypeTwitter;
+            break;
+        default:
+        {
+            
+            //  set your custom action for each selected menu item button
+            NSString *alertViewTitle = [NSString stringWithFormat:@"Menu Item %x is selected", (short)index];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertViewTitle message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            break;
+        }
+    }
+    if (serviceType && [SLComposeViewController isAvailableForServiceType:serviceType]) {
+        SLComposeViewController *vc = [SLComposeViewController composeViewControllerForServiceType:serviceType];
+        [vc setInitialText: [journal information]];
+        for (Photo *photo in [journal photos]) {
+            UIImage* image = [[photo image] valueForKey:@"image"];
+            [vc addImage:image];
+        }
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+    
+    
+
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

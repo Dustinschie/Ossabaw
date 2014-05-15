@@ -13,14 +13,15 @@
 #import "DropPinMapViewController.h"
 @protocol JournalAddDelegate;
 
-@interface JournalEntryMakerViewController : UIViewController <UIScrollViewDelegate,
-                                                    UIImagePickerControllerDelegate,
-                                                                UITextFieldDelegate,
-                                                                 UITextViewDelegate,
-                                                              UIActionSheetDelegate,
-                                                                UIAlertViewDelegate,
-                                                    NSFetchedResultsControllerDelegate,
-                                                    AddPinDelegate>
+@interface JournalEntryMakerViewController : UIViewController
+<UIScrollViewDelegate,
+UIImagePickerControllerDelegate,
+UITextFieldDelegate,
+ UITextViewDelegate,
+UIActionSheetDelegate,
+UIAlertViewDelegate,
+NSFetchedResultsControllerDelegate,
+AddPinDelegate>
 {
     UIScrollView     *scrollView;
     UIScrollView     *imageScrollView;
@@ -91,6 +92,9 @@
 // journal == nil on cancel
 - (void)journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController
                           didAddJournal:(Journal *)journal;
+- (void)journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController
+                         didTitleChange:(NSString *)title
+                   didInformationChange:(NSString *)information;
 
 
 @end

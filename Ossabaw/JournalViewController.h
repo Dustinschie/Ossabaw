@@ -13,6 +13,8 @@
 #import "ASOTwoStateButton.h"
 #import "ASOBounceButtonViewDelegate.h"
 #import "BounceButtonView.h"
+#import <Social/Social.h>
+
 @class Journal;
 @class Photo;
 
@@ -25,7 +27,7 @@ UICollectionViewDelegate, ASOBounceButtonViewDelegate>
     UIScrollView    *scrollView;
     UIBarButtonItem *editButton;
     
-    UITextView      *textView;
+//    UITextView      *textView;
     UIImageView *backgroundImageView;
     
     NSMutableDictionary *place;
@@ -35,9 +37,8 @@ UICollectionViewDelegate, ASOBounceButtonViewDelegate>
 @property (strong, nonatomic) IBOutlet ASOTwoStateButton *menuButton;
 @property (strong, nonatomic) IBOutlet  UIButton        *button;
 @property (strong, nonatomic) IBOutlet  UIPageControl   *pageControl;
-@property (strong, nonatomic) IBOutlet  UIScrollView    *scrollView;
 @property (strong, nonatomic) IBOutlet  UIBarButtonItem *editButton;
-@property (strong, nonatomic) IBOutlet  UITextView      *textView;
+@property (retain, nonatomic) IBOutlet  UITextView      *textView;
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
