@@ -11,8 +11,12 @@
 #import "Journal.h"
 #import "Photo.h"
 @interface ImageCollectionViewController : UICollectionViewController
+{
+    Journal *journal;
+    UICollectionView *collectionView;
+}
 @property (strong, nonatomic) Journal *journal;
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
--(IBAction)close:(id)sender;
+- (IBAction)close:(id)sender;
 @end

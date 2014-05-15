@@ -21,6 +21,30 @@
                                                                 UIAlertViewDelegate,
                                                     NSFetchedResultsControllerDelegate,
                                                     AddPinDelegate>
+{
+    UIScrollView     *scrollView;
+    UIScrollView     *imageScrollView;
+    UIPageControl    *pageControl;
+    UITextView       *textView;
+    UIButton         *doneButton;
+    UITextField      *titleTextField;
+    UIToolbar        *toolBar;
+    UISwitch         *colorSwitch;
+    UIDatePicker     *datePicker;
+    
+    NSMutableArray  *images;
+    NSMutableArray  *imageIndexes;
+    NSInteger        index;
+    
+    NSManagedObjectContext *managedObjectContext;
+    NSFetchedResultsController *fetchedResultsController;
+    
+    Journal         *journal;
+    id <JournalAddDelegate> delegate;
+    BOOL            isNewJournal;
+    IBOutlet UIButton *mapButton;
+    UIImagePickerController *imagePicker;
+}
 
 @property (strong, nonatomic) IBOutlet UIScrollView     *scrollView;
 @property (strong, nonatomic) IBOutlet UIScrollView     *imageScrollView;

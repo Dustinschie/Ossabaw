@@ -170,33 +170,34 @@
         <scene sceneID="cJX-fs-Hfc">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="P9p-A4-gFM" customClass="ImageCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="mJY-ri-3dJ">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" maximumZoomScale="10" dataMode="prototypes" id="mJY-ri-3dJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="w5O-jM-VIJ">
-                            <size key="itemSize" width="320" height="567"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5NP-nO-YoC">
+                            <size key="itemSize" width="320" height="533"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="collectionCellID" id="ssi-jg-cph">
-                                <rect key="frame" x="0.0" y="1" width="320" height="567"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionCellID" id="JAv-lR-HrE">
+                                <rect key="frame" x="0.0" y="18" width="320" height="533"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="567"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="533"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.22" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                             </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="P9p-A4-gFM" id="8se-1B-oQT"/>
                             <outlet property="delegate" destination="P9p-A4-gFM" id="wJd-iT-gio"/>
-                            <outletCollection property="gestureRecognizers" destination="s6B-f0-esn" appends="YES" id="fDB-X8-q6x"/>
+                            <outletCollection property="gestureRecognizers" destination="r5P-ee-1NW" appends="YES" id="i2O-ki-svU"/>
                         </connections>
                     </collectionView>
                     <connections>
@@ -204,9 +205,10 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s2S-97-sbL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer delaysTouchesBegan="YES" numberOfTapsRequired="2" id="s6B-f0-esn">
+                <tapGestureRecognizer numberOfTapsRequired="2" id="r5P-ee-1NW">
                     <connections>
-                        <action selector="close:" destination="P9p-A4-gFM" id="Sd4-x6-pFN"/>
+                        <action selector="close:" destination="P9p-A4-gFM" id="kgu-yx-1YB"/>
+                        <outlet property="delegate" destination="P9p-A4-gFM" id="5cW-iu-trH"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -433,14 +435,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="Xd1-dA-Za8">
-                            <rect key="frame" x="0.0" y="64" width="320" height="42"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        </view>
                         <prototypes>
                             <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyIdentifier" id="sRp-xu-m2M" customClass="TableCell">
-                                <rect key="frame" x="0.0" y="128" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sRp-xu-m2M" id="mfr-Pe-jEn">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
@@ -476,7 +473,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="addButton" destination="W6B-Ws-Nmz" id="74e-7g-5n1"/>
                         <outlet property="segControl" destination="uFt-Uc-pZh" id="HW1-g8-0rV"/>
                         <outlet property="tableView" destination="57W-hu-DPo" id="MV1-qQ-mY4"/>
-                        <outlet property="topView" destination="Xd1-dA-Za8" id="K9R-uk-fck"/>
                         <segue destination="eXl-fY-U7z" kind="push" identifier="tableToInfo" id="Dzr-kQ-trg"/>
                     </connections>
                 </tableViewController>
@@ -512,10 +508,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QNZ-bH-QcY">
+                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackAllowsAirPlay="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNZ-bH-QcY">
                                 <rect key="frame" x="0.0" y="20" width="320" height="501"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -563,6 +560,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Dzr-kQ-trg"/>
-        <segue reference="caf-Xu-SH1"/>
+        <segue reference="gmm-d0-xWt"/>
     </inferredMetricsTieBreakers>
 </document>

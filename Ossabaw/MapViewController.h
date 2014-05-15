@@ -22,12 +22,16 @@
 @interface MapViewController : UIViewController
 <MKMapViewDelegate, NSFetchedResultsControllerDelegate>
 {
-    MKMapView* mapView;
-    UIToolbar* toolBar;
-    MKUserLocation* userLocation;
-    NSArray   *places;
-    MapOverlay *mapOverlay;
-    BOOL hasOpened;
+    UISegmentedControl              *segControl;
+    MKMapView                       *mapView;
+    NSManagedObjectContext          *managedObjectContext;
+    NSFetchedResultsController      *fetchedResultsController;
+    NSArray                         *places;
+    MKUserLocation                  *userLocation;
+    MapOverlay                      *mapOverlay;
+    NSMutableArray                  *journals;
+    NSInteger                       index;
+    BOOL                            hasOpened;
 }
 @property (strong, nonatomic) IBOutlet  UISegmentedControl              *segControl;
 @property (strong, nonatomic) IBOutlet  MKMapView                       *mapView;

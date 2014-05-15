@@ -30,12 +30,11 @@
 //    UICollectionViewFlowLayout *layout = (id) self.collectionView.collectionViewLayout;
 //    layout.itemSize = self.collectionView.frame.size;
     
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
 }
 - (void)didReceiveMemoryWarning
 {
@@ -47,23 +46,23 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [[journal photos] count];
 }
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *) collectionView:(UICollectionView *)acollectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+
+    UICollectionViewCell *cell = [acollectionView dequeueReusableCellWithReuseIdentifier:@"collectionCellID"forIndexPath:indexPath];
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCellID"
-                                                                           forIndexPath:indexPath];
     Photo *photo;
-    photo = [[[[self journal] photos] allObjects] objectAtIndex:indexPath.item];
+    photo = [[[[self journal] photos] allObjects] objectAtIndex:indexPath.row];
     
     
     //    Photo *photo = [[[[self journal] photos] allObjects] objectAtIndex:indexPath.row - 1];
     UIImage *image = [[photo image] valueForKey:@"image"];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[collectionView frame]];
+    NSLog(@"hello %f %f", image.size.width, image.size.height);
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[cell frame]];
     [[imageView layer] setMasksToBounds:YES];
     [[imageView layer] setCornerRadius:5];
     [imageView  setContentMode:UIViewContentModeScaleAspectFit];
@@ -76,10 +75,42 @@
     for (UIView *view in [[cell contentView] subviews])
         [view removeFromSuperview];
     
-    [[cell contentView] addSubview:imageView];
+//    [[cell contentView] addSubview:imageView];
+    [[cell contentView] setContentMode:UIViewContentModeScaleAspectFit];
+    
+//    NSLog(@"hello %f %f %d", [cell.contentView.subviews[0] frame].size.width, [cell.contentView.subviews[0] frame].size.height, indexPath.row);
+    [cell setBackgroundView:imageView];
     [cell setBackgroundColor:[UIColor clearColor]];
     
     return cell;
+}
+
+-(BOOL)             collectionView:(UICollectionView *)collectionView
+  shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+-(BOOL) collectionView:(UICollectionView *)collectionView
+      canPerformAction:(SEL)action
+    forItemAtIndexPath:(NSIndexPath *)indexPath
+            withSender:(id)sender
+{
+    if (action == @selector(copy:)) {
+        return YES;
+    }
+    return NO;
+}
+- (void) collectionView:(UICollectionView *)collectionView
+          performAction:(SEL)action
+     forItemAtIndexPath:(NSIndexPath *)indexPath
+             withSender:(id)sender
+{
+    if (action == @selector(copy:)) {
+        UICollectionViewCell *cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+        UIImageView *imageView =(UIImageView *)[[[cell contentView] subviews] objectAtIndex:0];
+        [[UIPasteboard generalPasteboard] setImage: [imageView image]];
+    }
 }
 
 /*

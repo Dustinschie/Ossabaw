@@ -12,11 +12,13 @@
 
 @interface MapAnnotation : NSObject<MKAnnotation>
 {
-    NSString    *tittle,
-                *iconDir;
+    NSString    *tittle;
+    NSString    *iconDir;
     CLLocationCoordinate2D coordinate;
     BOOL        hasVistied;
     NSInteger   index;
+    Journal     *journal;
+    MKPinAnnotationColor pinColor;
                 
             
 }

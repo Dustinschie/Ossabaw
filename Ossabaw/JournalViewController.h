@@ -16,6 +16,19 @@
 @interface JournalViewController : UIViewController
 <UIScrollViewDelegate, JournalAddDelegate,
 UICollectionViewDataSource, UICollectionViewDelegate>
+{
+    UIButton        *button;
+    UIPageControl   *pageControl;
+    UIScrollView    *scrollView;
+    UIBarButtonItem *editButton;
+    
+    UITextView      *textView;
+    UIImageView *backgroundImageView;
+    
+    NSMutableDictionary *place;
+    Journal         *journal;
+    UICollectionView *collectionView;
+}
 @property (strong, nonatomic) IBOutlet  UIButton        *button;
 @property (strong, nonatomic) IBOutlet  UIPageControl   *pageControl;
 @property (strong, nonatomic) IBOutlet  UIScrollView    *scrollView;

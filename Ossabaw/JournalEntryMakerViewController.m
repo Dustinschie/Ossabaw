@@ -362,10 +362,17 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
-        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [imagePicker setDelegate:self];
-
-        [self presentViewController:imagePicker animated:YES completion:nil];
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+            [imagePicker setDelegate:self];
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        } else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Available"
+                                                            message:@"Your device does not have a camera"
+                                                           delegate:nil cancelButtonTitle:@"Okay"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
     } else if(buttonIndex == 1){
         [imagePicker setDelegate:self];
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];

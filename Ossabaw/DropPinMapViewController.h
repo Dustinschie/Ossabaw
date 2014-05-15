@@ -11,7 +11,18 @@
 #import "MapOverlay.h"
 #import "MapAnnotation.h"
 @protocol AddPinDelegate;
+
 @interface DropPinMapViewController : UIViewController<MKMapViewDelegate>
+{
+    MKMapView *mapView;
+    UIToolbar *cancelButton;
+    UIToolbar *doneButton;
+    UISegmentedControl *segControl;
+    UIToolbar *toolBar;
+    id<AddPinDelegate> delegate;
+    MapAnnotation *pin;
+    MapOverlay *mapOverlay;
+}
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UIToolbar *cancelButton;
 @property (strong, nonatomic) IBOutlet UIToolbar *doneButton;
@@ -26,6 +37,7 @@
 -(IBAction)dismiss:(id)sender;
 - (void) setCoord:(NSString *)aLocation;
 @end
+
 @protocol AddPinDelegate <NSObject>
 
 - (void) dropPinMapViewController: (DropPinMapViewController *)dropPinMapViewController

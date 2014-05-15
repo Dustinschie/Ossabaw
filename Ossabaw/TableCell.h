@@ -10,6 +10,14 @@
 #import "Journal.h"
 
 @interface TableCell : UITableViewCell
+{
+    UILabel *titleLabel;
+    UILabel *subtitleLabel;
+    UILabel *dateLabel;
+    UIImageView *thumbnailImageView;
+    Journal *   journal;
+    UIView *line;
+}
 
 @property (weak, nonatomic) IBOutlet    UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet    UILabel *subtitleLabel;
