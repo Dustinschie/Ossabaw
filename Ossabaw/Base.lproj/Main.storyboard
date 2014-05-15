@@ -136,8 +136,25 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5e-DT-c7h" userLabel="MainButton" customClass="ASOTwoStateButton">
+                                <rect key="frame" x="244" y="367" width="56" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="OffStateButtonImage">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="OffStateImageName" value="OffStateButtonImage"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="menuButtonAction:" destination="eXl-fY-U7z" eventType="touchUpInside" id="WS4-RP-YNs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="E5e-DT-c7h" secondAttribute="bottom" constant="145" id="85O-CO-zoY"/>
+                            <constraint firstAttribute="trailing" secondItem="E5e-DT-c7h" secondAttribute="trailing" constant="20" id="JOi-PL-6rJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hgl-S3-Ozg">
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="l3g-FW-vmK">
@@ -150,6 +167,7 @@
                         <outlet property="backgroundImageView" destination="l5J-n1-xFq" id="M16-UU-ZUx"/>
                         <outlet property="collectionView" destination="v7O-eO-60W" id="nf4-Fn-riz"/>
                         <outlet property="editButton" destination="l3g-FW-vmK" id="dWA-GR-AHU"/>
+                        <outlet property="menuButton" destination="E5e-DT-c7h" id="0iz-si-Tsf"/>
                         <outlet property="pageControl" destination="TDz-79-luQ" id="Hfe-de-Wgp"/>
                         <outlet property="textView" destination="z14-6M-AhF" id="SWd-Zg-SLg"/>
                         <segue destination="0zK-FN-ngE" kind="custom" identifier="blurToEdit" customClass="BlurryModalSegue" id="caf-Xu-SH1"/>
@@ -546,12 +564,93 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="-1331" y="262"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="2tI-X2-IYJ">
+            <objects>
+                <viewController storyboardIdentifier="ExpandMenu" id="2fE-Yd-v0a" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0p6-NV-T8J"/>
+                        <viewControllerLayoutGuide type="bottom" id="17T-FO-lyx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ajj-pQ-q7l" customClass="BounceButtonView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5U-4e-ejr" userLabel="facebook">
+                                <rect key="frame" x="233" y="300" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="facebook">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XE-DS-QK4" userLabel="twitter">
+                                <rect key="frame" x="213" y="228" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="twitter">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAB-MP-Ujf" userLabel="googleplus">
+                                <rect key="frame" x="184" y="158" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="googleplus">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Phd-lp-QsT" userLabel="pinterest">
+                                <rect key="frame" x="144" y="95" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="pinterest">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIv-as-JVh" userLabel="MainButton" customClass="ASOTwoStateButton">
+                                <rect key="frame" x="244" y="367" width="56" height="56"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="OffStateButtonImage">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="OffStateImageName" value="OffStateButtonImage"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="k5U-4e-ejr" secondAttribute="bottom" constant="218" id="BiI-vL-TL8"/>
+                            <constraint firstAttribute="trailing" secondItem="Phd-lp-QsT" secondAttribute="trailing" constant="126" id="Igj-nU-26y"/>
+                            <constraint firstAttribute="bottom" secondItem="Phd-lp-QsT" secondAttribute="bottom" constant="423" id="R0W-gh-8FQ"/>
+                            <constraint firstAttribute="trailing" secondItem="k5U-4e-ejr" secondAttribute="trailing" constant="37" id="S4d-Hl-VCW"/>
+                            <constraint firstAttribute="bottom" secondItem="6XE-DS-QK4" secondAttribute="bottom" constant="290" id="SCH-21-hMc"/>
+                            <constraint firstAttribute="bottom" secondItem="wIv-as-JVh" secondAttribute="bottom" constant="145" id="XqC-oj-CaR"/>
+                            <constraint firstAttribute="trailing" secondItem="wIv-as-JVh" secondAttribute="trailing" constant="20" id="drD-5a-uqZ"/>
+                            <constraint firstAttribute="trailing" secondItem="6XE-DS-QK4" secondAttribute="trailing" constant="57" id="exe-Ez-1HZ"/>
+                            <constraint firstAttribute="bottom" secondItem="yAB-MP-Ujf" secondAttribute="bottom" constant="360" id="vqU-eD-HVF"/>
+                            <constraint firstAttribute="trailing" secondItem="yAB-MP-Ujf" secondAttribute="trailing" constant="86" id="yT0-Zg-V0h"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="facebookButton" destination="k5U-4e-ejr" id="2Tw-8I-vFr"/>
+                            <outlet property="googleplus" destination="yAB-MP-Ujf" id="6NJ-Qx-qhx"/>
+                            <outlet property="pinterest" destination="Phd-lp-QsT" id="kyy-iH-MbH"/>
+                            <outlet property="twitterButton" destination="6XE-DS-QK4" id="TwM-NN-aZ5"/>
+                        </connections>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Tb-Qf-iYD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="388" y="325"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="OffStateButtonImage" width="56" height="56"/>
         <image name="UITabBarMostViewed_2x" width="23" height="23"/>
+        <image name="facebook" width="50" height="50"/>
         <image name="first" width="30" height="30"/>
+        <image name="googleplus" width="50" height="50"/>
         <image name="map_icon.png" width="954" height="674"/>
+        <image name="pinterest" width="50" height="50"/>
         <image name="second" width="30" height="30"/>
+        <image name="twitter" width="50" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -560,6 +659,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Dzr-kQ-trg"/>
-        <segue reference="gmm-d0-xWt"/>
+        <segue reference="caf-Xu-SH1"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -22,6 +22,21 @@
 -(void) viewDidLoad
 {
     [super viewDidLoad];
+    [[self menuButton] initAnimationWithFadeEffectEnabled:YES];
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *menuItemsVC = (UIViewController *)[mainStoryBoard instantiateViewControllerWithIdentifier:@"ExpandMenu"];
+    [self setMenuItemView:(BounceButtonView *)[menuItemsVC view]];
+    NSArray *arrMenuItemButtons = [[NSArray alloc] initWithObjects: [[self menuItemView] facebookButton],
+                                                                    [[self menuItemView] pinterest],
+                                                                    [[self menuItemView] googleplus],
+                                                                    [[self menuItemView] twitterButton], nil];
+    //  add all the defined 'menu' buttons to menu item view
+    [[self menuItemView] addBounceButtons:arrMenuItemButtons];
+    //  set the bouncing distance, speed, and fade-out effect duration here. Refer to the ASOBounceButtonView public properties
+    [[self menuItemView] setBouncingDistance:[NSNumber numberWithFloat:0.7f]];
+    //  set as delegate of 'menu item view'
+    [[self menuItemView] setDelegate:self];
+    
     UIImage *bgImage = [[ UIImage imageNamed:@"sky.png"]applyLightEffect];
     [[self backgroundImageView] setImage:bgImage];
     [[self view] sendSubviewToBack:[self backgroundImageView]];
@@ -57,8 +72,9 @@
 
 - (void) viewDidAppear:(BOOL)animated
 {
-        [super viewDidAppear:animated];
-
+    [super viewDidAppear:animated];
+    //  tell menu button position to menu item view
+    [[self menuItemView] setAnimationStartFromHere:[[self menuButton] frame]];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -128,19 +144,23 @@
     [self performSegueWithIdentifier:@"blurToEdit" sender:self];
 }
 
--(IBAction)enlargePhoto:(id)sender
+- (IBAction)menuButtonAction:(id)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enlarge Photo Button Pressed"
-                                                    message:@"Needs implementation"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles: nil];
-        [alert show];
+    if ([sender isOn]) {
+        //  show menu item view and expand its meni item button
+        [[self menuButton] addCustomView:[self menuItemView]];
+        [[self menuItemView] expandWithAnimationStyle:ASOAnimationStyleExpand];
+    } else{
+        //  collapse all 'menu item button' and remove 'menu item view'
+        [[self menuItemView] collapseWithAnimationStyle:ASOAnimationStyleExpand];
+        [[self menuButton] removeCustomView:[self menuItemView] interval:[[[self menuItemView]collapsedViewDuration] doubleValue]];
+    }
+    
 }
 
 //----------------------------------------------------------------------------------------------
 // Crop image to specifications in rect
-- (UIImage *) cropImage: (UIImage *) image toRect: (CGRect) rect
+- (UIImage *) cropImage: (UIImage *) image toRect:(CGRect) rect
 {
     CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
     UIImage *cropped = [UIImage imageWithCGImage:imageRef];
@@ -153,13 +173,10 @@
     CGPoint tappedPoint = [sender locationInView:self.collectionView];
     NSIndexPath *tappedCellPath = [self.collectionView indexPathForItemAtPoint:tappedPoint];
     
-    if (tappedCellPath)
-    {
-        UICollectionViewCell *cell = (UICollectionViewCell *)[self.collectionView cellForItemAtIndexPath:tappedCellPath];
+    if (tappedCellPath){
         [self.collectionView selectItemAtIndexPath:tappedCellPath
                                           animated:YES
                                     scrollPosition:UICollectionViewScrollPositionNone];
-        
     }
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enlarge Photo Button Pressed"
                                                     message:@"Needs implementation"
@@ -194,9 +211,9 @@
 #pragma mark - journal support
 //----------------------------------------------------------------------------------------------
 
-- (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)journal
+- (void) journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController didAddJournal:(Journal *)ajournal
 {
-    [self setJournal:journal];
+    [self setJournal:ajournal];
     if (![[self presentedViewController] isBeingDismissed]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
@@ -208,31 +225,38 @@
     return [[[self journal] photos] count];
 }
 
-- (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *) collectionView:(UICollectionView *)acollectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"hell");
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCellID"
+    UICollectionViewCell *cell = [acollectionView dequeueReusableCellWithReuseIdentifier:@"collectionCellID"
                                                                           forIndexPath:indexPath];
     Photo *photo;
     photo = [[[[self journal] photos] allObjects] objectAtIndex:indexPath.item];
     
-    
-//    Photo *photo = [[[[self journal] photos] allObjects] objectAtIndex:indexPath.row - 1];
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[collectionView frame]];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:[acollectionView frame]];
     [[imageView layer] setMasksToBounds:YES];
     [[imageView layer] setCornerRadius:5];
-//    NSLog(@"%d %f %f", indexPath.row, imageView.frame.size.width, imageView.frame.size.width);
+
     [imageView setImage:[[photo image] valueForKey:@"image"]];
     [imageView setContentMode:UIViewContentModeScaleAspectFill];
     [cell setBackgroundView:imageView];
     return cell;
 }
 
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//
-//
-//}
+#pragma mark -Menu item view delegate method
+- (void)didSelectBounceButtonAtIndex:(NSUInteger)index
+{
+    //  Collapse all menu item buttons and remove menu item view once a menu item is selected
+    [[self menuButton] sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
+    //  set your custom action for each selected menu item button
+    NSString *alertViewTitle = [NSString stringWithFormat:@"Menu Item %x is selected", (short)index];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:alertViewTitle message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [[self menuItemView] setAnimationStartFromHere:[[self menuButton] frame]];
+}
 
 @end

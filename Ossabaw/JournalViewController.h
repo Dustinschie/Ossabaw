@@ -10,12 +10,15 @@
 #import "JournalEntryMakerViewController.h"
 #import <BlurryModalSegue/BlurryModalSegue.h>
 #import "ImageCollectionViewController.h"
+#import "ASOTwoStateButton.h"
+#import "ASOBounceButtonViewDelegate.h"
+#import "BounceButtonView.h"
 @class Journal;
 @class Photo;
 
 @interface JournalViewController : UIViewController
-<UIScrollViewDelegate, JournalAddDelegate,
-UICollectionViewDataSource, UICollectionViewDelegate>
+<UIScrollViewDelegate, JournalAddDelegate, UICollectionViewDataSource,
+UICollectionViewDelegate, ASOBounceButtonViewDelegate>
 {
     UIButton        *button;
     UIPageControl   *pageControl;
@@ -29,21 +32,22 @@ UICollectionViewDataSource, UICollectionViewDelegate>
     Journal         *journal;
     UICollectionView *collectionView;
 }
+@property (strong, nonatomic) IBOutlet ASOTwoStateButton *menuButton;
 @property (strong, nonatomic) IBOutlet  UIButton        *button;
 @property (strong, nonatomic) IBOutlet  UIPageControl   *pageControl;
 @property (strong, nonatomic) IBOutlet  UIScrollView    *scrollView;
 @property (strong, nonatomic) IBOutlet  UIBarButtonItem *editButton;
-
 @property (strong, nonatomic) IBOutlet  UITextView      *textView;
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 
 @property (strong, nonatomic)           NSMutableDictionary *place;
-@property (strong, nonatomic)           Journal         *journal;
-@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic)           Journal             *journal;
+@property (strong, nonatomic)           BounceButtonView    *menuItemView;
 
 - (IBAction)editButtonPressed:(id)sender;
-- (IBAction)enlargePhoto:(id)sender;
 - (IBAction)doubleTappedCell:(id)sender;
+- (IBAction)menuButtonAction:(id)sender;
 - (UIImage *) cropImage: (UIImage *) image toRect: (CGRect) rect;
 @end
