@@ -10,6 +10,9 @@
 		5831FA9919231211004C9390 /* ImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831FA9819231211004C9390 /* ImageCollectionViewController.m */; };
 		5831FAA119244BDC004C9390 /* BounceButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831FAA019244BDC004C9390 /* BounceButtonView.m */; };
 		5831FAA519245FE2004C9390 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5831FAA419245FE2004C9390 /* Social.framework */; };
+		583B98ED1925BB7900F1BB03 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583B98EC1925BB7900F1BB03 /* MessageUI.framework */; };
+		583B98EF1925D05100F1BB03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 583B98EE1925D05100F1BB03 /* Images.xcassets */; };
+		583B98F119272E2800F1BB03 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583B98F019272E2800F1BB03 /* MobileCoreServices.framework */; };
 		5848D2F618F4EF2B006C13D9 /* JournalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848D2F418F4EF2B006C13D9 /* JournalViewController.m */; };
 		5848D2F918F7BB57006C13D9 /* UIBarButtonCamera_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */; };
 		5848D2FB18F7C409006C13D9 /* UIBarButtonAdd_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2FA18F7C409006C13D9 /* UIBarButtonAdd_2x.png */; };
@@ -20,7 +23,6 @@
 		587B77C61914B1010014348D /* map_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 587B77C51914B1010014348D /* map_icon.png */; };
 		587B77C81915FAB20014348D /* sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 587B77C71915FAB20014348D /* sky.png */; };
 		587B77CA1919FF660014348D /* sky_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 587B77C91919FF660014348D /* sky_large.png */; };
-		587B77CC191A00820014348D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 587B77CB191A00820014348D /* Images.xcassets */; };
 		587B77CF191A0B990014348D /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B77CE191A0B990014348D /* UIImage+ImageEffects.m */; };
 		587EDD8618F8212000634925 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587EDD8518F8212000634925 /* TableViewController.m */; };
 		58A0613118F8C5EC004959B0 /* User_Journal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58A0613018F8C5EC004959B0 /* User_Journal.plist */; };
@@ -90,6 +92,9 @@
 		5831FA9F19244BDC004C9390 /* BounceButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BounceButtonView.h; sourceTree = "<group>"; };
 		5831FAA019244BDC004C9390 /* BounceButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BounceButtonView.m; sourceTree = "<group>"; };
 		5831FAA419245FE2004C9390 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		583B98EC1925BB7900F1BB03 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		583B98EE1925D05100F1BB03 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		583B98F019272E2800F1BB03 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		5848D2F318F4EF2B006C13D9 /* JournalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalViewController.h; sourceTree = "<group>"; };
 		5848D2F418F4EF2B006C13D9 /* JournalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalViewController.m; sourceTree = "<group>"; };
 		5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonCamera_2x.png; sourceTree = "<group>"; };
@@ -105,7 +110,6 @@
 		587B77C51914B1010014348D /* map_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_icon.png; sourceTree = "<group>"; };
 		587B77C71915FAB20014348D /* sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky.png; sourceTree = "<group>"; };
 		587B77C91919FF660014348D /* sky_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky_large.png; sourceTree = "<group>"; };
-		587B77CB191A00820014348D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		587B77CD191A0B990014348D /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		587B77CE191A0B990014348D /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		587EDD8418F8212000634925 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
@@ -177,6 +181,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				583B98F119272E2800F1BB03 /* MobileCoreServices.framework in Frameworks */,
+				583B98ED1925BB7900F1BB03 /* MessageUI.framework in Frameworks */,
 				5831FAA519245FE2004C9390 /* Social.framework in Frameworks */,
 				58C47FC319035092006406E2 /* CoreData.framework in Frameworks */,
 				58F7F8AD18EB2B0300BAFC4F /* MapKit.framework in Frameworks */,
@@ -291,6 +297,8 @@
 		58F7F87318EB295C00BAFC4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				583B98F019272E2800F1BB03 /* MobileCoreServices.framework */,
+				583B98EC1925BB7900F1BB03 /* MessageUI.framework */,
 				5831FAA419245FE2004C9390 /* Social.framework */,
 				58C47FC219035092006406E2 /* CoreData.framework */,
 				58F7F8AC18EB2B0300BAFC4F /* MapKit.framework */,
@@ -326,8 +334,8 @@
 		58F7F87B18EB295C00BAFC4F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				587B77CB191A00820014348D /* Images.xcassets */,
 				58F7F87C18EB295C00BAFC4F /* Ossabaw-Info.plist */,
+				583B98EE1925D05100F1BB03 /* Images.xcassets */,
 				58F7F87D18EB295C00BAFC4F /* InfoPlist.strings */,
 				58F7F88018EB295C00BAFC4F /* main.m */,
 				58F7F88218EB295C00BAFC4F /* Ossabaw-Prefix.pch */,
@@ -486,7 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58F7F90118EC72B300BAFC4F /* slavetabbies_icon.png in Resources */,
-				587B77CC191A00820014348D /* Images.xcassets in Resources */,
+				583B98EF1925D05100F1BB03 /* Images.xcassets in Resources */,
 				58F7F90218EC72B300BAFC4F /* slavetabbies.png in Resources */,
 				58F7F90018EC72B300BAFC4F /* rookery.png in Resources */,
 				58F7F8F218EC72B300BAFC4F /* alligators.png in Resources */,

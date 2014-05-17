@@ -28,11 +28,10 @@
 {
     
     [self setTabBarController: (UITabBarController *)[[self window] rootViewController]];
+    [[self tabBarController] setDelegate:self];
     UINavigationController *navController = [[[self tabBarController] viewControllers] objectAtIndex:0];
     TableViewController *tableViewController = (TableViewController *)[navController topViewController];
     [tableViewController setManagedObjectContext:[self managedObjectContext]];
-    [[[[self tabBarController] tabBar] layer] setMasksToBounds:YES];
-    [[[[self tabBarController] tabBar] layer] setCornerRadius:5];
 //    // Override point for customization after application launch.
 //    UINavigationController *navController2 = [[[self tabBarController] viewControllers] objectAtIndex:1];
 //    MapViewController *mapViewController = (MapViewController *)[navController2 topViewController];
@@ -186,17 +185,35 @@
 }
 
 #pragma mark - UITabVarControllerDelegate
-
-//- (void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-//{
-//    [[viewController navigationController] popToRootViewControllerAnimated:YES];
-//}
-
--(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+- (BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    [[viewController navigationController] popToRootViewControllerAnimated:YES];
     return YES;
 }
+- (void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    for (UIViewController *controller in [tabBarController viewControllers]) {
+        UINavigationController *navController = (UINavigationController *)controller;
+//        NSLog(@"%@", NSStringFromClass([[[navController viewControllers] objectAtIndex:0] class]));
+        [navController popToRootViewControllerAnimated:NO];
+    }
+    
+    UINavigationController *navController = (UINavigationController *)viewController;
+    if ([[[navController viewControllers] objectAtIndex:0] isKindOfClass:[TableViewController class]]) {
+        MapViewController *map = (MapViewController *)
+                                        [[[tabBarController viewControllers] objectAtIndex:1] topViewController];
+        [map setManagedObjectContext:nil];
+        TableViewController *table = (TableViewController *)[[navController viewControllers] objectAtIndex:0];
+        [table setManagedObjectContext:[self managedObjectContext]];
+    } else if ([[[navController viewControllers] objectAtIndex:0] isKindOfClass:[MapViewController class]]) {
+//        NSLog(@"%@", NSStringFromClass([[[[tabBarController viewControllers] objectAtIndex:0] topViewController] class]));
+        TableViewController *table = (TableViewController *)
+                                    [[[tabBarController viewControllers] objectAtIndex:0] topViewController];
+        [table setManagedObjectContext:nil];
+        MapViewController *map = (MapViewController *)[[navController viewControllers] objectAtIndex:0];
+        [map setManagedObjectContext:[self managedObjectContext]];
+    }
+}
+
 
 
 

@@ -10,6 +10,7 @@
 
 @interface DropPinMapViewController ()
 @property (strong, nonatomic) NSString* location;
+@property (strong, nonatomic) NSString* previousLocation;
 @end
 
 @implementation DropPinMapViewController
@@ -55,11 +56,10 @@
 
     
     CLLocationCoordinate2D coord;
-    if ([self location] == nil)
-        
+    if ([self previousLocation] == nil)
         coord = CLLocationCoordinate2DMake(31.839120, -81.092040);
     else{
-        CGPoint point = CGPointFromString([self location]);
+        CGPoint point = CGPointFromString([self previousLocation]);
         coord = CLLocationCoordinate2DMake(point.x, point.y);
     }
     
@@ -106,14 +106,15 @@
 -(IBAction)dismiss:(id)sender
 {
     NSInteger tag = [sender tag];
-    NSLog(@"%d", tag);
+    NSLog(@"%d %@ %@", tag, [self location], [self previousLocation]);
     switch (tag) {
         case 0:
-            NSLog(@"%d", tag);
+            
             [[self delegate] dropPinMapViewController:self didAddLocation:[self location]];
             break;
         case 1:
-            [[self delegate] dropPinMapViewController:self didAddLocation:nil];
+            
+            [[self delegate] dropPinMapViewController:self didAddLocation:[self previousLocation]];
             break;
         default:
             break;
@@ -121,8 +122,7 @@
 }
 - (void) setCoord:(NSString *)aLocation
 {
-    [self setLocation:aLocation];
-    NSLog(@"%@", [self location]);
+    [self setPreviousLocation:aLocation];
 }
 #pragma mark - MKMapViewDelegate
 - (void)    mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view

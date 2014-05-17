@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JournalViewController.h"
+#import "AppDelegate.h"
 
 @interface TableViewController : UITableViewController
 <UITableViewDataSource, NSFetchedResultsControllerDelegate, JournalAddDelegate>

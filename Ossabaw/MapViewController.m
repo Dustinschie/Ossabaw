@@ -16,10 +16,7 @@
 
 - (void)viewDidLoad
 {
-    AppDelegate * appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self setManagedObjectContext:[appDelegate managedObjectContext]];
-    
-//    mapView.showsUserLocation = YES;
+
     [super viewDidLoad];
     hasOpened = NO;
     [[self mapView] setDelegate:self];
@@ -32,10 +29,16 @@
     [[self mapView] setPitchEnabled:NO];
     [[self mapView] setRotateEnabled:NO];
     [[[self segControl] layer] setCornerRadius:5];
-    
-    
-    //    [[self mapView] setScrollEnabled:NO];
-//    [[[self mapView] layer] setCornerRadius:5];
+    NSError *error = nil;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        /*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@, %@", error, [error userInfo], [error localizedDescription]);
+		abort();
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -75,6 +78,19 @@
         [temp setIndex: i];
         [[self mapView] addAnnotation:temp];
     }
+    for (Journal *journal in [_fetchedResultsController fetchedObjects]) {
+        if ([journal location]) {
+            CGPoint pt = CGPointFromString([journal location]);
+            MapAnnotation *temp = [[MapAnnotation alloc] initWithLocation:CLLocationCoordinate2DMake(pt.x, pt.y)];
+            [temp setJournal:journal];
+            [temp setTitle: [journal title]];
+            [temp setPinColor:MKPinAnnotationColorGreen];
+            [temp setSubtitle:[journal information]];
+            [[self mapView] addAnnotation:temp];
+
+        }
+//        NSLog(@"%@, %@,", [journal title], [journal location]);
+    }
 }
 
 
@@ -92,7 +108,6 @@
 
         MKPinAnnotationView* pinView = (MKPinAnnotationView *)[[self mapView] dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
         if (!pinView) {
-            NSLog(@"annotation");
             pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
         }
         [pinView setAnimatesDrop: !hasOpened];
@@ -115,6 +130,9 @@
                 NSLog(@"iconDir is empty!");
             }
         }else{
+            image = [UIImage imageWithCGImage:[[anAnnotation journal] icon].CGImage
+                                        scale:8
+                                  orientation:UIImageOrientationUp];
             
         }
         
@@ -122,6 +140,7 @@
         
         CGRect rect = [imageView frame];
         [imageView setFrame:CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, [pinView  frame].size.height)];
+        [[imageView layer] setMasksToBounds:YES];
         [imageView setContentMode:UIViewContentModeScaleAspectFill];
         [pinView setLeftCalloutAccessoryView: imageView];
         [[[pinView leftCalloutAccessoryView] layer] setMasksToBounds:YES];
@@ -142,9 +161,11 @@
         MapAnnotation *thisAnnotation = annotation;
         
         [self setIndex:[thisAnnotation index]];
-        
-        [self performSegueWithIdentifier:@"goToInfo" sender:[places objectAtIndex:[thisAnnotation index]]];
-        
+        if ([thisAnnotation index]) {
+            [self performSegueWithIdentifier:@"goToInfo" sender:[places objectAtIndex:[thisAnnotation index]]];
+        } else{
+            [self performSegueWithIdentifier:@"goToInfo" sender: [thisAnnotation journal]];
+        }
     }
 //    MKMapRect mRect = self.mapView.visibleMapRect;
 //    NSArray *temp = [self getBoundingBox:mRect];
@@ -204,20 +225,18 @@
 //----------------------------------------------------------------------------------------------
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-        if ([[segue identifier] isEqualToString:@"goToInfo"]) {
-            JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
+    JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
+    [jvc setHidesBottomBarWhenPushed:NO];
+    if ([[segue identifier] isEqualToString:@"goToInfo"]) {
+        if ([sender isKindOfClass:[Journal class]]) {
+            [jvc setJournal:(Journal *) sender];
+        } else{
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: (NSDictionary *) sender];
             [jvc setPlace: dict];
-            
         }
-    
-        else if ([[segue identifier] isEqualToString:@"toInfo"]) {
-            JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
-            [jvc setPlace: dict];
-        
-        }
-   
+    }
+    [[jvc editButton] setEnabled:NO];
+
 }
 
 -(IBAction)changeMap:(id)sender
@@ -276,7 +295,6 @@
         aFetchedResultsController.delegate = self;
         [self setFetchedResultsController: aFetchedResultsController];
     }
-//	[self configureAnnotations];
 	return _fetchedResultsController;
 }
 
@@ -286,26 +304,32 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
 - (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
+//    NSLog(@"%@", NSStringFromClass([anObject class]));
     switch (type) {
         case NSFetchedResultsChangeInsert:
         {
-            [self fetchedResultsChangeInsert:anObject];
+//            [self fetchedResultsChangeInsert:anObject];
             break;
         }
         case NSFetchedResultsChangeDelete:
         {
-            [self fetchedResultsChangeDelete:anObject];
+//            [self fetchedResultsChangeDelete:anObject];
             break;
         }
         case NSFetchedResultsChangeUpdate:
         {
-            [self fetchedResultsChangeUpdate:anObject];
+//            [self fetchedResultsChangeUpdate:anObject];
             break;
         }
         case NSFetchedResultsChangeMove:
@@ -317,6 +341,7 @@
 
 - (void)fetchedResultsChangeInsert: (MapAnnotation *)annotation
 {
+    
     [[self mapView] addAnnotation:annotation];
 }
 - (void)fetchedResultsChangeDelete: (MapAnnotation *)annotation

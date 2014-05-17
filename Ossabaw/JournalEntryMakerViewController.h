@@ -63,7 +63,7 @@ AddPinDelegate>
 
 @property (strong, nonatomic)           NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic)           NSFetchedResultsController *fetchedResultsController;
-
+@property (strong, nonatomic)           NSString *location;
 @property (strong, nonatomic)           Journal         *journal;
 @property (unsafe_unretained, nonatomic) id <JournalAddDelegate> delegate;
 @property                               BOOL            isNewJournal;
@@ -92,9 +92,6 @@ AddPinDelegate>
 // journal == nil on cancel
 - (void)journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController
                           didAddJournal:(Journal *)journal;
-- (void)journalEntryMakerViewController:(JournalEntryMakerViewController *)journalEntryMakerViewController
-                         didTitleChange:(NSString *)title
-                   didInformationChange:(NSString *)information;
 
 
 @end

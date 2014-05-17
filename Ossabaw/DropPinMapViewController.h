@@ -23,14 +23,14 @@
     MapAnnotation *pin;
     MapOverlay *mapOverlay;
 }
-@property (strong, nonatomic) IBOutlet MKMapView *mapView;
-@property (strong, nonatomic) IBOutlet UIToolbar *cancelButton;
-@property (strong, nonatomic) IBOutlet UIToolbar *doneButton;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *segControl;
-@property (strong, nonatomic) IBOutlet UIToolbar *toolBar;
-@property (unsafe_unretained, nonatomic) id<AddPinDelegate> delegate;
-@property (strong, nonatomic)           MapAnnotation *pin;
-@property (strong, nonatomic)           MapOverlay *mapOverlay;
+@property (strong, nonatomic)           IBOutlet    MKMapView           *mapView;
+@property (strong, nonatomic)           IBOutlet    UIToolbar           *cancelButton;
+@property (strong, nonatomic)           IBOutlet    UIToolbar           *doneButton;
+@property (strong, nonatomic)           IBOutlet    UISegmentedControl  *segControl;
+@property (strong, nonatomic)           IBOutlet    UIToolbar           *toolBar;
+@property (unsafe_unretained, nonatomic)            id<AddPinDelegate>  delegate;
+@property (strong, nonatomic)                       MapAnnotation       *pin;
+@property (strong, nonatomic)                       MapOverlay          *mapOverlay;
 
 
 -(IBAction)changeMap:(id)sender;

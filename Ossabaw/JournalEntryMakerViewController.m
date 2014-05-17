@@ -9,12 +9,11 @@
 #import "JournalEntryMakerViewController.h"
 
 @interface JournalEntryMakerViewController ()
-
 @end
 
 @implementation JournalEntryMakerViewController
 @synthesize doneButton, pageControl, textView, titleTextField, imageScrollView,
-scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imagePicker;
+scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imagePicker, location;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +27,7 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self setImagePicker:[[UIImagePickerController alloc] init]];
     [[self toolBar] setClipsToBounds:YES];
     [self setImages:[[NSMutableArray alloc] init]];
@@ -117,9 +117,6 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
     [super viewDidLayoutSubviews];
     NSInteger h = [[self scrollView] frame].size.height * 2;
     [[self scrollView] setContentSize:CGSizeMake([[self scrollView] frame].size.width, h)];
-//    [[self scrollView] setPagingEnabled:YES];
-    
-//    [[[self scrollView] layer] setCornerRadius:5];
 }
 
 
@@ -130,9 +127,9 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
 }
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-        DropPinMapViewController *dpmvc = (DropPinMapViewController *) segue.destinationViewController;
-        [dpmvc setCoord:[[self journal] location]];
-        [dpmvc setDelegate:self];
+    DropPinMapViewController *dpmvc = (DropPinMapViewController *) segue.destinationViewController;
+    [dpmvc setCoord:[[self journal] location]];
+    [dpmvc setDelegate:self];
 }
 
 
@@ -168,11 +165,14 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
 #pragma mark - AddPinDelegate
 //----------------------------------------------------------------------------------------------
 - (void) dropPinMapViewController:(DropPinMapViewController *)dropPinMapViewController
-                   didAddLocation:(NSString *)location
+                   didAddLocation:(NSString *)alocation
 {
-    [[self journal] setLocation:location];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (alocation != nil)
+        [self setLocation:alocation];
+    if (![[self presentedViewController] isBeingDismissed])
+        [self dismissViewControllerAnimated:YES completion:nil];
     
+    NSLog(@"hello");
 }
 //----------------------------------------------------------------------------------------------
 -(IBAction)takePhoto:(id)sender
@@ -208,8 +208,9 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
             abort();
         }
         [[self delegate] journalEntryMakerViewController:self didAddJournal:nil];
+    } else{
+        [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
     }
-    [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
 }
 
 - (IBAction)switchChanged:(id)sender
@@ -231,13 +232,13 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
     [[self journal] setTitle: [[self titleTextField] text]];
     [[self journal] setDate: [[self datePicker] date]];
     [[self journal] setInformation:[[self textView] text]];
+    [[self journal] setLocation:location];
     if ([[self images] count] != 0 && [[self journal] icon] == nil) {
         Photo *photo = [[self images] objectAtIndex:0];
         [[self journal] setIcon:[[photo image] valueForKey:@"image"]];
         
         UIImage *a = [[self journal] icon];
     }
-    
     NSError *error = nil;
     if (![[[self journal] managedObjectContext] save:&error]) {
         /*
@@ -249,9 +250,6 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
 		abort();
     }
     [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
-    [[self delegate] journalEntryMakerViewController:self
-                                     didTitleChange:[[self titleTextField] text]
-                               didInformationChange:[[self textView] text]];
 }
 
 -(IBAction)openMap:(id)sender

@@ -42,7 +42,7 @@
     key = @"title";
     changed = true;
     [super viewDidLoad];
-    [[[self tabBarController] tabBar] setHidden:NO];
+
     cellReuseName = @"MyIdentifier";
     
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
@@ -64,6 +64,7 @@
     [[[self tableView] layer] setMasksToBounds:YES];
     [[self tableView] setBackgroundView:bg];
     NSError *error = nil;
+//    [self setManagedObjectContext:[((AppDelegate *)[[UIApplication sharedApplication] delegate]) managedObjectContext]];
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
 		 Replace this implementation with code to handle the error appropriately.
@@ -155,12 +156,6 @@
 {
     // dequeue a TableViewCell, then set its recipe to the recipe for the current row
     TableCell *cell = (TableCell *)[tableView dequeueReusableCellWithIdentifier:cellReuseName forIndexPath:indexPath];
-//    if (cell == nil) {
-//        UIViewController *temp = [[UIViewController alloc] initWithNibName:@"TableCell" bundle:nil];
-//        cell = (TableCell *)[temp view];
-//    }
-
-
     
     return cell;
 }
@@ -175,7 +170,7 @@
 #pragma mark - UITableViewDelegate
 
 // Override to support editing the table view.
-- (void)    tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
@@ -237,7 +232,7 @@
 - (void) tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell
  forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ((TableCell *) cell).journal = nil;
+    [(TableCell *) cell setJournal:nil];
 }
 
 - (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
@@ -273,6 +268,7 @@
 {
     if ([[segue identifier] isEqualToString:@"tableToInfo"]) {
         JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
+//        [jvc setHidesBottomBarWhenPushed:NO];
         Journal *journal = nil;
         if ([sender isKindOfClass:[Journal class]]) {
             journal = (Journal *) sender;
@@ -282,11 +278,6 @@
             journal = (Journal *)[[self fetchedResultsController] objectAtIndexPath:indexPath];
         }
         [jvc setJournal:journal];
-
-        
-//        NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary: [places objectAtIndex:[self index]]];
-//        [jvc setPlace: dict];
-        
     }
     
     else if ([[segue identifier] isEqualToString:@"toInfo"]) {
@@ -349,7 +340,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
         [self setFetchedResultsController: aFetchedResultsController];
         changed = false;
     }
-
 	return _fetchedResultsController;
 }
 
@@ -358,41 +348,54 @@ shouldReloadTableForSearchString:(NSString *)searchString
     [[self tableView] beginUpdates];
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
 {
-    UITableView *tableView = [self tableView];
+    UITableView *atableView = [self tableView];
 	
 	switch(type) {
 		case NSFetchedResultsChangeInsert:
-			[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[atableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeDelete:
-			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[atableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeUpdate:
-			[self configureCell:(TableCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+			[self configureCell:(TableCell *)[atableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
 			break;
 			
 		case NSFetchedResultsChangeMove:
-			[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+			[atableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
+            [atableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
             break;
 	}
 
     
 }
 
-- (void) controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+- (void) controller:(NSFetchedResultsController *)controller
+   didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo
+            atIndex:(NSUInteger)sectionIndex
+      forChangeType:(NSFetchedResultsChangeType)type
 {
     switch(type) {
 		case NSFetchedResultsChangeInsert:
-			[[self tableView] insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			[[self tableView] insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                            withRowAnimation:UITableViewRowAnimationFade];
 			break;
 			
 		case NSFetchedResultsChangeDelete:
-			[[self tableView] deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+			[[self tableView] deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                            withRowAnimation:UITableViewRowAnimationFade];
 			break;
 	}
 

@@ -61,7 +61,6 @@
     
     //    Photo *photo = [[[[self journal] photos] allObjects] objectAtIndex:indexPath.row - 1];
     UIImage *image = [[photo image] valueForKey:@"image"];
-    NSLog(@"hello %f %f", image.size.width, image.size.height);
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:[cell frame]];
     [[imageView layer] setMasksToBounds:YES];
     [[imageView layer] setCornerRadius:5];
