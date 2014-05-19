@@ -226,7 +226,8 @@
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     JournalViewController *jvc = (JournalViewController *)segue.destinationViewController;
-    [jvc setHidesBottomBarWhenPushed:NO];
+//    [jvc setHidesBottomBarWhenPushed:YES];
+//    [jvc setHidesBottomBarWhenPushed:NO];
     if ([[segue identifier] isEqualToString:@"goToInfo"]) {
         if ([sender isKindOfClass:[Journal class]]) {
             [jvc setJournal:(Journal *) sender];

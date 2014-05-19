@@ -316,14 +316,11 @@
 			children = (
 				58F7F88318EB295C00BAFC4F /* AppDelegate.h */,
 				58F7F88418EB295C00BAFC4F /* AppDelegate.m */,
-				587B77CD191A0B990014348D /* UIImage+ImageEffects.h */,
-				587B77CE191A0B990014348D /* UIImage+ImageEffects.m */,
 				58590E57190CBA8200CA58B3 /* Model and Model Classes */,
 				5867EE871907405A00803413 /* Journal */,
 				5867EE841907400A00803413 /* Map */,
 				5867EE861907404C00803413 /* Pages */,
 				5867EE851907402A00803413 /* Table */,
-				58F7F90618EC7A3200BAFC4F /* Properties */,
 				58F7F90518EC72BA00BAFC4F /* Images */,
 				58F7F90718EC7A4A00BAFC4F /* Storyboards and Nibs */,
 				58F7F87B18EB295C00BAFC4F /* Supporting Files */,
@@ -334,6 +331,10 @@
 		58F7F87B18EB295C00BAFC4F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				58F7F8B018EC6D1400BAFC4F /* Places.plist */,
+				58A0613018F8C5EC004959B0 /* User_Journal.plist */,
+				587B77CD191A0B990014348D /* UIImage+ImageEffects.h */,
+				587B77CE191A0B990014348D /* UIImage+ImageEffects.m */,
 				58F7F87C18EB295C00BAFC4F /* Ossabaw-Info.plist */,
 				583B98EE1925D05100F1BB03 /* Images.xcassets */,
 				58F7F87D18EB295C00BAFC4F /* InfoPlist.strings */,
@@ -391,15 +392,6 @@
 				58F7F8F018EC72B300BAFC4F /* southbeach.png */,
 			);
 			name = Images;
-			sourceTree = "<group>";
-		};
-		58F7F90618EC7A3200BAFC4F /* Properties */ = {
-			isa = PBXGroup;
-			children = (
-				58F7F8B018EC6D1400BAFC4F /* Places.plist */,
-				58A0613018F8C5EC004959B0 /* User_Journal.plist */,
-			);
-			name = Properties;
 			sourceTree = "<group>";
 		};
 		58F7F90718EC7A4A00BAFC4F /* Storyboards and Nibs */ = {

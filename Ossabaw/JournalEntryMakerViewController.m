@@ -153,14 +153,6 @@ scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imageP
         [aScrollView setContentOffset:CGPointZero animated:NO];
         [aScrollView setContentSize:CGSizeMake(viewWidth * numViews, [aScrollView frame].size.height)];
     }
-    
-//    CGFloat viewWidth = [aScrollView frame].size.width;
-//    int numViews = [[aScrollView subviews] count];
-//    int pageNumber = floor(([aScrollView contentOffset].x - viewWidth / numViews) / viewWidth + 1);
-//    
-//    [[self pageControl] setCurrentPage:pageNumber];
-//    
-//    [self setIndex:pageNumber];
 }
 #pragma mark - AddPinDelegate
 //----------------------------------------------------------------------------------------------

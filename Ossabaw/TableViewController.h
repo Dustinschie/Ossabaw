@@ -30,7 +30,6 @@
 
 @property (strong, nonatomic)           NSManagedObjectContext          *managedObjectContext;
 @property (strong, nonatomic)           NSFetchedResultsController      *fetchedResultsController;
-@property (strong, nonatomic) IBOutlet  UIView                          *topView;
 @property (strong, nonatomic) IBOutlet  UISegmentedControl              *segControl;
 @property                               NSInteger                       index;
 

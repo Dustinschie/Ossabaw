@@ -193,19 +193,26 @@
 {
     for (UIViewController *controller in [tabBarController viewControllers]) {
         UINavigationController *navController = (UINavigationController *)controller;
-//        NSLog(@"%@", NSStringFromClass([[[navController viewControllers] objectAtIndex:0] class]));
         [navController popToRootViewControllerAnimated:NO];
     }
     
     UINavigationController *navController = (UINavigationController *)viewController;
+    /**
+     *  The following code is used in the handling of the 'Managed Object Context'(MOC) between the two view controllers
+     *  that use it: TableViewController(TVC) and MapViewController(MVC). Since Core Data (Database) doesn't really like to
+     *  be accessed by two different entities at the time, the following handles 'the switching' of ownership between 
+     *  the viewControllers.
+     */
+    //  if the upcoming view controller is of the class TVC, remove the MOC from the MVC tab, then give it to TVC
     if ([[[navController viewControllers] objectAtIndex:0] isKindOfClass:[TableViewController class]]) {
         MapViewController *map = (MapViewController *)
                                         [[[tabBarController viewControllers] objectAtIndex:1] topViewController];
         [map setManagedObjectContext:nil];
         TableViewController *table = (TableViewController *)[[navController viewControllers] objectAtIndex:0];
         [table setManagedObjectContext:[self managedObjectContext]];
-    } else if ([[[navController viewControllers] objectAtIndex:0] isKindOfClass:[MapViewController class]]) {
-//        NSLog(@"%@", NSStringFromClass([[[[tabBarController viewControllers] objectAtIndex:0] topViewController] class]));
+    }
+    //  if the upcoming view controller is of the class MVC, remove the MOC from the TVC tab, then give it to MVC
+    else if ([[[navController viewControllers] objectAtIndex:0] isKindOfClass:[MapViewController class]]) {
         TableViewController *table = (TableViewController *)
                                     [[[tabBarController viewControllers] objectAtIndex:0] topViewController];
         [table setManagedObjectContext:nil];
