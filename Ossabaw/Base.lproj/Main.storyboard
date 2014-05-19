@@ -9,7 +9,7 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="7ln-dO-AnR" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="globe" id="rDg-PW-2wZ"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WbQ-z8-hkB">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="WbQ-z8-hkB">
                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -41,10 +41,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <segmentedControl clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="raS-Gz-X0K">
+                            <segmentedControl clipsSubviews="YES" alpha="0.59999999999999964" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="raS-Gz-X0K">
                                 <rect key="frame" x="8" y="486" width="304" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="9Xb-qU-m41"/>
                                     <constraint firstAttribute="width" constant="304" id="Hab-dN-raW"/>
@@ -72,6 +72,7 @@
                     <navigationItem key="navigationItem" id="Y67-de-U0V">
                         <nil key="title"/>
                     </navigationItem>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="OPo-ZB-FnM" id="8GX-Ng-cvZ"/>
                         <outlet property="segControl" destination="raS-Gz-X0K" id="dRe-ee-e5v"/>
@@ -191,6 +192,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="backgroundImageView" destination="l5J-n1-xFq" id="M16-UU-ZUx"/>
                         <outlet property="collectionView" destination="v7O-eO-60W" id="nf4-Fn-riz"/>
@@ -276,7 +278,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zd-bE-HEs">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="0zd-bE-HEs">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
@@ -533,7 +535,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <navigationController definesPresentationContext="YES" id="6r3-u4-BEj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Journal" image="UITabBarMostViewed_2x" id="E1h-nf-q8c"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W9q-P5-CuM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="W9q-P5-CuM">
                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -550,7 +552,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <navigationController definesPresentationContext="YES" id="gDR-8d-QdT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" image="info" id="AJf-hK-mKc"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tG8-an-y7L">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="tG8-an-y7L">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -597,7 +599,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tabBarController id="8YX-ce-x5E" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" opaque="NO" contentMode="scaleToFill" id="JQR-rB-NYL">
+                    <tabBar key="tabBar" opaque="NO" contentMode="scaleToFill" barStyle="black" id="JQR-rB-NYL">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -710,7 +712,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lnr-Hd-aR1"/>
+        <segue reference="az6-b1-akb"/>
         <segue reference="caf-Xu-SH1"/>
     </inferredMetricsTieBreakers>
 </document>
