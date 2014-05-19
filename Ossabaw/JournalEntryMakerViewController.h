@@ -13,14 +13,39 @@
 #import "DropPinMapViewController.h"
 @protocol JournalAddDelegate;
 
-@interface JournalEntryMakerViewController : UIViewController <UIScrollViewDelegate,
-                                                    UIImagePickerControllerDelegate,
-                                                                UITextFieldDelegate,
-                                                                 UITextViewDelegate,
-                                                              UIActionSheetDelegate,
-                                                                UIAlertViewDelegate,
-                                                    NSFetchedResultsControllerDelegate,
-                                                    AddPinDelegate>
+@interface JournalEntryMakerViewController : UIViewController
+<UIScrollViewDelegate,
+UIImagePickerControllerDelegate,
+UITextFieldDelegate,
+ UITextViewDelegate,
+UIActionSheetDelegate,
+UIAlertViewDelegate,
+NSFetchedResultsControllerDelegate,
+AddPinDelegate>
+{
+    UIScrollView     *scrollView;
+    UIScrollView     *imageScrollView;
+    UIPageControl    *pageControl;
+    UITextView       *textView;
+    UIButton         *doneButton;
+    UITextField      *titleTextField;
+    UIToolbar        *toolBar;
+    UISwitch         *colorSwitch;
+    UIDatePicker     *datePicker;
+    
+    NSMutableArray  *images;
+    NSMutableArray  *imageIndexes;
+    NSInteger        index;
+    
+    NSManagedObjectContext *managedObjectContext;
+    NSFetchedResultsController *fetchedResultsController;
+    
+    Journal         *journal;
+    id <JournalAddDelegate> delegate;
+    BOOL            isNewJournal;
+    IBOutlet UIButton *mapButton;
+    UIImagePickerController *imagePicker;
+}
 
 @property (strong, nonatomic) IBOutlet UIScrollView     *scrollView;
 @property (strong, nonatomic) IBOutlet UIScrollView     *imageScrollView;
@@ -38,11 +63,12 @@
 
 @property (strong, nonatomic)           NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic)           NSFetchedResultsController *fetchedResultsController;
-
+@property (strong, nonatomic)           NSString *location;
 @property (strong, nonatomic)           Journal         *journal;
 @property (unsafe_unretained, nonatomic) id <JournalAddDelegate> delegate;
 @property                               BOOL            isNewJournal;
 @property (strong, nonatomic) IBOutlet UIButton *mapButton;
+@property (strong, nonatomic)           UIImagePickerController *imagePicker;
 
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)dismiss:(id)sender;

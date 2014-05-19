@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5831FA9919231211004C9390 /* ImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831FA9819231211004C9390 /* ImageCollectionViewController.m */; };
+		5831FAA119244BDC004C9390 /* BounceButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5831FAA019244BDC004C9390 /* BounceButtonView.m */; };
+		5831FAA519245FE2004C9390 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5831FAA419245FE2004C9390 /* Social.framework */; };
+		583B98ED1925BB7900F1BB03 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583B98EC1925BB7900F1BB03 /* MessageUI.framework */; };
+		583B98EF1925D05100F1BB03 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 583B98EE1925D05100F1BB03 /* Images.xcassets */; };
+		583B98F119272E2800F1BB03 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583B98F019272E2800F1BB03 /* MobileCoreServices.framework */; };
 		5848D2F618F4EF2B006C13D9 /* JournalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5848D2F418F4EF2B006C13D9 /* JournalViewController.m */; };
 		5848D2F918F7BB57006C13D9 /* UIBarButtonCamera_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */; };
 		5848D2FB18F7C409006C13D9 /* UIBarButtonAdd_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5848D2FA18F7C409006C13D9 /* UIBarButtonAdd_2x.png */; };
@@ -17,7 +23,6 @@
 		587B77C61914B1010014348D /* map_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 587B77C51914B1010014348D /* map_icon.png */; };
 		587B77C81915FAB20014348D /* sky.png in Resources */ = {isa = PBXBuildFile; fileRef = 587B77C71915FAB20014348D /* sky.png */; };
 		587B77CA1919FF660014348D /* sky_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 587B77C91919FF660014348D /* sky_large.png */; };
-		587B77CC191A00820014348D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 587B77CB191A00820014348D /* Images.xcassets */; };
 		587B77CF191A0B990014348D /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 587B77CE191A0B990014348D /* UIImage+ImageEffects.m */; };
 		587EDD8618F8212000634925 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587EDD8518F8212000634925 /* TableViewController.m */; };
 		58A0613118F8C5EC004959B0 /* User_Journal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58A0613018F8C5EC004959B0 /* User_Journal.plist */; };
@@ -82,6 +87,14 @@
 
 /* Begin PBXFileReference section */
 		47D2F40EDD264580ABF3691D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5831FA9719231211004C9390 /* ImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCollectionViewController.h; sourceTree = "<group>"; };
+		5831FA9819231211004C9390 /* ImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCollectionViewController.m; sourceTree = "<group>"; };
+		5831FA9F19244BDC004C9390 /* BounceButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BounceButtonView.h; sourceTree = "<group>"; };
+		5831FAA019244BDC004C9390 /* BounceButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BounceButtonView.m; sourceTree = "<group>"; };
+		5831FAA419245FE2004C9390 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		583B98EC1925BB7900F1BB03 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		583B98EE1925D05100F1BB03 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		583B98F019272E2800F1BB03 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		5848D2F318F4EF2B006C13D9 /* JournalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalViewController.h; sourceTree = "<group>"; };
 		5848D2F418F4EF2B006C13D9 /* JournalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalViewController.m; sourceTree = "<group>"; };
 		5848D2F818F7BB57006C13D9 /* UIBarButtonCamera_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonCamera_2x.png; sourceTree = "<group>"; };
@@ -97,7 +110,6 @@
 		587B77C51914B1010014348D /* map_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_icon.png; sourceTree = "<group>"; };
 		587B77C71915FAB20014348D /* sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky.png; sourceTree = "<group>"; };
 		587B77C91919FF660014348D /* sky_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky_large.png; sourceTree = "<group>"; };
-		587B77CB191A00820014348D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		587B77CD191A0B990014348D /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		587B77CE191A0B990014348D /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		587EDD8418F8212000634925 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
@@ -169,6 +181,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				583B98F119272E2800F1BB03 /* MobileCoreServices.framework in Frameworks */,
+				583B98ED1925BB7900F1BB03 /* MessageUI.framework in Frameworks */,
+				5831FAA519245FE2004C9390 /* Social.framework in Frameworks */,
 				58C47FC319035092006406E2 /* CoreData.framework in Frameworks */,
 				58F7F8AD18EB2B0300BAFC4F /* MapKit.framework in Frameworks */,
 				58F7F87718EB295C00BAFC4F /* CoreGraphics.framework in Frameworks */,
@@ -209,8 +224,8 @@
 				58CE6D3818ED0F7A00D80D83 /* MapAnnotation.h */,
 				58CE6D3918ED0F7A00D80D83 /* MapAnnotation.m */,
 				58CB1CEA18EFCA850098FEDE /* MapOverlay.h */,
-				58CB1CF318EFD5550098FEDE /* MapOverlayRenderer.h */,
 				58CB1CEB18EFCA850098FEDE /* MapOverlay.m */,
+				58CB1CF318EFD5550098FEDE /* MapOverlayRenderer.h */,
 				58CB1CF418EFD5550098FEDE /* MapOverlayRenderer.m */,
 				58F7F88918EB295C00BAFC4F /* MapViewController.h */,
 				58F7F88A18EB295C00BAFC4F /* MapViewController.m */,
@@ -225,6 +240,8 @@
 				587EDD8518F8212000634925 /* TableViewController.m */,
 				58B8B9A0190DD517009C8885 /* TableCell.h */,
 				58B8B9A1190DD517009C8885 /* TableCell.m */,
+				58A0613218F8CD67004959B0 /* WebViewController.h */,
+				58A0613318F8CD67004959B0 /* WebViewController.m */,
 			);
 			name = Table;
 			sourceTree = "<group>";
@@ -249,6 +266,10 @@
 				5848D2F418F4EF2B006C13D9 /* JournalViewController.m */,
 				587B77C219148DB80014348D /* DropPinMapViewController.h */,
 				587B77C319148DB80014348D /* DropPinMapViewController.m */,
+				5831FA9719231211004C9390 /* ImageCollectionViewController.h */,
+				5831FA9819231211004C9390 /* ImageCollectionViewController.m */,
+				5831FA9F19244BDC004C9390 /* BounceButtonView.h */,
+				5831FAA019244BDC004C9390 /* BounceButtonView.m */,
 			);
 			name = Journal;
 			sourceTree = "<group>";
@@ -276,6 +297,9 @@
 		58F7F87318EB295C00BAFC4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				583B98F019272E2800F1BB03 /* MobileCoreServices.framework */,
+				583B98EC1925BB7900F1BB03 /* MessageUI.framework */,
+				5831FAA419245FE2004C9390 /* Social.framework */,
 				58C47FC219035092006406E2 /* CoreData.framework */,
 				58F7F8AC18EB2B0300BAFC4F /* MapKit.framework */,
 				58F7F87418EB295C00BAFC4F /* Foundation.framework */,
@@ -290,10 +314,15 @@
 		58F7F87A18EB295C00BAFC4F /* Ossabaw */ = {
 			isa = PBXGroup;
 			children = (
-				58F7F90618EC7A3200BAFC4F /* Properties */,
+				58F7F88318EB295C00BAFC4F /* AppDelegate.h */,
+				58F7F88418EB295C00BAFC4F /* AppDelegate.m */,
+				58590E57190CBA8200CA58B3 /* Model and Model Classes */,
+				5867EE871907405A00803413 /* Journal */,
+				5867EE841907400A00803413 /* Map */,
+				5867EE861907404C00803413 /* Pages */,
+				5867EE851907402A00803413 /* Table */,
 				58F7F90518EC72BA00BAFC4F /* Images */,
 				58F7F90718EC7A4A00BAFC4F /* Storyboards and Nibs */,
-				58F7F8DC18EC726800BAFC4F /* Source */,
 				58F7F87B18EB295C00BAFC4F /* Supporting Files */,
 			);
 			path = Ossabaw;
@@ -302,8 +331,12 @@
 		58F7F87B18EB295C00BAFC4F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				587B77CB191A00820014348D /* Images.xcassets */,
+				58F7F8B018EC6D1400BAFC4F /* Places.plist */,
+				58A0613018F8C5EC004959B0 /* User_Journal.plist */,
+				587B77CD191A0B990014348D /* UIImage+ImageEffects.h */,
+				587B77CE191A0B990014348D /* UIImage+ImageEffects.m */,
 				58F7F87C18EB295C00BAFC4F /* Ossabaw-Info.plist */,
+				583B98EE1925D05100F1BB03 /* Images.xcassets */,
 				58F7F87D18EB295C00BAFC4F /* InfoPlist.strings */,
 				58F7F88018EB295C00BAFC4F /* main.m */,
 				58F7F88218EB295C00BAFC4F /* Ossabaw-Prefix.pch */,
@@ -327,24 +360,6 @@
 				58F7F89F18EB295C00BAFC4F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		58F7F8DC18EC726800BAFC4F /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				58F7F88318EB295C00BAFC4F /* AppDelegate.h */,
-				58F7F88418EB295C00BAFC4F /* AppDelegate.m */,
-				587B77CD191A0B990014348D /* UIImage+ImageEffects.h */,
-				587B77CE191A0B990014348D /* UIImage+ImageEffects.m */,
-				58590E57190CBA8200CA58B3 /* Model and Model Classes */,
-				5867EE871907405A00803413 /* Journal */,
-				5867EE841907400A00803413 /* Map */,
-				5867EE861907404C00803413 /* Pages */,
-				5867EE851907402A00803413 /* Table */,
-				58A0613218F8CD67004959B0 /* WebViewController.h */,
-				58A0613318F8CD67004959B0 /* WebViewController.m */,
-			);
-			name = Source;
 			sourceTree = "<group>";
 		};
 		58F7F90518EC72BA00BAFC4F /* Images */ = {
@@ -377,15 +392,6 @@
 				58F7F8F018EC72B300BAFC4F /* southbeach.png */,
 			);
 			name = Images;
-			sourceTree = "<group>";
-		};
-		58F7F90618EC7A3200BAFC4F /* Properties */ = {
-			isa = PBXGroup;
-			children = (
-				58F7F8B018EC6D1400BAFC4F /* Places.plist */,
-				58A0613018F8C5EC004959B0 /* User_Journal.plist */,
-			);
-			name = Properties;
 			sourceTree = "<group>";
 		};
 		58F7F90718EC7A4A00BAFC4F /* Storyboards and Nibs */ = {
@@ -480,7 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58F7F90118EC72B300BAFC4F /* slavetabbies_icon.png in Resources */,
-				587B77CC191A00820014348D /* Images.xcassets in Resources */,
+				583B98EF1925D05100F1BB03 /* Images.xcassets in Resources */,
 				58F7F90218EC72B300BAFC4F /* slavetabbies.png in Resources */,
 				58F7F90018EC72B300BAFC4F /* rookery.png in Resources */,
 				58F7F8F218EC72B300BAFC4F /* alligators.png in Resources */,
@@ -562,6 +568,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5831FAA119244BDC004C9390 /* BounceButtonView.m in Sources */,
+				5831FA9919231211004C9390 /* ImageCollectionViewController.m in Sources */,
 				587EDD8618F8212000634925 /* TableViewController.m in Sources */,
 				58F7F88518EB295C00BAFC4F /* AppDelegate.m in Sources */,
 				58F7F88B18EB295C00BAFC4F /* MapViewController.m in Sources */,

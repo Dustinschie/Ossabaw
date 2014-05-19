@@ -11,7 +11,6 @@
 @implementation MapOverlayRenderer
 
 
-
 - (void) drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)context{
     UIImage *image = [UIImage imageNamed:@"map.png"];
     UIImage *newImage = [UIImage imageWithCGImage:image.CGImage

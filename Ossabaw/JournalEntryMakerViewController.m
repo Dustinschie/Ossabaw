@@ -9,12 +9,11 @@
 #import "JournalEntryMakerViewController.h"
 
 @interface JournalEntryMakerViewController ()
-
 @end
 
 @implementation JournalEntryMakerViewController
 @synthesize doneButton, pageControl, textView, titleTextField, imageScrollView,
-            scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal;
+scrollView, images,index, toolBar, colorSwitch, datePicker, isNewJournal, imagePicker, location;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,6 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setImagePicker:[[UIImagePickerController alloc] init]];
     [[self toolBar] setClipsToBounds:YES];
     [self setImages:[[NSMutableArray alloc] init]];
     int imgSVWidth = [[self imageScrollView] frame].size.width;
@@ -116,9 +117,6 @@
     [super viewDidLayoutSubviews];
     NSInteger h = [[self scrollView] frame].size.height * 2;
     [[self scrollView] setContentSize:CGSizeMake([[self scrollView] frame].size.width, h)];
-//    [[self scrollView] setPagingEnabled:YES];
-    
-//    [[[self scrollView] layer] setCornerRadius:5];
 }
 
 
@@ -129,9 +127,9 @@
 }
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-        DropPinMapViewController *dpmvc = (DropPinMapViewController *) segue.destinationViewController;
-        [dpmvc setCoord:[[self journal] location]];
-        [dpmvc setDelegate:self];
+    DropPinMapViewController *dpmvc = (DropPinMapViewController *) segue.destinationViewController;
+    [dpmvc setCoord:[[self journal] location]];
+    [dpmvc setDelegate:self];
 }
 
 
@@ -155,23 +153,18 @@
         [aScrollView setContentOffset:CGPointZero animated:NO];
         [aScrollView setContentSize:CGSizeMake(viewWidth * numViews, [aScrollView frame].size.height)];
     }
-    
-//    CGFloat viewWidth = [aScrollView frame].size.width;
-//    int numViews = [[aScrollView subviews] count];
-//    int pageNumber = floor(([aScrollView contentOffset].x - viewWidth / numViews) / viewWidth + 1);
-//    
-//    [[self pageControl] setCurrentPage:pageNumber];
-//    
-//    [self setIndex:pageNumber];
 }
 #pragma mark - AddPinDelegate
 //----------------------------------------------------------------------------------------------
 - (void) dropPinMapViewController:(DropPinMapViewController *)dropPinMapViewController
-                   didAddLocation:(NSString *)location
+                   didAddLocation:(NSString *)alocation
 {
-    [[self journal] setLocation:location];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (alocation != nil)
+        [self setLocation:alocation];
+    if (![[self presentedViewController] isBeingDismissed])
+        [self dismissViewControllerAnimated:YES completion:nil];
     
+    NSLog(@"hello");
 }
 //----------------------------------------------------------------------------------------------
 -(IBAction)takePhoto:(id)sender
@@ -207,8 +200,9 @@
             abort();
         }
         [[self delegate] journalEntryMakerViewController:self didAddJournal:nil];
+    } else{
+        [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
     }
-    [[self delegate] journalEntryMakerViewController:self didAddJournal:[self journal]];
 }
 
 - (IBAction)switchChanged:(id)sender
@@ -230,13 +224,13 @@
     [[self journal] setTitle: [[self titleTextField] text]];
     [[self journal] setDate: [[self datePicker] date]];
     [[self journal] setInformation:[[self textView] text]];
+    [[self journal] setLocation:location];
     if ([[self images] count] != 0 && [[self journal] icon] == nil) {
         Photo *photo = [[self images] objectAtIndex:0];
         [[self journal] setIcon:[[photo image] valueForKey:@"image"]];
         
         UIImage *a = [[self journal] icon];
     }
-    
     NSError *error = nil;
     if (![[[self journal] managedObjectContext] save:&error]) {
         /*
@@ -266,7 +260,12 @@
 //----------------------------------------------------------------------------------------------
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImage *chosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    UIImage *chosenImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *newImage = [UIImage imageWithCGImage:chosenImage.CGImage];
+    if (newImage.size.height != chosenImage.size.height) {
+        chosenImage = [UIImage imageWithCGImage:chosenImage.CGImage scale:1.0 orientation:UIImageOrientationRight];
+    }
+    NSLog(@"%f, %f", chosenImage.size.width, chosenImage.size.height);
 
     if (chosenImage.size.width != 0 && chosenImage.size.height != 0) {
         NSManagedObjectContext *context = [[self journal] managedObjectContext];
@@ -356,18 +355,22 @@
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        [picker setDelegate:self];
-        [picker setAllowsEditing:YES];
-        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:picker animated:YES completion:nil];
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+            [imagePicker setDelegate:self];
+            [self presentViewController:imagePicker animated:YES completion:nil];
+        } else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Camera Available"
+                                                            message:@"Your device does not have a camera"
+                                                           delegate:nil cancelButtonTitle:@"Okay"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
     } else if(buttonIndex == 1){
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        [picker setDelegate:self];
-        [picker setAllowsEditing:YES];
-        [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [imagePicker setDelegate:self];
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         
-        [self presentViewController:picker animated:YES completion:nil];
+        [self presentViewController:imagePicker animated:YES completion:nil];
     }
 
 }

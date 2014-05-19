@@ -6,6 +6,24 @@
 // project.
 
 
+// ASOAnimatedButton
+#define COCOAPODS_POD_AVAILABLE_ASOAnimatedButton
+#define COCOAPODS_VERSION_MAJOR_ASOAnimatedButton 1
+#define COCOAPODS_VERSION_MINOR_ASOAnimatedButton 0
+#define COCOAPODS_VERSION_PATCH_ASOAnimatedButton 1
+
+// ASOAnimatedButton/BounceButton
+#define COCOAPODS_POD_AVAILABLE_ASOAnimatedButton_BounceButton
+#define COCOAPODS_VERSION_MAJOR_ASOAnimatedButton_BounceButton 1
+#define COCOAPODS_VERSION_MINOR_ASOAnimatedButton_BounceButton 0
+#define COCOAPODS_VERSION_PATCH_ASOAnimatedButton_BounceButton 1
+
+// ASOAnimatedButton/TwoStateButton
+#define COCOAPODS_POD_AVAILABLE_ASOAnimatedButton_TwoStateButton
+#define COCOAPODS_VERSION_MAJOR_ASOAnimatedButton_TwoStateButton 1
+#define COCOAPODS_VERSION_MINOR_ASOAnimatedButton_TwoStateButton 0
+#define COCOAPODS_VERSION_PATCH_ASOAnimatedButton_TwoStateButton 1
+
 // BlurryModalSegue
 #define COCOAPODS_POD_AVAILABLE_BlurryModalSegue
 #define COCOAPODS_VERSION_MAJOR_BlurryModalSegue 1
@@ -16,7 +34,7 @@
 #define COCOAPODS_POD_AVAILABLE_MZAppearance
 #define COCOAPODS_VERSION_MAJOR_MZAppearance 1
 #define COCOAPODS_VERSION_MINOR_MZAppearance 1
-#define COCOAPODS_VERSION_PATCH_MZAppearance 2
+#define COCOAPODS_VERSION_PATCH_MZAppearance 3
 
 // UIImage+BlurredFrame
 #define COCOAPODS_POD_AVAILABLE_UIImage_BlurredFrame

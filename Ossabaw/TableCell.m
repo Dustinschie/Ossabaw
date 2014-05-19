@@ -19,13 +19,15 @@
 //    [[self layer] setMasksToBounds:YES];
 //    [[self layer] setCornerRadius:[[self thumbnailImageView] frame].size.height / 2];
     [[[self thumbnailImageView] layer] setMasksToBounds:YES];
-    [[[self thumbnailImageView] layer] setCornerRadius: 5];
-    
+    [[[self thumbnailImageView] layer] setCornerRadius: [[[self thumbnailImageView] layer] frame].size.width / 2];
+    [[[self thumbnailImageView] layer] setBorderColor:[[UIColor whiteColor] CGColor]];
+    [[[self thumbnailImageView] layer] setBorderWidth:2.0];
+    //  set color of both background and contentView to clear
     [self setBackgroundColor:[UIColor clearColor]];
     [[self contentView] setBackgroundColor:[UIColor clearColor]];
-//    [[[self contentView] superview] setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.80]];
-    [[self layer] setMasksToBounds:YES];
     [[[self line] layer] setCornerRadius:1];
+    [[self layer] setMasksToBounds:YES];
+
     [[self layer] setCornerRadius:5];
 }
 

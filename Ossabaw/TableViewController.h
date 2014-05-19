@@ -8,8 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "JournalViewController.h"
+#import "AppDelegate.h"
 
-@interface TableViewController : UITableViewController<UITableViewDataSource, NSFetchedResultsControllerDelegate, JournalAddDelegate, UISearchBarDelegate>
+@interface TableViewController : UITableViewController
+<UITableViewDataSource, NSFetchedResultsControllerDelegate, JournalAddDelegate>
+{
+    UITableView                     *tableView;
+    NSMutableArray                  *places;
+    UIBarButtonItem                 *addButton;
+    
+    NSManagedObjectContext          *managedObjectContext;
+    NSFetchedResultsController      *fetchedResultsController;
+    UIView                          *topView;
+    UISegmentedControl              *segControl;
+    NSInteger                       index;
+}
 
 @property (strong, nonatomic) IBOutlet  UITableView                     *tableView;
 @property (strong, nonatomic)           NSMutableArray                  *places;
@@ -17,11 +30,10 @@
 
 @property (strong, nonatomic)           NSManagedObjectContext          *managedObjectContext;
 @property (strong, nonatomic)           NSFetchedResultsController      *fetchedResultsController;
-@property (strong, nonatomic) IBOutlet UIView *topView;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *segControl;
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet  UISegmentedControl              *segControl;
+@property                               NSInteger                       index;
 
--(IBAction)AddButtonPressed:(id)sender;
-@property NSInteger index;
+- (IBAction)sorterKeyChanged:(id)sender;
+
 
 @end

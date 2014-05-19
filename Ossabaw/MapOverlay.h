@@ -11,7 +11,7 @@
 
 @interface MapOverlay : NSObject <MKOverlay>
 {
-    
+    CLLocationCoordinate2D coordinate;
 }
 
 - (MKMapRect) boundingMapRect;

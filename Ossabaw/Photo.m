@@ -29,7 +29,7 @@
 }
 
 - (id)transformedValue:(id)value {
-	NSData *data = UIImagePNGRepresentation(value);
+	NSData *data = UIImageJPEGRepresentation(value, 1.0f);
 	return data;
 }
 

@@ -1,16 +1,23 @@
 PODS:
+  - ASOAnimatedButton (1.0.1):
+    - ASOAnimatedButton/BounceButton
+    - ASOAnimatedButton/TwoStateButton
+  - ASOAnimatedButton/BounceButton (1.0.1)
+  - ASOAnimatedButton/TwoStateButton (1.0.1)
   - BlurryModalSegue (1.0.0):
     - MZAppearance (~> 1.1.1)
     - UIImage+BlurredFrame (~> 0.0.4)
-  - MZAppearance (1.1.2)
+  - MZAppearance (1.1.3)
   - UIImage+BlurredFrame (0.0.4)
 
 DEPENDENCIES:
+  - ASOAnimatedButton
   - BlurryModalSegue
 
 SPEC CHECKSUMS:
+  ASOAnimatedButton: 62562e8825d7421eaa0275682a2157323ba91e6a
   BlurryModalSegue: 35b785b80d61fa05b7c422673bac2f975f312367
-  MZAppearance: 75bc6c786025c311ebc247b01e1dead5cd29f7c5
+  MZAppearance: 490bcde824c00598eb62efe732f2786d9342b907
   UIImage+BlurredFrame: e604fa605955f47f24aecfbdc013efe5d5aa0b6c
 
 COCOAPODS: 0.32.1

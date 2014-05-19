@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface PlaceChildViewController : UIViewController
+{
+    UIImageView *image;
+    NSUInteger index;
+}
 
 @property (strong, nonatomic) IBOutlet UIImageView *image;
 @property (assign, nonatomic) NSUInteger index;

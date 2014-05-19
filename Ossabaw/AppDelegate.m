@@ -28,11 +28,10 @@
 {
     
     [self setTabBarController: (UITabBarController *)[[self window] rootViewController]];
+    [[self tabBarController] setDelegate:self];
     UINavigationController *navController = [[[self tabBarController] viewControllers] objectAtIndex:0];
     TableViewController *tableViewController = (TableViewController *)[navController topViewController];
     [tableViewController setManagedObjectContext:[self managedObjectContext]];
-    [[[[self tabBarController] tabBar] layer] setMasksToBounds:YES];
-    [[[[self tabBarController] tabBar] layer] setCornerRadius:5];
 //    // Override point for customization after application launch.
 //    UINavigationController *navController2 = [[[self tabBarController] viewControllers] objectAtIndex:1];
 //    MapViewController *mapViewController = (MapViewController *)[navController2 topViewController];
@@ -186,17 +185,42 @@
 }
 
 #pragma mark - UITabVarControllerDelegate
-
-//- (void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-//{
-//    [[viewController navigationController] popToRootViewControllerAnimated:YES];
-//}
-
--(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+- (BOOL) tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    [[viewController navigationController] popToRootViewControllerAnimated:YES];
     return YES;
 }
+- (void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    for (UIViewController *controller in [tabBarController viewControllers]) {
+        UINavigationController *navController = (UINavigationController *)controller;
+        [navController popToRootViewControllerAnimated:NO];
+    }
+    
+    UINavigationController *navController = (UINavigationController *)viewController;
+    /**
+     *  The following code is used in the handling of the 'Managed Object Context'(MOC) between the two view controllers
+     *  that use it: TableViewController(TVC) and MapViewController(MVC). Since Core Data (Database) doesn't really like to
+     *  be accessed by two different entities at the time, the following handles 'the switching' of ownership between 
+     *  the viewControllers.
+     */
+    //  if the upcoming view controller is of the class TVC, remove the MOC from the MVC tab, then give it to TVC
+    if ([[[navController viewControllers] objectAtIndex:0] isKindOfClass:[TableViewController class]]) {
+        MapViewController *map = (MapViewController *)
+                                        [[[tabBarController viewControllers] objectAtIndex:1] topViewController];
+        [map setManagedObjectContext:nil];
+        TableViewController *table = (TableViewController *)[[navController viewControllers] objectAtIndex:0];
+        [table setManagedObjectContext:[self managedObjectContext]];
+    }
+    //  if the upcoming view controller is of the class MVC, remove the MOC from the TVC tab, then give it to MVC
+    else if ([[[navController viewControllers] objectAtIndex:0] isKindOfClass:[MapViewController class]]) {
+        TableViewController *table = (TableViewController *)
+                                    [[[tabBarController viewControllers] objectAtIndex:0] topViewController];
+        [table setManagedObjectContext:nil];
+        MapViewController *map = (MapViewController *)[[navController viewControllers] objectAtIndex:0];
+        [map setManagedObjectContext:[self managedObjectContext]];
+    }
+}
+
 
 
 

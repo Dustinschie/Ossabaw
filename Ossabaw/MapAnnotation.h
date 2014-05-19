@@ -12,18 +12,20 @@
 
 @interface MapAnnotation : NSObject<MKAnnotation>
 {
-    NSString    *tittle,
-                *iconDir;
+    NSString    *tittle;
+    NSString    *iconDir;
     CLLocationCoordinate2D coordinate;
     BOOL        hasVistied;
     NSInteger   index;
+    Journal     *journal;
+    MKPinAnnotationColor pinColor;
                 
             
 }
 @property (nonatomic, copy) NSString    *title;
 @property (nonatomic, copy) NSString    *subtitle;
 @property (nonatomic, copy) NSString    *iconDir;
-@property (nonatomic, copy) Journal     *journal;
+@property (strong, nonatomic) Journal     *journal;
 @property NSInteger index;
 @property MKPinAnnotationColor pinColor;
 

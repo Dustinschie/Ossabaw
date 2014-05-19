@@ -10,6 +10,15 @@
 #import "PlaceChildViewController.h"
 
 @interface PlaceViewController : UIViewController <UIPageViewControllerDataSource>
+{
+    UIPageViewController *pageViewController;
+    UILabel *label;
+    UIPageControl *pageControl;
+    UITextView *captionView;
+    
+    NSArray *images;
+    NSString *info;
+}
 
 @property (strong, nonatomic) UIPageViewController *pageViewController;
 @property (strong, nonatomic) IBOutlet UILabel *label;

@@ -9,5 +9,5 @@
 #import <MapKit/MapKit.h>
 
 @interface MapOverlayRenderer : MKOverlayRenderer
-
+- (void) drawMapRect:(MKMapRect)mapRect zoomScale:(MKZoomScale)zoomScale inContext:(CGContextRef)context;
 @end
